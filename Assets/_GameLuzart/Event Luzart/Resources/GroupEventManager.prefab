@@ -1,0 +1,2245 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1012510939848621918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3605720077193696225}
+  - component: {fileID: 1134652183257772992}
+  m_Layer: 0
+  m_Name: BattlePass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3605720077193696225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012510939848621918}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457092610288871484}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1134652183257772992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012510939848621918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fc7f67f098bf3408e7f33247f2524e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataEvent:
+    dbEvent:
+      idEvent: 
+      eventName: 0
+      timeEvent:
+        timeStart: 0
+        timeEndPreview: 0
+        timeStartReview: 0
+        timeEnd: 0
+      allTypeResources: []
+    isBuyIAP: 0
+    totalUse: 0
+    cacheKeyHome: 0
+    cacheKeyUI: 0
+    timeStartEvent: -1
+    timeEndEvent: -1
+  diffKey:
+  - difficulty: 0
+    amountKey: 1
+  - difficulty: 1
+    amountKey: 3
+  - difficulty: 2
+    amountKey: 5
+--- !u!1 &1085508385579612345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3701343200443685363}
+  - component: {fileID: 3880519149857489513}
+  m_Layer: 0
+  m_Name: TicketTallyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3701343200443685363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085508385579612345}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457092610288871484}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3880519149857489513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085508385579612345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4217b4cae537de4488837ce2de63f572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataEvent:
+    dbEvent:
+      idEvent: 
+      eventName: 0
+      timeEvent:
+        timeStart: 0
+        timeEndPreview: 0
+        timeStartReview: 0
+        timeEnd: 0
+      allTypeResources: []
+    totalUse: 0
+    timeStartEvent: -1
+    timeEndEvent: -1
+    isEndEvent: 0
+    levelEnd: -1
+    cacheKey: 0
+--- !u!1 &2138712016912928185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9154397611624277392}
+  - component: {fileID: 4690240476875329731}
+  m_Layer: 0
+  m_Name: PackManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9154397611624277392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138712016912928185}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3191336765669515281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4690240476875329731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138712016912928185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e1e03cf10b00743afa109e11cea244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dbPackSO: {fileID: 11400000, guid: ce5d225091e079e41b6e1b846beb4ee4, type: 2}
+  ePacks: 
+  ePackCurrentDefault: 
+  ePackCurrent: 
+  isCalShowPack: 0
+--- !u!1 &2147928474779445271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2086339940406070599}
+  - component: {fileID: 6842507375601012653}
+  m_Layer: 0
+  m_Name: IslandTreasure
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2086339940406070599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147928474779445271}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457092610288871484}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6842507375601012653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147928474779445271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08799098581c1745b9dd4c2b16ed2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataEvent:
+    dbEvent:
+      idEvent: 
+      eventName: 0
+      timeEvent:
+        timeStart: 0
+        timeEndPreview: 0
+        timeStartReview: 0
+        timeEnd: 0
+      allTypeResources: []
+  dbIAP:
+  - index: 2
+    eTypeResources: 2
+    dbPack:
+      ePack: 11
+      productId: lorry.color.sort.puzzle.treasure_1
+      isRemoveAds: 0
+      gift:
+        dataResources: []
+        typeChest:
+          type: 0
+          id: 0
+      resourcesOther:
+        dataResources: []
+        typeChest:
+          type: 0
+          id: 0
+      where: 
+      maxBuy: 1000000000
+      levelShowIcon: 16
+      timeStartShow: -1
+      timeEndShow: -1
+    stats: {fileID: 11400000, guid: 709221c027ce94c42a48f2e4715cf2fb, type: 2}
+    countAds: 1
+  - index: 5
+    eTypeResources: 2
+    dbPack:
+      ePack: 12
+      productId: lorry.color.sort.puzzle.treasure_2
+      isRemoveAds: 0
+      gift:
+        dataResources: []
+        typeChest:
+          type: 0
+          id: 0
+      resourcesOther:
+        dataResources: []
+        typeChest:
+          type: 0
+          id: 0
+      where: 
+      maxBuy: 1000000000
+      levelShowIcon: 16
+      timeStartShow: -1
+      timeEndShow: -1
+    stats: {fileID: 11400000, guid: bb4491863c97a6c4799335fb66b10095, type: 2}
+    countAds: 0
+--- !u!1 &2539615054554950521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3161046891089904895}
+  - component: {fileID: 1341720664866668127}
+  m_Layer: 0
+  m_Name: DailyLogin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3161046891089904895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539615054554950521}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457092610288871484}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1341720664866668127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2539615054554950521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e683e435b7abc4a892b68069e2db21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Today: 0
+  dataEvent:
+    dbEvent:
+      idEvent: 
+      eventName: 0
+      timeEvent:
+        timeStart: 0
+        timeEndPreview: 0
+        timeStartReview: 0
+        timeEnd: 0
+      allTypeResources: []
+    listIsClaim: 
+    listIsClaimX2: 
+    isReceiveToday: 0
+    timeStartEvent: -1
+--- !u!1 &3382896668771261730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5240810405036254212}
+  - component: {fileID: 9010690011509353245}
+  m_Layer: 0
+  m_Name: LuckySpinManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5240810405036254212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3382896668771261730}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457092610288871484}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9010690011509353245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3382896668771261730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f502631b6eb04468e4af5139486516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataEvent:
+    dbEvent:
+      idEvent: 
+      eventName: 0
+      timeEvent:
+        timeStart: 0
+        timeEndPreview: 0
+        timeStartReview: 0
+        timeEnd: 0
+      allTypeResources: []
+    progress: 0
+    countTicket: 0
+    levelBreakVisual: 0
+--- !u!1 &3412759222907232528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2028677087305896523}
+  - component: {fileID: 5418749276580700630}
+  m_Layer: 0
+  m_Name: Racing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2028677087305896523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3412759222907232528}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457092610288871484}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5418749276580700630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3412759222907232528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe305593993092940a0c76c13ac29fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataEvent:
+    dbEvent:
+      idEvent: 
+      eventName: 0
+      timeEvent:
+        timeStart: 0
+        timeEndPreview: 0
+        timeStartReview: 0
+        timeEnd: 0
+      allTypeResources: []
+    totalUse: 0
+    timeStartEvent: -1
+    timeEndEvent: -1
+    cacheLevel: 0
+    isEventComplete: 0
+    isRewardClaimed: 0
+    listDataBotRacing: []
+    listDataBotRacingCache: []
+  dbBotRacingSO: {fileID: 11400000, guid: c8edccef91d93794cab2e210e9b466d4, type: 2}
+--- !u!1 &3743144561663985058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8822240382064201456}
+  - component: {fileID: 92609314326053360}
+  m_Layer: 0
+  m_Name: WinStreak
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8822240382064201456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743144561663985058}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457092610288871484}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &92609314326053360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743144561663985058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aafe9ae7d6060ce41b3634d3cf95a7df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataEvent:
+    dbEvent:
+      idEvent: 
+      eventName: 0
+      timeEvent:
+        timeStart: 0
+        timeEndPreview: 0
+        timeStartReview: 0
+        timeEnd: 0
+      allTypeResources: []
+    totalUse: 0
+    timeStartEvent: -1
+    timeEndEvent: -1
+    levelEnd: -1
+    totalUseCacheUI: 0
+    totalUseCacheHome: 0
+    isEndEvent: 0
+--- !u!1 &5726170221527731591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7040366961314861631}
+  - component: {fileID: 6708616143103102023}
+  m_Layer: 0
+  m_Name: HeartManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7040366961314861631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5726170221527731591}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3191336765669515281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6708616143103102023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5726170221527731591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99576101e8d11349a441ccc3faf523d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataHeart:
+    valueHeart: 5
+    timeHeartCurrent: 0
+    timeHeartInfinite: 0
+    lastTimeEnd: 0
+--- !u!1 &6029430892691987722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4382099988169552162}
+  - component: {fileID: 8697771104075036397}
+  - component: {fileID: 4226394381806097115}
+  m_Layer: 0
+  m_Name: GameUtility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4382099988169552162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029430892691987722}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3191336765669515281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8697771104075036397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029430892691987722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b158bdb5a0eb4394b955d551f33561e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActionPerSecond: 1
+  isOnNewDay: 1
+--- !u!114 &4226394381806097115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029430892691987722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3174989616b7bd4ca63696e3e006eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6194990788100106087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3191336765669515281}
+  - component: {fileID: 3268103455563274192}
+  m_Layer: 0
+  m_Name: GroupEventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3191336765669515281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6194990788100106087}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1457092610288871484}
+  - {fileID: 4382099988169552162}
+  - {fileID: 9154397611624277392}
+  - {fileID: 8614822262358144303}
+  - {fileID: 7040366961314861631}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3268103455563274192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6194990788100106087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17381ad2eb3fb849a685157e39ec4e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6430732033243035113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1457092610288871484}
+  - component: {fileID: 8965265622379787660}
+  m_Layer: 0
+  m_Name: EventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1457092610288871484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6430732033243035113}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3701343200443685363}
+  - {fileID: 2086339940406070599}
+  - {fileID: 3161046891089904895}
+  - {fileID: 5240810405036254212}
+  - {fileID: 8822240382064201456}
+  - {fileID: 3605720077193696225}
+  - {fileID: 2028677087305896523}
+  m_Father: {fileID: 3191336765669515281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8965265622379787660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6430732033243035113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d311364539f65649a65a77c3409677d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseEventManagers:
+  - {fileID: 3880519149857489513}
+  - {fileID: 6842507375601012653}
+  - {fileID: 1341720664866668127}
+  - {fileID: 9010690011509353245}
+  - {fileID: 92609314326053360}
+  - {fileID: 1134652183257772992}
+  - {fileID: 5418749276580700630}
+  list_Event:
+  - idEvent: ticketTally
+    eventName: 2
+    timeEvent:
+      timeStart: 0
+      timeEndPreview: 0
+      timeStartReview: 0
+      timeEnd: 0
+    allTypeResources:
+    - type: 0
+      gifts:
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 250
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 6
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 500
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 8
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 9
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 11
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 750
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 12
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 13
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 1000
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 14
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 15
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 16
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 17
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 1500
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 18
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 19
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 20
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 21
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 2000
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 22
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 2
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+  - idEvent: journey
+    eventName: 3
+    timeEvent:
+      timeStart: 0
+      timeEndPreview: 0
+      timeStartReview: 0
+      timeEnd: 0
+    allTypeResources:
+    - type: 0
+      gifts:
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 500
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 5
+            id: 1
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 2000
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 5
+            id: 1
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 1000
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 5
+            id: 1
+        isClaimed: 0
+  - idEvent: 
+    eventName: 7
+    timeEvent:
+      timeStart: 0
+      timeEndPreview: 0
+      timeStartReview: 0
+      timeEnd: 0
+    allTypeResources:
+    - type: 0
+      gifts:
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 500
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 1000
+          typeChest:
+            type: 5
+            id: 1
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 2000
+          typeChest:
+            type: 5
+            id: 1
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 500
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 5
+            id: 1
+        isClaimed: 0
+  - idEvent: 
+    eventName: 8
+    timeEvent:
+      timeStart: 0
+      timeEndPreview: 0
+      timeStartReview: 0
+      timeEnd: 0
+    allTypeResources:
+    - type: 0
+      gifts:
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 40
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 500
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 20
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 1000
+          typeChest:
+            type: 5
+            id: 1
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 1500
+          typeChest:
+            type: 5
+            id: 1
+        isClaimed: 0
+  - idEvent: riose
+    eventName: 5
+    timeEvent:
+      timeStart: 0
+      timeEndPreview: 0
+      timeStartReview: 0
+      timeEnd: 0
+    allTypeResources:
+    - type: 0
+      gifts:
+      - require: 1
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 250
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 2
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 2
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 500
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 750
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 11
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+  - idEvent: battlepass
+    eventName: 1
+    timeEvent:
+      timeStart: 0
+      timeEndPreview: 0
+      timeStartReview: 0
+      timeEnd: 0
+    allTypeResources:
+    - type: 0
+      gifts:
+      - require: 1
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 100
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 1
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 1
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 2
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 2
+        groupGift:
+          dataResources:
+          - type:
+              type: 6
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 2
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 250
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 6
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 500
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 1
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          - type:
+              type: 4
+              id: 2
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 750
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 6
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 1000
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 6
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 1500
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 2
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 6
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 2000
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 3
+          - type:
+              type: 4
+              id: 1
+            amount: 3
+          - type:
+              type: 4
+              id: 2
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+    - type: 1
+      gifts:
+      - require: 1
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 200
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 1
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 1
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 2
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 2
+        groupGift:
+          dataResources:
+          - type:
+              type: 6
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 2
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 500
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 3
+        groupGift:
+          dataResources:
+          - type:
+              type: 6
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 1000
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 2
+          - type:
+              type: 4
+              id: 1
+            amount: 2
+          - type:
+              type: 4
+              id: 2
+            amount: 2
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 1500
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 4
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 6
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 2000
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 5
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 6
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 3000
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 3
+          - type:
+              type: 4
+              id: 1
+            amount: 3
+          - type:
+              type: 4
+              id: 2
+            amount: 3
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 7
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 4
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 1
+            amount: 4
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 2
+            amount: 4
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 6
+              id: 0
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 4000
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 10
+        groupGift:
+          dataResources:
+          - type:
+              type: 4
+              id: 0
+            amount: 4
+          - type:
+              type: 4
+              id: 1
+            amount: 4
+          - type:
+              type: 4
+              id: 2
+            amount: 4
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+  - idEvent: racing
+    eventName: 9
+    timeEvent:
+      timeStart: 0
+      timeEndPreview: 0
+      timeStartReview: 0
+      timeEnd: 0
+    allTypeResources:
+    - type: 0
+      gifts:
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 500
+          - type:
+              type: 3
+              id: 0
+            amount: 900
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 250
+          - type:
+              type: 3
+              id: 0
+            amount: 900
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+      - require: 0
+        groupGift:
+          dataResources:
+          - type:
+              type: 1
+              id: 0
+            amount: 100
+          - type:
+              type: 4
+              id: 1
+            amount: 1
+          typeChest:
+            type: 0
+            id: 0
+        isClaimed: 0
+  list_EventUnlockLevel:
+  - eventName: 3
+    level: 9
+  - eventName: 2
+    level: 13
+  - eventName: 7
+    level: 2
+  - eventName: 8
+    level: 6
+  - eventName: 1
+    level: 11
+  - eventName: 9
+    level: 16
+  - eventName: 5
+    level: 21
+  events: []
+  dbEventJson:
+    dataEvent:
+      timeFirstTime: -1
+      listEventTutorial: []
+    events: []
+--- !u!1 &6720994706253912286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8614822262358144303}
+  - component: {fileID: 4424167327827230372}
+  m_Layer: 0
+  m_Name: ResourcesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8614822262358144303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720994706253912286}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3191336765669515281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4424167327827230372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720994706253912286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b30aee384c7d7040a9f33a5f0ebba55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteResourcesSO: {fileID: 11400000, guid: 7cd0fb9f64018114fb4ff267fe0fd95e, type: 2}

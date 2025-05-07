@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1266b76a9f6bc94a84d316462b25a80, type: 3}
+  m_Name: DB_BotRacingSO
+  m_EditorClassIdentifier: 
+  dbBotRacings:
+  - id: 0
+    timePassLevel: 0e0100001c0200002a0300003804000046050000
+  - id: 1
+    timePassLevel: 1c0200003804000054060000700800008c0a0000
+  - id: 2
+    timePassLevel: 3804000070080000a80c0000e010000018150000
+  - id: 3
+    timePassLevel: 70080000e010000050190000c0210000302a0000
