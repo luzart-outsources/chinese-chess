@@ -27,6 +27,10 @@ namespace Luzart
             //sq.OnComplete(() => closeBtn.gameObject.SetActive(true));
 
         }
+        public void Initialize( params DataResource[] dataResources)
+        {
+
+        }
     }
 
 }
