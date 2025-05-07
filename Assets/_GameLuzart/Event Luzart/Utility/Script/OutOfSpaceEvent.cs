@@ -99,8 +99,10 @@ public class OutOfSpaceEvent : MonoBehaviour
     }
     private bool CheckAndInitHeart()
     {
-        bool isNoneHeart = HeartManager.Instance.EStateHeart != EStateHeart.Infinite;
-        obHeart?.SetActive(isNoneHeart);
-        return isNoneHeart;
+        //bool isNoneHeart = HeartManager.Instance.EStateHeart != EStateHeart.Infinite;
+        //obHeart?.SetActive(isNoneHeart);
+        //return isNoneHeart;
+        Debug.LogError("ISNONEHEART");
+        return false;
     }
 }
