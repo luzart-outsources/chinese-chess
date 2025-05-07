@@ -422,19 +422,6 @@
         }
     
     }
-    [System.Serializable]
-    public struct GroupDataResources
-    {
-        public List<DataResource> dataResources;
-        public DataTypeResource typeChest;
-        public bool IsHasChest
-        {
-            get
-            {
-                return typeChest.type == RES_type.Chest && typeChest.id != 0;
-            }
-        }
-    }
     
     [System.Serializable]
     public struct EventUnlockLevel

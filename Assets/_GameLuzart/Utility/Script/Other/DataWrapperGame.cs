@@ -222,4 +222,17 @@ namespace Luzart
         Chest = 5, // 0: None, start for 1, 2 , 3,4
         Spin = 6,
     }
+    [System.Serializable]
+    public struct GroupDataResources
+    {
+        public List<DataResource> dataResources;
+        public DataTypeResource typeChest;
+        public bool IsHasChest
+        {
+            get
+            {
+                return typeChest.type == RES_type.Chest && typeChest.id != 0;
+            }
+        }
+    }
 }
