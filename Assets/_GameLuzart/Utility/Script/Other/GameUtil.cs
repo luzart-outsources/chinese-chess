@@ -96,8 +96,7 @@ namespace Luzart
             int dayCacheLocal = DateTimeOffset.FromUnixTimeSeconds(TimeUtils.GetLongTimeCurrent).Day;
             if (dayCacheLocal != dayCache)
             {
-                EventManager.Instance.SaveAllData();
-                EventManager.Instance.Initialize();
+                Debug.Log("NewDay");
                 if (isOnNewDay)
                 {
                     WaitAFrame(OnNewDay);
