@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CustomMenuLuzart : EditorWindow
 {
@@ -139,7 +141,7 @@ public static class DynamicMenuGenerator
 
             string sceneName = Path.GetFileNameWithoutExtension(scene.path);
             scriptContent += $@"
-        [MenuItem(""Luzart/_Scenes/{sceneName}"")]
+        [MenuItem(""Luzart/_Scenes/{i}{sceneName}"")]
         public static void OpenScene_{i}()
         {{
             EditorSceneManager.OpenScene(@""{scene.path.Replace("\\", "/")}"");
@@ -211,6 +213,7 @@ public class ScaleToOneAndKeepSize : Editor
         Vector3[] originalChildSizeDeltas = new Vector3[childTransforms.Length];
         Vector2[] originalChildPositions = new Vector2[childTransforms.Length];
         TMP_Text[] txts = parentTransform.GetComponentsInChildren<TMP_Text>(true);
+        Text[] txtNormals = parentTransform.GetComponentsInChildren<Text>(true); 
 
         for (int i = 0; i < childTransforms.Length; i++)
         {
@@ -250,10 +253,75 @@ public class ScaleToOneAndKeepSize : Editor
             size = size * originalParentScale.x;
             txts[i].fontSize = size;
         }
+        for (int i = 0; i < txtNormals.Length; i++)
+        {
+            float size = txtNormals[i].fontSize;
+            size = size * originalParentScale.x;
+            int sizeInt = Mathf.RoundToInt(size);
+            txtNormals[i].fontSize = sizeInt;
+        }
 
         parentTransform.anchoredPosition3D = originalParentAnchors;
 
         EditorUtility.SetDirty(parentTransform);
+    }
+}
+public static class NativeSizeMatchArtResolution
+{
+    // Đây là kích thước gốc art team dùng để thiết kế layout UI
+    private static readonly Vector2 artReferenceResolution = new Vector2(1920, 1080);
+
+    [MenuItem("Luzart/LuzartTool/Set Native Size Match Art Resolution")]
+    public static void SetNativeSizeMatchArt()
+    {
+        foreach (GameObject obj in Selection.gameObjects)
+        {
+            Image img = obj.GetComponent<Image>();
+            if (img == null || img.sprite == null)
+            {
+                Debug.LogWarning($"❌ Skipped: {obj.name} (No Image or no Sprite)");
+                continue;
+            }
+
+            CanvasScaler scaler = obj.GetComponentInParent<CanvasScaler>();
+            if (scaler == null || scaler.uiScaleMode != CanvasScaler.ScaleMode.ScaleWithScreenSize)
+            {
+                Debug.LogWarning($"❌ Skipped: {obj.name} (CanvasScaler missing or not ScaleWithScreenSize)");
+                continue;
+            }
+
+            Vector2 currentReferenceResolution = scaler.referenceResolution;
+            float match = scaler.matchWidthOrHeight;
+
+            // ✅ Tính tỉ lệ lệch giữa resolution hiện tại và art reference
+            float widthRatio = currentReferenceResolution.x / artReferenceResolution.x;
+            float heightRatio = currentReferenceResolution.y / artReferenceResolution.y;
+            float compensateScale = 1;
+            // ✅ Xử lý chính xác theo screenMatchMode
+            switch (scaler.screenMatchMode)
+            {
+                case CanvasScaler.ScreenMatchMode.MatchWidthOrHeight:
+                    compensateScale = Mathf.Lerp(widthRatio, heightRatio, scaler.matchWidthOrHeight);
+                    break;
+                case CanvasScaler.ScreenMatchMode.Expand:
+                    compensateScale = Mathf.Max(widthRatio, heightRatio); // Expand = dùng tỉ lệ nhỏ hơn
+                    break;
+                case CanvasScaler.ScreenMatchMode.Shrink:
+                    compensateScale = Mathf.Min(widthRatio, heightRatio); // Shrink = dùng tỉ lệ lớn hơn
+                    break;
+            }
+
+            // ✅ Lấy kích thước thật của sprite (theo pixel)
+            Vector2 spritePixelSize = img.sprite.rect.size;
+
+            // ✅ Điều chỉnh lại sizeDelta sao cho trông giống y như bản thiết kế ở canvas 1920x1080
+            Vector2 finalSizeDelta = spritePixelSize * compensateScale/*/ (scaler.defaultSpriteDPI/100)*/;
+
+            Undo.RecordObject(img.rectTransform, "Set Native Size Match Art");
+            img.rectTransform.sizeDelta = finalSizeDelta;
+
+            Debug.Log($"✅ {obj.name} → sizeDelta = {finalSizeDelta} to match ArtLayout (1920x1080) scaleFactor {scaler.scaleFactor}");
+        }
     }
 }
 
@@ -343,6 +411,88 @@ public class NamespaceAdder : EditorWindow
             }
         }
         return false;
+    }
+}
+public class NamespaceRemover : EditorWindow
+{
+    private string namespaceToRemove = "Luzart";
+    private string folderPath = "";
+
+    [MenuItem("Luzart/LuzartTool/Remove Namespace from Scripts")]
+    public static void ShowWindow()
+    {
+        GetWindow<NamespaceRemover>("Namespace Remover");
+    }
+
+    private void OnGUI()
+    {
+        GUILayout.Label("Remove Namespace from Scripts", EditorStyles.boldLabel);
+        namespaceToRemove = EditorGUILayout.TextField("Namespace to Remove", namespaceToRemove);
+
+        GUILayout.BeginHorizontal();
+        folderPath = EditorGUILayout.TextField("Folder Path", folderPath);
+        if (GUILayout.Button("Browse"))
+        {
+            string selectedFolder = EditorUtility.OpenFolderPanel("Select Folder", "", "");
+            if (!string.IsNullOrEmpty(selectedFolder))
+            {
+                folderPath = selectedFolder;
+            }
+        }
+        GUILayout.EndHorizontal();
+
+        if (GUILayout.Button("Remove Namespace"))
+        {
+            RemoveNamespaceFromScripts();
+        }
+    }
+
+    private void RemoveNamespaceFromScripts()
+    {
+        if (string.IsNullOrEmpty(folderPath))
+        {
+            Debug.LogError("Folder path is empty. Please select a folder.");
+            return;
+        }
+
+        string[] scriptFiles = Directory.GetFiles(folderPath, "*.cs", SearchOption.AllDirectories);
+
+        foreach (string scriptPath in scriptFiles)
+        {
+            string code = File.ReadAllText(scriptPath);
+
+            // Check if namespace exists
+            if (!Regex.IsMatch(code, $@"namespace\s+{namespaceToRemove}\s*\{{"))
+            {
+                Debug.Log($"Skipped: {scriptPath} (Namespace '{namespaceToRemove}' not found)");
+                continue;
+            }
+
+            // Remove 'using Luzart;' if exists
+            code = Regex.Replace(code, @"^\s*using\s+" + namespaceToRemove + @"\s*;\s*\n?", "", RegexOptions.Multiline);
+
+            // Remove namespace block and dedent
+            code = Regex.Replace(code,
+                $@"namespace\s+{namespaceToRemove}\s*\{{([\s\S]*?)\}}\s*$",
+                match =>
+                {
+                    // Giảm thụt dòng lùi lại
+                    string innerCode = match.Groups[1].Value;
+                    string[] lines = innerCode.Split('\n');
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        lines[i] = lines[i].StartsWith("    ") ? lines[i].Substring(4) : lines[i];
+                    }
+                    return string.Join("\n", lines);
+                },
+                RegexOptions.Multiline);
+
+            File.WriteAllText(scriptPath, code);
+            Debug.Log($"Namespace '{namespaceToRemove}' removed from: {scriptPath}");
+        }
+
+        AssetDatabase.Refresh();
+        Debug.Log("Namespace removal complete.");
     }
 }
 public class MissingScriptFinder : EditorWindow
@@ -452,6 +602,51 @@ public class MissingScriptFinder : EditorWindow
             if (HasMissingScripts(obj))
             {
                 missingScriptObjects.Add(GetFullPath(obj));
+            }
+        }
+    }
+}
+public class ReferenceFinder : EditorWindow
+{
+
+    [MenuItem("Luzart/LuzartTool/Find References In Scene")]
+    public static void Find()
+    {
+        Transform[] selectedTransforms = Selection.transforms;
+
+        if (selectedTransforms.Length == 0)
+        {
+            Debug.LogWarning("Please select at least one RectTransform in the hierarchy.");
+            return;
+        }
+
+        foreach (Transform selected in selectedTransforms)
+        {
+            if (selected is RectTransform parentTransform)
+            {
+                FindReferences(parentTransform.gameObject);
+            }
+        }
+    }
+    static void FindReferences(GameObject target)
+    {
+
+        var allObjects = GameObject.FindObjectsOfType<Component>();
+
+        foreach (var obj in allObjects)
+        {
+            SerializedObject so = new SerializedObject(obj);
+            SerializedProperty prop = so.GetIterator();
+
+            while (prop.NextVisible(true))
+            {
+                if (prop.propertyType == SerializedPropertyType.ObjectReference)
+                {
+                    if (prop.objectReferenceValue == target)
+                    {
+                        Debug.Log($"Reference found in: {obj.gameObject.name}, Component: {obj.GetType().Name}", obj.gameObject);
+                    }
+                }
             }
         }
     }
