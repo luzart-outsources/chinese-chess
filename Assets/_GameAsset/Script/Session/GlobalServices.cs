@@ -10,7 +10,7 @@ namespace Assets._GameAsset.Script.Session
     public class GlobalServices
     {
         private static GlobalServices instance;
-        public static GlobalServices INSTANCE => instance ?? (instance = new GlobalServices());
+        public static GlobalServices Instance => instance ?? (instance = new GlobalServices());
 
         public void login(string username, string password)
         {
@@ -21,7 +21,7 @@ namespace Assets._GameAsset.Script.Session
                 msg.Writer.writeString(username);
                 msg.Writer.writeString(password);
 
-                SessionMe.INSTANCE.SendMessage(msg);
+                SessionMe.Instance.SendMessage(msg);
             }
             catch (Exception e) 
             {
@@ -38,7 +38,20 @@ namespace Assets._GameAsset.Script.Session
                 msg.Writer.writeString(phoneNumber);
                 msg.Writer.writeString(password);
 
-                SessionMe.INSTANCE.SendMessage(msg);
+                SessionMe.Instance.SendMessage(msg);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+        public void PostNameUser(string namePlayer)
+        {
+            try
+            {
+                var msg = new Message(2);
+                msg.Writer.writeString(namePlayer);
+                SessionMe.Instance.SendMessage(msg);
             }
             catch (Exception e)
             {

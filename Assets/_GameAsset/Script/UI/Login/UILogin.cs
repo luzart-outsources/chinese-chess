@@ -1,18 +1,34 @@
+using Assets._GameAsset.Script.Session;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UILogin : MonoBehaviour
+public class UILogin : UIBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Button btnClickLogin;
+    public Button btnClickRegister;
+    public LoginPopUp loginPopUp;
+    public RegisterPopup registerPopup;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        GameUtil.ButtonOnClick(btnClickLogin, ClickLogin);
+        GameUtil.ButtonOnClick(btnClickRegister, ClickRegister);
+
+    }
+    private void ClickLogin()
+    {
+        ConnectToSession();
+        loginPopUp.OnClickLogin();
+    }
+    private void ClickRegister()
+    {
+        ConnectToSession();
+        registerPopup.OnClickeRegister();
+    }
+    public void ConnectToSession()
+    {
+        SessionMe.Instance.Connect();
     }
 }

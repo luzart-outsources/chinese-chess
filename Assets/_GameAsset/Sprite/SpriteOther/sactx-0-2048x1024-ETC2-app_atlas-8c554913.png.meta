@@ -144,7 +144,7 @@ TextureImporter:
         width: 74
         height: 811
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -165,7 +165,7 @@ TextureImporter:
         width: 74
         height: 811
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,6 +173,69 @@ TextureImporter:
       bones: []
       spriteID: a38c1fc4cca00ff40abf5ac681526113
       internalID: -1935083818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-0-2048x1024-ETC2-app_atlas-8c554913_2
+      rect:
+        serializedVersion: 2
+        x: 1453
+        y: 362
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 425d4c9bce269d542a150ca1c226a4c3
+      internalID: -291770338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-0-2048x1024-ETC2-app_atlas-8c554913_3
+      rect:
+        serializedVersion: 2
+        x: 1452
+        y: 260
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e660d85254bc674db75da932e999708
+      internalID: 204552404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sactx-0-2048x1024-ETC2-app_atlas-8c554913_4
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 116
+        width: 109
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d21ee5eaec4e3a49a46201ef9a07056
+      internalID: -888660032
       vertices: []
       indices: 
       edges: []
@@ -190,6 +253,9 @@ TextureImporter:
     nameFileIdTable:
       sactx-0-2048x1024-ETC2-app_atlas-8c554913_0: 1562797233
       sactx-0-2048x1024-ETC2-app_atlas-8c554913_1: -1935083818
+      sactx-0-2048x1024-ETC2-app_atlas-8c554913_2: -291770338
+      sactx-0-2048x1024-ETC2-app_atlas-8c554913_3: 204552404
+      sactx-0-2048x1024-ETC2-app_atlas-8c554913_4: -888660032
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

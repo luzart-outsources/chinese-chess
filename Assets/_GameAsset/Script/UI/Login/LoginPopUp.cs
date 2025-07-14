@@ -22,7 +22,7 @@ public class LoginPopUp : MonoBehaviour
     {
         string username = usernameInputField.text;
         string password = passwordInputField.text;
-        GlobalServices.INSTANCE.login(username, password);
+        GlobalServices.Instance.login(username, password);
         Debug.Log($"Login: {username}, {password}");
 
         // TODO: Thực hiện xử lý đăng nhập

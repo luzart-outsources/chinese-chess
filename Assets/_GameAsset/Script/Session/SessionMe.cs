@@ -1,5 +1,4 @@
-﻿using Luzart;
-using NetworkClient.Interfaces;
+﻿using NetworkClient.Interfaces;
 using NetworkClient.Models;
 using NetworkClient.Network.Tcp;
 using NetworkClient.Network.WebSocket;
@@ -13,11 +12,11 @@ namespace Assets._GameAsset.Script.Session
 {
     public class SessionMe
     {
-        const string hostTCP = "127.0.0.1";
+        const string hostTCP = "103.82.21.235";
         const int port = 36526;
 
         private static SessionMe _instance;
-        public static SessionMe INSTANCE => _instance ?? (_instance = new SessionMe());
+        public static SessionMe Instance => _instance ?? (_instance = new SessionMe());
         public MessageHandler messageHandler;
         public INetworkConnection network;
 
@@ -37,13 +36,21 @@ namespace Assets._GameAsset.Script.Session
 
         public void Disconnect()
         {
+            if(network != null && !network.IsConnected)
+            {
+                var ui = UIManager.Instance.ShowUI<UINotiAButton>(UIName.NotiAButton);
+                ui.InitPopup(null, "Lỗi kết nối mạng", "Không thể kết nối với máy chủ", "Thử lại");
+            }
+
             if (network == null && network.IsConnected)
+            {
                 network.Disconnect();
+            }
         }
 
         public void SendMessage(Message msg)
         {
-            if (network == null && network.IsConnected)
+            if (network != null && network.IsConnected)
                 network.Send(msg);
             msg.Dispose();
         }

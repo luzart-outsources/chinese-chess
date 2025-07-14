@@ -1,4 +1,4 @@
-﻿namespace Eco.TweenAnimation
+namespace Eco.TweenAnimation
 {
     public class AnimationFactory
     {

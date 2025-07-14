@@ -436,12 +436,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameData:
-    level: 0
-    namePlayer: 
-    idAvt: 0
-    timeFirstTime: -1
-    isUserIAP: 0
-    adsLimit: 0
+    dataUserLogin:
+      username: 
+      password: 
+      email: 
+  dataUser:
+    id: 0
+    avt: 
+    name: 
+    gold: 0
 --- !u!1 &7062897448495686203
 GameObject:
   m_ObjectHideFlags: 0

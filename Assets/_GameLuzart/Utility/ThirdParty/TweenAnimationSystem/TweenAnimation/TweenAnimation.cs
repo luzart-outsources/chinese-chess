@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -87,7 +87,14 @@ namespace Eco.TweenAnimation
             if (_showOn == EShow.Enable)
                 Show();
         }
-
+        public void Show()
+        {
+            _animationDebug.Show();
+        }
+        public void Hide()
+        {
+            _animationDebug.Hide();
+        }
         public override void Show(TweenCallback onComplete = null)
         {
             Kill();

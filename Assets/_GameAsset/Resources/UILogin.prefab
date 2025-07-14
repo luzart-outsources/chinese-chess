@@ -504,6 +504,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c9da038d98bf84880d6605b6e880ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiName: 0
+  closeBtn: {fileID: 0}
+  isAnimBtnClose: 0
+  isCache: 0
+  btnClickLogin: {fileID: 7977923826700008105}
+  btnClickRegister: {fileID: 3068840330687959661}
+  loginPopUp: {fileID: 6581594840232735433}
+  registerPopup: {fileID: 8502654695171274139}
 --- !u!1 &1820657558658387034
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +754,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Username
+  m_text: Username/Phonenumber
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 095cddc91bd195844b6509e64da577ae, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 18758c7cbb1657a449c08edb84de6f75, type: 2}
@@ -773,8 +781,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -927,15 +935,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1114,8 +1122,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1187,6 +1195,7 @@ GameObject:
   - component: {fileID: 7535800661771878565}
   - component: {fileID: 4751443405797907864}
   - component: {fileID: 4105782553860997352}
+  - component: {fileID: 7977923826700008105}
   m_Layer: 5
   m_Name: btnLogin
   m_TagString: Untagged
@@ -1236,7 +1245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1252,6 +1261,50 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.45
+--- !u!114 &7977923826700008105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2322946387868876892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 4105782553860997352}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2556634175715492764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,8 +1604,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1858,15 +1911,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1992,15 +2045,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2118,7 +2171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5116952167693251579}
-  - component: {fileID: 5843354481628957642}
+  - component: {fileID: 2587146647787399711}
   m_Layer: 5
   m_Name: AllButtonUp
   m_TagString: Untagged
@@ -2147,7 +2200,7 @@ RectTransform:
   m_AnchoredPosition: {x: -28.36, y: 424}
   m_SizeDelta: {x: 760.77, y: 218.05}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5843354481628957642
+--- !u!114 &2587146647787399711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2156,10 +2209,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4655071790941408509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1d72dc5d7710f46831f26c5e6a3bf8, type: 3}
+  m_Script: {fileID: 11500000, guid: 1230353e2c946154682671ad4a8e5a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groupBaseSelectCustomsSelect:
+  groupBSCustomSelect:
     baseSelectCustom:
     - baseSelect: {fileID: 6470716239471914748}
       index: 0
@@ -2167,14 +2220,14 @@ MonoBehaviour:
     - baseSelect: {fileID: 4548007047706421035}
       index: 0
       isSelect: 0
-  groupBaseSelectCustomsUnSelect:
+  groupBSCustomUnSelect:
     baseSelectCustom:
-    - baseSelect: {fileID: 4548007047706421035}
-      index: 0
-      isSelect: 1
     - baseSelect: {fileID: 6470716239471914748}
       index: 0
       isSelect: 0
+    - baseSelect: {fileID: 4548007047706421035}
+      index: 0
+      isSelect: 1
 --- !u!1 &4784328981416855290
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,15 +2372,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2835,7 +2888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2894,19 +2947,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 254372196896454958}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6581594840232735433}
-        m_TargetAssemblyTypeName: LoginPopUp, Assembly-CSharp
-        m_MethodName: OnClickLogin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6470716239471914748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3033,8 +3074,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64
-  m_fontSizeBase: 64
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3144,8 +3185,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groupBaseSelect:
-  - {fileID: 5843354481628957642}
+  - {fileID: 2587146647787399711}
   - {fileID: 281564887002779036}
+  - {fileID: 2858556834873764280}
 --- !u!1 &6130279155322980935
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,6 +3198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2161348855997765230}
   - component: {fileID: 121007581432812929}
+  - component: {fileID: 2858556834873764280}
   m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
@@ -3181,7 +3224,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -698, y: -67.89494}
+  m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 1420, y: 620}
   m_Pivot: {x: 0.25, y: 0.5}
 --- !u!114 &121007581432812929
@@ -3197,22 +3240,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: 2
-  _showOn: 1
+  _showOn: 0
   _registerScreenToggle: 1
   _canvasGroup: {fileID: 0}
   _image: {fileID: 0}
   _baseOptions:
-    ShowEase: 27
-    HideEase: 26
-    Duration: 0.1925
+    ShowEase: 6
+    HideEase: 6
+    Duration: 0.2
     StartDelay: 0
     IgnoreTimeScale: 0
     LoopTime: 0
     LoopType: 0
     DelayPerOneTimeLoop: 0
   _vector3Options:
-    From: {x: 0, y: 0, z: 0}
-    EndTo: {x: -1, y: -1, z: -1}
+    From: {x: 0, y: -30, z: 0}
+    EndTo: {x: -700, y: -30, z: 0}
   _canvasGroupOptions:
     From: 0
     To: 1
@@ -3220,6 +3263,48 @@ MonoBehaviour:
   _floatOptions:
     From: 0
     To: 1
+--- !u!114 &2858556834873764280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130279155322980935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e75def3609a124a8e62a56379de63c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSelect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 121007581432812929}
+        m_TargetAssemblyTypeName: Eco.TweenAnimation.TweenAnimation, Assembly-CSharp
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  eventUnSelect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 121007581432812929}
+        m_TargetAssemblyTypeName: Eco.TweenAnimation.TweenAnimation, Assembly-CSharp
+        m_MethodName: Show
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6430066628070140578
 GameObject:
   m_ObjectHideFlags: 0
@@ -3231,6 +3316,7 @@ GameObject:
   - component: {fileID: 1019398594339045338}
   - component: {fileID: 7233963842318939677}
   - component: {fileID: 3493347163401324486}
+  - component: {fileID: 3068840330687959661}
   m_Layer: 5
   m_Name: btnSignUp
   m_TagString: Untagged
@@ -3280,7 +3366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3296,6 +3382,50 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.45
+--- !u!114 &3068840330687959661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6430066628070140578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 3493347163401324486}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6563425905970360503
 GameObject:
   m_ObjectHideFlags: 0
@@ -4086,7 +4216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4145,19 +4275,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9026907197612715919}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8502654695171274139}
-        m_TargetAssemblyTypeName: RegisterPopup, Assembly-CSharp
-        m_MethodName: OnClickeRegister
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &4548007047706421035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4335,15 +4453,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4895,8 +5013,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

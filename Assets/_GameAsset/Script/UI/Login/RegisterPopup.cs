@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets._GameAsset.Script.Session;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -24,6 +25,6 @@ public class RegisterPopup : MonoBehaviour
 
         Debug.Log($"Register: {username}, {phone}, {password}");
 
-        // TODO: Thực hiện xử lý đăng ký
+        GlobalServices.Instance.Register(username, phone, password);
     }
 }

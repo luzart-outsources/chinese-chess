@@ -1,28 +1,34 @@
-namespace Luzart
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEngine;
+
+public class UISplash : UIBase
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    
-    public class UISplash : UIBase
+    public ProgressBarUI progressBarUI;
+    private bool isHasDataGameLocal = false;
+    public override void Show(Action onHideDone)
     {
-        public RectTransform rtSliderParent;
-        public RectTransform rtSliderChild;
-        public override void Show(Action onHideDone)
+        base.Show(onHideDone);
+        progressBarUI.SetSlider(0, 1, 3f, InitLoading);
+        isHasDataGameLocal = DataManager.Instance.IsHasDataGame();
+    }
+    private void InitLoading()
+    {
+        if (isHasDataGameLocal)
         {
-            Vector2 sizeParent = rtSliderParent.sizeDelta;
-            Vector2 size = rtSliderChild.sizeDelta;
-            base.Show(onHideDone);
-            GameUtil.Instance.StartLerpValue(this, 0, sizeParent.x, 5f, (x) =>
-            {
-                rtSliderChild.sizeDelta = new Vector2(x, size.y);
-            }, InitStartGame);
+
         }
-        private void InitStartGame()
+        else
         {
-            UIManager.Instance.ShowUI(UIName.MainMenu);
+            UIManager.Instance.ShowUI(UIName.Login);
             Hide();
         }
+    }
+    private void InitStartGame()
+    {
+        UIManager.Instance.ShowUI(UIName.MainMenu);
+        Hide();
     }
 }

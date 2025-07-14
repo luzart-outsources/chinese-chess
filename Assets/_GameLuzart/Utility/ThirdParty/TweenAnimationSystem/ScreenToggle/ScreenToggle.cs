@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Eco.TweenAnimation;
 using Sirenix.OdinInspector;
 using UnityEngine;

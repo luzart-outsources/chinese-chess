@@ -527,8 +527,7 @@ MonoBehaviour:
   closeBtn: {fileID: 0}
   isAnimBtnClose: 0
   isCache: 0
-  rtSliderParent: {fileID: 5616637650292954334}
-  rtSliderChild: {fileID: 7597012426463586757}
+  progressBarUI: {fileID: 387611534988137538}
 --- !u!1 &8612508170130176157
 GameObject:
   m_ObjectHideFlags: 0

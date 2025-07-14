@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 
 namespace Eco.TweenAnimation

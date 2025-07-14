@@ -1,98 +1,95 @@
-namespace Luzart
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UIBase : MonoBehaviour
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using UnityEngine.UI;
+    public UIName uiName = UIName.None;
+    public Button closeBtn;
+    public bool isAnimBtnClose = false;
+    public bool isCache = false;
 
-    public class UIBase : MonoBehaviour
+
+    protected bool isSetup = false;
+    protected System.Action onHideDone;
+
+    protected virtual void Setup()
     {
-        public UIName uiName = UIName.None;
-        public Button closeBtn;
-        public bool isAnimBtnClose = false;
-        public bool isCache = false;
-
-
-        protected bool isSetup = false;
-        protected System.Action onHideDone;
-
-        protected virtual void Setup()
+        if (closeBtn != null)
         {
-            if (closeBtn != null)
-            {
-                GameUtil.ButtonOnClick(closeBtn, OnClickClose, isAnimBtnClose);
-                // closeBtn.onClick.AddListener(OnClickClose);
-            }
+            GameUtil.ButtonOnClick(closeBtn, OnClickClose, isAnimBtnClose);
+            // closeBtn.onClick.AddListener(OnClickClose);
         }
-        public virtual void Show(System.Action onHideDone)
+    }
+    public virtual void Show(System.Action onHideDone)
+    {
+        if (!isSetup)
         {
-            if (!isSetup)
-            {
-                isSetup = true;
-                Setup();
-            }
-            gameObject.SetActive(true);
-            InitActionOnHideDone(onHideDone);
+            isSetup = true;
+            Setup();
         }
-        public void InitActionOnHideDone(System.Action onHideDone)
+        gameObject.SetActive(true);
+        InitActionOnHideDone(onHideDone);
+    }
+    public void InitActionOnHideDone(System.Action onHideDone)
+    {
+        this.onHideDone = onHideDone;
+    }
+
+    public virtual void RefreshUI()
+    {
+    }
+
+    public virtual void Hide()
+    {
+        UIManager.Instance.RemoveActiveUI(uiName);
+        if (gameObject == null)
         {
-            this.onHideDone = onHideDone;
+            return;
         }
-
-        public virtual void RefreshUI()
+        if (!isCache)
         {
+            Destroy(gameObject);
         }
-
-        public virtual void Hide()
+        else
         {
-            UIManager.Instance.RemoveActiveUI(uiName);
-            if (gameObject == null)
-            {
-                return;
-            }
-            if (!isCache)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-            onHideDone?.Invoke();
-            onHideDone = null;
+            gameObject.SetActive(false);
         }
+        onHideDone?.Invoke();
+        onHideDone = null;
+    }
 
-        public virtual void OnAnimHideDone()
+    public virtual void OnAnimHideDone()
+    {
+        if (!isCache)
         {
-            if (!isCache)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-
-            onHideDone?.Invoke();
-
-            onHideDone = null;
+            Destroy(gameObject);
         }
-
-        private IEnumerator DelayAnimHide(float dur)
+        else
         {
-            yield return new WaitForSeconds(dur);
-            OnAnimHideDone();
-        }
-        private IEnumerator DelayShowOut()
-        {
-            yield return new WaitForSeconds(0.5f);
             gameObject.SetActive(false);
         }
 
-        public virtual void OnClickClose()
-        {
-            Hide();
-            //AudioManager.Instance.PlayClickBtnFx();
-        }
+        onHideDone?.Invoke();
+
+        onHideDone = null;
+    }
+
+    private IEnumerator DelayAnimHide(float dur)
+    {
+        yield return new WaitForSeconds(dur);
+        OnAnimHideDone();
+    }
+    private IEnumerator DelayShowOut()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameObject.SetActive(false);
+    }
+
+    public virtual void OnClickClose()
+    {
+        Hide();
+        //AudioManager.Instance.PlayClickBtnFx();
     }
 }

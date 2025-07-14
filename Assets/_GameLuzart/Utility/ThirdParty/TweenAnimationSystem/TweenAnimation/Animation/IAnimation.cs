@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 
 namespace Eco.TweenAnimation
 {

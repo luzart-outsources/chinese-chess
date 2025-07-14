@@ -413,21 +413,19 @@ public class NamespaceAdder : EditorWindow
         return false;
     }
 }
-public class NamespaceRemover : EditorWindow
+public class NamespaceRemoverFixedBrace : EditorWindow
 {
-    private string namespaceToRemove = "Luzart";
     private string folderPath = "";
 
-    [MenuItem("Luzart/LuzartTool/Remove Namespace from Scripts")]
+    [MenuItem("Luzart/LuzartTool/Remove 'namespace Luzart' (Fixed Brace)")]
     public static void ShowWindow()
     {
-        GetWindow<NamespaceRemover>("Namespace Remover");
+        GetWindow<NamespaceRemoverFixedBrace>("Remove Namespace Luzart (Brace Fix)");
     }
 
     private void OnGUI()
     {
-        GUILayout.Label("Remove Namespace from Scripts", EditorStyles.boldLabel);
-        namespaceToRemove = EditorGUILayout.TextField("Namespace to Remove", namespaceToRemove);
+        GUILayout.Label("Safely Remove 'namespace Luzart' and matching braces", EditorStyles.boldLabel);
 
         GUILayout.BeginHorizontal();
         folderPath = EditorGUILayout.TextField("Folder Path", folderPath);
@@ -443,56 +441,76 @@ public class NamespaceRemover : EditorWindow
 
         if (GUILayout.Button("Remove Namespace"))
         {
-            RemoveNamespaceFromScripts();
+            RemoveNamespace();
         }
     }
 
-    private void RemoveNamespaceFromScripts()
+    private void RemoveNamespace()
     {
         if (string.IsNullOrEmpty(folderPath))
         {
-            Debug.LogError("Folder path is empty. Please select a folder.");
+            Debug.LogError("Folder path is empty.");
             return;
         }
 
-        string[] scriptFiles = Directory.GetFiles(folderPath, "*.cs", SearchOption.AllDirectories);
+        string[] csFiles = Directory.GetFiles(folderPath, "*.cs", SearchOption.AllDirectories);
 
-        foreach (string scriptPath in scriptFiles)
+        foreach (var path in csFiles)
         {
-            string code = File.ReadAllText(scriptPath);
+            string[] lines = File.ReadAllLines(path);
+            var result = new List<string>();
 
-            // Check if namespace exists
-            if (!Regex.IsMatch(code, $@"namespace\s+{namespaceToRemove}\s*\{{"))
+            bool insideNamespace = false;
+            bool skipNextBraceLine = false;
+            int braceDepth = 0;
+
+            foreach (var rawLine in lines)
             {
-                Debug.Log($"Skipped: {scriptPath} (Namespace '{namespaceToRemove}' not found)");
-                continue;
+                string line = rawLine;
+
+                // Detect namespace Luzart
+                if (!insideNamespace && line.TrimStart().StartsWith("namespace Luzart"))
+                {
+                    insideNamespace = true;
+                    skipNextBraceLine = true; // we expect next line to be '{'
+                    continue; // skip namespace line
+                }
+
+                if (skipNextBraceLine)
+                {
+                    if (line.Trim() == "{" || line.Trim().StartsWith("{ ")) // line is just '{' or '{ // comment'
+                    {
+                        skipNextBraceLine = false;
+                        continue; // skip the opening brace line
+                    }
+                }
+
+                if (insideNamespace)
+                {
+                    if (line.Contains("{")) braceDepth++;
+                    if (line.Contains("}")) braceDepth--;
+
+                    // If braceDepth < 0, we passed closing }, skip it
+                    if (braceDepth < 0)
+                    {
+                        insideNamespace = false;
+                        continue;
+                    }
+
+                    // Remove one level of indent (4 spaces or tab)
+                    if (line.StartsWith("    ")) line = line.Substring(4);
+                    else if (line.StartsWith("\t")) line = line.Substring(1);
+                }
+
+                result.Add(line);
             }
 
-            // Remove 'using Luzart;' if exists
-            code = Regex.Replace(code, @"^\s*using\s+" + namespaceToRemove + @"\s*;\s*\n?", "", RegexOptions.Multiline);
-
-            // Remove namespace block and dedent
-            code = Regex.Replace(code,
-                $@"namespace\s+{namespaceToRemove}\s*\{{([\s\S]*?)\}}\s*$",
-                match =>
-                {
-                    // Giảm thụt dòng lùi lại
-                    string innerCode = match.Groups[1].Value;
-                    string[] lines = innerCode.Split('\n');
-                    for (int i = 0; i < lines.Length; i++)
-                    {
-                        lines[i] = lines[i].StartsWith("    ") ? lines[i].Substring(4) : lines[i];
-                    }
-                    return string.Join("\n", lines);
-                },
-                RegexOptions.Multiline);
-
-            File.WriteAllText(scriptPath, code);
-            Debug.Log($"Namespace '{namespaceToRemove}' removed from: {scriptPath}");
+            File.WriteAllLines(path, result);
+            Debug.Log($"✅ Cleaned namespace and braces: {path}");
         }
 
         AssetDatabase.Refresh();
-        Debug.Log("Namespace removal complete.");
+        Debug.Log("🎉 Namespace removal complete, no more extra braces.");
     }
 }
 public class MissingScriptFinder : EditorWindow
