@@ -1,0 +1,6 @@
+green: 5fa576
+yellow:  f0c94c
+blue: ade0e9
+brown: 7b3016
+co vua number & text: 552323
+id: a4a6a9

@@ -391,6 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteResourcesSO: {fileID: 11400000, guid: 7cd0fb9f64018114fb4ff267fe0fd95e, type: 2}
+  avatarResourcesSO: {fileID: 11400000, guid: a937e538218949c4b8b53a448a88fe8c, type: 2}
 --- !u!1 &4822578124946984593
 GameObject:
   m_ObjectHideFlags: 0

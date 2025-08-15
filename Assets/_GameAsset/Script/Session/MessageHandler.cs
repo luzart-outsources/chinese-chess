@@ -20,15 +20,21 @@ namespace Assets._GameAsset.Script.Session
 
         public void onMessage(Message msg)
         {
+            Message msgClone = msg;
+            MainThreadDispatcher.Enqueue(() => OnMessageMainThread(msgClone));
+        }
+        private void OnMessageMainThread(Message msg)
+        {
+            UIManager.Instance.HideUiActive(UIName.Loading);
             switch (msg.Command)
             {
                 case 1:
                     readMsg.LoginComplete(msg);
                     break;
-                case 2: 
+                case 2:
                     readMsg.OnReceiveCreateData(msg);
                     break;
-                case 3: 
+                case 3:
                     readMsg.ShowDialog(msg);
                     break;
                 case 4:

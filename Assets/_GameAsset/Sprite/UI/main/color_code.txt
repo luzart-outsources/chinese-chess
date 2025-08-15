@@ -1,0 +1,2 @@
+yellow: F4E3C2
+red: 6e0907

@@ -510,8 +510,11 @@ MonoBehaviour:
   isCache: 0
   btnClickLogin: {fileID: 7977923826700008105}
   btnClickRegister: {fileID: 3068840330687959661}
+  btnUpClickLogin: {fileID: 1578471788067964438}
+  btnUpClickRegister: {fileID: 7827408088762450543}
   loginPopUp: {fileID: 6581594840232735433}
   registerPopup: {fileID: 8502654695171274139}
+  bsLogin: {fileID: 4902589716599451799}
 --- !u!1 &1820657558658387034
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +651,7 @@ MonoBehaviour:
   m_CharacterValidation: 2
   m_RegexValue: 
   m_GlobalPointSize: 14
-  m_CharacterLimit: 0
+  m_CharacterLimit: 15
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls: []
@@ -1316,7 +1319,7 @@ GameObject:
   - component: {fileID: 1117434020355686251}
   - component: {fileID: 5141764067428447737}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: ParentMove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3200,7 +3203,7 @@ GameObject:
   - component: {fileID: 121007581432812929}
   - component: {fileID: 2858556834873764280}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: MoveTween
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

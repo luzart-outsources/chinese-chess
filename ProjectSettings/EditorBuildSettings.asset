@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_GameLuzart/GameManager/Scenes/Game.unity
+    guid: ad24c87d5d313424bb2f9281106130ca
   m_configObjects: {}

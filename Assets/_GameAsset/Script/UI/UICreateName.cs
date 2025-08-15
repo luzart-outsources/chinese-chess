@@ -3,15 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UICreateName : UIBase
 {
     private string strTextValid = "Tên người dùng không hợp lệ";
     public TMP_InputField inputField;
     public TMP_Text txtInValid;
+    public Button btnClick;
     private void Awake()
     {
         Observer.Instance.AddObserver(ObserverKey.OnReceiveCreateName, OnReceiveCreateName);
+        GameUtil.ButtonOnClick(btnClick, OnClickOk);
     }
     private void OnDestroy()
     {

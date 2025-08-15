@@ -58,5 +58,11 @@ namespace Assets._GameAsset.Script.Session
 
             }
         }
+
+        public void PostListRoom()
+        {
+            var msg = new Message(11);
+            msg.Writer.writeByte(0);
+        }
     }
 }

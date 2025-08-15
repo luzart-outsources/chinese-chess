@@ -78,6 +78,7 @@ namespace Eco.TweenAnimation
 
         private void Awake()
         {
+            InitializedDebug();
             if (_showOn == EShow.Awake)
                 Show();
         }

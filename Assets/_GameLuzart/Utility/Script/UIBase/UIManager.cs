@@ -33,6 +33,7 @@ public class UIManager : Singleton<UIManager>
         {UIName.Loading,"4,0,UILoading" },
         {UIName.Login,"1,0,UILogin" },
         {UIName.NotiAButton,"3,0,UINotiAButton" },
+        {UIName.CreateName,"1,0,UICreateName" },
 };
 
     private Dictionary<UIName, DataUIBase> dic2;
@@ -192,11 +193,20 @@ public class UIManager : Singleton<UIManager>
         }
         else
         {
-            var idx = dic2[uIScreen].rootIdx;
-            string path = PATH_UI + dic2[uIScreen].loadPath;
-            var pf = Resources.Load<UIBase>(path);
-            current = Instantiate(pf, rootOb[idx]);
-            cacheScreen.Add(uIScreen, current);
+            try
+            {
+                var idx = dic2[uIScreen].rootIdx;
+                string path = PATH_UI + dic2[uIScreen].loadPath;
+                var pf = Resources.Load<UIBase>(path);
+                current = Instantiate(pf, rootOb[idx]);
+                cacheScreen.Add(uIScreen, current);
+            }
+            catch(Exception e)
+            {
+                Debug.LogError(e);
+            }
+            
+
         }
         return current;
     }
@@ -357,6 +367,7 @@ public enum UIName
     Login = 7,
     Loading = 8,
     NotiAButton = 9,
+    CreateName = 10,
 }
 public class DataUIBase
 {

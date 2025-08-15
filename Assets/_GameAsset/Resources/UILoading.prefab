@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8575390068818071013}
   - component: {fileID: 580650110570024903}
+  - component: {fileID: 6271689105667951053}
   m_Layer: 5
   m_Name: UILoading
   m_TagString: Untagged
@@ -46,6 +47,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1128475113645125732}
   m_CullTransparentMesh: 1
+--- !u!114 &6271689105667951053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128475113645125732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea0b83b2715d084297f0c5cd7d76530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiName: 0
+  closeBtn: {fileID: 0}
+  isAnimBtnClose: 0
+  isCache: 0
 --- !u!1 &3496216530962305225
 GameObject:
   m_ObjectHideFlags: 0

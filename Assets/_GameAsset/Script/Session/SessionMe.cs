@@ -38,8 +38,12 @@ namespace Assets._GameAsset.Script.Session
         {
             if(network != null && !network.IsConnected)
             {
-                var ui = UIManager.Instance.ShowUI<UINotiAButton>(UIName.NotiAButton);
-                ui.InitPopup(null, "Lỗi kết nối mạng", "Không thể kết nối với máy chủ", "Thử lại");
+                Action action = () =>
+                {
+                    var ui = UIManager.Instance.ShowUI<UINotiAButton>(UIName.NotiAButton);
+                    ui.InitPopup(null, "Lỗi kết nối mạng", "Không thể kết nối với máy chủ", "Thử lại");
+                };
+                MainThreadDispatcher.Enqueue(action);
             }
 
             if (network == null && network.IsConnected)

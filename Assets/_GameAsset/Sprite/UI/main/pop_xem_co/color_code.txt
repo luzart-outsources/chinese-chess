@@ -1,0 +1,3 @@
+yellow: f0c94c
+red: 7b3016
+grey: 827165

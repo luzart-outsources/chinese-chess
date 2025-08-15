@@ -52,4 +52,5 @@ public static class ObserverKey
     public const string CoinObserverDontAuto = "CoinObserverDontAuto";
     public const string OnNewDay = "OnNewDay";
     public const string OnReceiveCreateName = "OnReceiveCreateName";
+    public const string RefreshDataMeByServer = "RefreshDataMeByServer";
 }

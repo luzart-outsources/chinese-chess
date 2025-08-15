@@ -5,5 +5,6 @@ using UnityEngine;
 public class ResourcesManager : Singleton<ResourcesManager>
 {
     public SpriteResourcesSO spriteResourcesSO;
+    public AvatarResourcesSO avatarResourcesSO;
 }
 

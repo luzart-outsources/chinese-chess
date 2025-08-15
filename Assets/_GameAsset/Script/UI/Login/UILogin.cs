@@ -8,13 +8,18 @@ public class UILogin : UIBase
 {
     public Button btnClickLogin;
     public Button btnClickRegister;
+    public Button btnUpClickLogin;
+    public Button btnUpClickRegister;
     public LoginPopUp loginPopUp;
     public RegisterPopup registerPopup;
+    public BaseSelect bsLogin;
 
     private void Start()
     {
         GameUtil.ButtonOnClick(btnClickLogin, ClickLogin);
         GameUtil.ButtonOnClick(btnClickRegister, ClickRegister);
+        GameUtil.ButtonOnClick(btnUpClickLogin, ClickUpLogin);
+        GameUtil.ButtonOnClick(btnUpClickRegister, ClickUpRegister);
 
     }
     private void ClickLogin()
@@ -26,6 +31,14 @@ public class UILogin : UIBase
     {
         ConnectToSession();
         registerPopup.OnClickeRegister();
+    }
+    private void ClickUpLogin()
+    {
+        bsLogin.Select(true);
+    }
+    private void ClickUpRegister()
+    {
+        bsLogin.Select(false);
     }
     public void ConnectToSession()
     {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 namespace Assets._GameAsset.Script.Session
 {
@@ -17,6 +18,7 @@ namespace Assets._GameAsset.Script.Session
 
         public void LoginComplete(Message msg)
         {
+            UIManager.Instance.HideAllUiActive();
             UIManager.Instance.ShowUI(UIName.MainMenu);
         }
         public void RefreshData(Message msg)
@@ -32,8 +34,9 @@ namespace Assets._GameAsset.Script.Session
 
             if (indexRead == -1)
             {
-                // Show ra bảng nhập tên
+                UIManager.Instance.ShowUI(UIName.CreateName);
             }
+            Observer.Instance.Notify(ObserverKey.RefreshDataMeByServer);
         }
 
         public void ShowDialog(Message msg)
@@ -46,7 +49,7 @@ namespace Assets._GameAsset.Script.Session
                         string title = msg.Reader.readString();
                         string noti = msg.Reader.readString();
                         var uiNoti = UIManager.Instance.ShowUI<UINotiAButton>(UIName.NotiAButton);
-                        if(uiNoti != null)
+                        if (uiNoti != null)
                         {
                             uiNoti.InitPopup(null, title, noti);
                         }
