@@ -60,7 +60,7 @@ namespace Assets._GameAsset.Script.Session
 
         public void OnReceiveCreateData(Message msg)
         {
-            byte type = msg.Reader.readByte() ;
+            byte type = msg.Reader.readByte();
             DataCreateName data = new DataCreateName();
             data.indexStatus = type;
             if (type == 0)
@@ -69,6 +69,30 @@ namespace Assets._GameAsset.Script.Session
                 data.str = strStatus;
             }
             Observer.Instance.Notify(ObserverKey.OnReceiveCreateName, data);
+        }
+        public void OnReceiveListRoomData(Message msg)
+        {
+            byte first = msg.Reader.readByte();
+            short numValue = msg.Reader.readShort();
+            List<DataServerRoom> listDataServerRooms = new List<DataServerRoom>();
+            for (int i = 0; i < numValue; i++)
+            {
+                int id = msg.Reader.readInt();
+                string name = msg.Reader.readString();
+                byte numPeople = msg.Reader.readByte();
+                int numPeopleSee = msg.Reader.readInt();
+                int gold = msg.Reader.readInt();
+                bool isFlash = msg.Reader.readBool();
+                DataServerRoom data = new DataServerRoom();
+                data.id = id;
+                data.nameBoss = name;
+                data.numPeoplePlay = numPeople;
+                data.numPeopleSee = numPeopleSee;
+                data.gold = gold;
+                data.isFlash = isFlash;
+                listDataServerRooms.Add(data);
+            }
+            RoomManager.Instance.UpdateRoom((EChessType)first, listDataServerRooms);
         }
     }
 }

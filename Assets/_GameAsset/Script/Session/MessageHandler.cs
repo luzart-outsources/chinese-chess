@@ -40,6 +40,9 @@ namespace Assets._GameAsset.Script.Session
                 case 4:
                     readMsg.RefreshData(msg);
                     break;
+                case 10:
+                    readMsg.OnReceiveListRoomData(msg);
+                    break;
 
             }
         }

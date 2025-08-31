@@ -23,9 +23,9 @@ namespace Assets._GameAsset.Script.Session
 
                 SessionMe.Instance.SendMessage(msg);
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
-                
+
             }
         }
         public void Register(string username, string phoneNumber, string password)
@@ -63,6 +63,20 @@ namespace Assets._GameAsset.Script.Session
         {
             var msg = new Message(11);
             msg.Writer.writeByte(0);
+        }
+        public void RequestGetRoom(int idChess)
+        {
+            var msg = new Message(10);
+            msg.Writer.writeByte(0);
+            msg.Writer.writeInt(idChess);
+        }
+        public void RequestCreateRoom(EChessType eChessType, int gold, bool isFlash)
+        {
+            var msg = new Message(10);
+            msg.Writer.writeByte(1);
+            msg.Writer.writeByte((byte)eChessType);
+            msg.Writer.writeInt(gold);
+            msg.Writer.writeBool(isFlash);
         }
     }
 }
