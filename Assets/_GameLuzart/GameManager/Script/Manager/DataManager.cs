@@ -15,6 +15,12 @@ public partial class DataManager : Singleton<DataManager>
     private bool IsInit { get; set; } = false;
     #region GameData
     private const string KEY_GAME_DATA = "key_gamedata";
+    public DBValueRate[] dbValueRate;
+    public int[] GetValuesRate()
+    {
+        return dbValueRate.SelectMany(x => x.value).ToArray();
+    }
+
     public void Initialize()
     {
         LoadGameData();
@@ -25,7 +31,7 @@ public partial class DataManager : Singleton<DataManager>
         {
             LoadGameData();
         }
-        if(GameData.dataUserLogin == null || string.IsNullOrEmpty(GameData.dataUserLogin.username))
+        if (GameData.dataUserLogin == null || string.IsNullOrEmpty(GameData.dataUserLogin.username))
         {
             return false;
         }
@@ -195,4 +201,7 @@ public class PlayerResources
         return resource != null ? resource.amount : 0;
     }
 }
-
+public class DBValueRate
+{
+    public int[] value;
+}
