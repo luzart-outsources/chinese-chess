@@ -9,14 +9,11 @@ public class GameCoordinator : MonoBehaviour
     public Action<bool> ActionOnEndGame = null;
     void Start()
     {
-        var pf = Resources.Load<UIBase>("UINotiAButton");
-        if (pf == null)
-        {
-            Debug.LogError("❌ Prefab null!");
-        }
-        else
-        {
-            Debug.Log("✅ Prefab loaded");
-        }
+
     }
+    public void OpenRoom(DataRoom dataRoom)
+    {
+        UIManager.Instance.HideAll();
+    }
+
 }

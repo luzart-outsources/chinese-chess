@@ -111,6 +111,14 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void OpenRoom(DataRoom dataRoom)
+    {
+        UIManager.Instance.HideAll();
+        gameCoordinator.OpenRoom(dataRoom);
+        var ui = UIManager.Instance.ShowUI<UIGameplay>(UIName.Gameplay);
+        ui.InitData(dataRoom);
+    }
+
 
 
 }

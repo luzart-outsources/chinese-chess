@@ -1,3 +1,4 @@
+using Assets._GameAsset.Script.Session;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,11 @@ public class UICreateRoom : UIBase
     private int typeChess = 0;
     private int typeChestFlash = 0;
 
+    protected override void Setup()
+    {
+        base.Setup();
+        GameUtil.ButtonOnClick(btnCreateRoom, OnClickCreateRoom);
+    }
     public override void Show(Action onHideDone)
     {
         base.Show(onHideDone);
@@ -55,6 +61,6 @@ public class UICreateRoom : UIBase
 
     public void OnClickCreateRoom()
     {
-
+        GlobalServices.Instance.RequestCreateRoom((EChessType)typeChess, 10000 ,typeChestFlash == 0? true : false);
     }
 }

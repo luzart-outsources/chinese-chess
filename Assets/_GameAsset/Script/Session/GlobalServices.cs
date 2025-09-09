@@ -77,6 +77,15 @@ namespace Assets._GameAsset.Script.Session
             msg.Writer.writeByte((byte)eChessType);
             msg.Writer.writeInt(gold);
             msg.Writer.writeBool(isFlash);
+            SessionMe.Instance.SendMessage(msg);
+        }
+        public void RequestJoinRoom(int idRoom, bool isViewer)
+        {
+            var msg = new Message(10);
+            msg.Writer.writeByte(2);
+            msg.Writer.writeInt(idRoom);
+            msg.Writer.writeBool(isViewer);
+            SessionMe.Instance.SendMessage(msg);
         }
     }
 }

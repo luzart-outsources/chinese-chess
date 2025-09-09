@@ -74,6 +74,7 @@ namespace Assets._GameAsset.Script.Session
         {
             byte first = msg.Reader.readByte();
             short numValue = msg.Reader.readShort();
+            byte typeChess = msg.Reader.readByte();
             List<DataServerRoom> listDataServerRooms = new List<DataServerRoom>();
             for (int i = 0; i < numValue; i++)
             {
@@ -93,6 +94,72 @@ namespace Assets._GameAsset.Script.Session
                 listDataServerRooms.Add(data);
             }
             RoomManager.Instance.UpdateRoom((EChessType)first, listDataServerRooms);
+        }
+
+        public void OnReceiveCreateRoomData(Message msg)
+        {
+            string nameMember2 = "";
+            string avtMember2 = "";
+            long goldMember2 = 0;
+            byte type = msg.Reader.readByte();
+            if (type == 0)
+            {
+                int idRoom = msg.Reader.readInt();
+                byte typeChess = msg.Reader.readByte();
+                bool isViewer = msg.Reader.readBool();
+                int idMember1 = msg.Reader.readInt();
+                string nameMember1 = msg.Reader.readString();
+                string avtMember1 = msg.Reader.readString();
+                long goldMember1 = msg.Reader.readLong();
+                int idMemeber2 = msg.Reader.readInt();
+                if(idMemeber2 != -1)
+                {
+                     nameMember2 = msg.Reader.readString();
+                     avtMember2 = msg.Reader.readString();
+                     goldMember2 = msg.Reader.readLong();
+                }
+                short numberViewer = msg.Reader.readShort();
+                int goldRate = msg.Reader.readInt();
+                
+
+                DataRoom dataRoom = new DataRoom();
+                dataRoom.idRoom = idRoom;
+                dataRoom.goldRate = goldRate;
+                dataRoom.viewer = numberViewer;
+
+                var dataMember1 = new DataPlayerInRoom()
+                {
+                    idSession = idMember1,
+                    name = nameMember1,
+                    avatar = avtMember1,
+                    gold = goldMember1,
+                };
+                DataPlayerInRoom dataMember2 = null;
+                if(idMemeber2!= -1)
+                {
+                    dataMember2 = new DataPlayerInRoom()
+                    {
+                        idSession = idMemeber2,
+                        name = nameMember2,
+                        avatar = avtMember2,
+                        gold = goldMember2,
+                    };
+                }
+                if(idMember1 == DataManager.Instance.DataUser.id)
+                {
+                    dataRoom.dataMe = dataMember1;
+                    dataRoom.dataMember2 = dataMember2;
+                }
+                else
+                {
+                    dataRoom.dataMe = dataMember2;
+                    dataRoom.dataMember2 = dataMember1;
+                }
+
+                GameManager.Instance.OpenRoom(dataRoom);
+                //RoomManager.Instance.JoinRoom(idRoom);
+
+            }
         }
     }
 }

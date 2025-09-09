@@ -73,3 +73,22 @@ public class DataServerRoom
     public int gold;
     public bool isFlash;
 }
+[System.Serializable]
+public class DataRoom
+{
+    public int idRoom;
+    public EChessType eChessType;
+    public int goldRate;
+    public int viewer;
+    public DataPlayerInRoom dataMe;
+    public DataPlayerInRoom dataMember2;
+
+}
+[System.Serializable]
+public class DataPlayerInRoom
+{
+    public int idSession;
+    public string name;
+    public string avatar;
+    public long gold;
+}

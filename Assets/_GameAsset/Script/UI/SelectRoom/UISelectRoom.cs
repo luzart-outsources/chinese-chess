@@ -1,3 +1,4 @@
+using Assets._GameAsset.Script.Session;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ public class UISelectRoom : UIBase
             {
                 item.gameObject.SetActive(true);
                 var data = listRoom[index];
-                item.InitData(data);
+                item.InitData(data, OnClickJoinRoom);
             });
         }
     }
@@ -42,6 +43,11 @@ public class UISelectRoom : UIBase
     }
     public void OnClickCreateRoom()
     {
+        UIManager.Instance.ShowUI<UICreateRoom>(UIName.CreateRoom);
+    }
+    public void OnClickJoinRoom(ConfigDataRoom dataRoom)
+    {
+        GlobalServices.Instance.RequestJoinRoom(dataRoom.idRoom,false);
 
     }
 }

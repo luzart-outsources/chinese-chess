@@ -201,6 +201,7 @@ public class PlayerResources
         return resource != null ? resource.amount : 0;
     }
 }
+[System.Serializable]
 public class DBValueRate
 {
     public int[] value;

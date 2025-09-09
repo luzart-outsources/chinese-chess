@@ -2538,8 +2538,8 @@ MonoBehaviour:
   isCache: 0
   bsTypeChess: {fileID: 7382968861962861112}
   bsTypeChestFlash: {fileID: 3177019741827352814}
-  dropDown: {fileID: 0}
-  btnCreateRoom: {fileID: 0}
+  dropDown: {fileID: 7178599824432601359}
+  btnCreateRoom: {fileID: 3138501010509159991}
 --- !u!1 &5654668612972584901
 GameObject:
   m_ObjectHideFlags: 0

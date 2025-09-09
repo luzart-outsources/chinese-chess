@@ -34,6 +34,8 @@ public class UIManager : Singleton<UIManager>
         {UIName.Login,"1,0,UILogin" },
         {UIName.NotiAButton,"3,0,UINotiAButton" },
         {UIName.CreateName,"1,0,UICreateName" },
+        {UIName.SelectRoom,"1,0,UISelectRoom" },
+        {UIName.CreateRoom,"1,0,UICreateRoom" },
 };
 
     private Dictionary<UIName, DataUIBase> dic2;
@@ -368,6 +370,8 @@ public enum UIName
     Loading = 8,
     NotiAButton = 9,
     CreateName = 10,
+    CreateRoom = 11,
+    SelectRoom = 12,
 }
 public class DataUIBase
 {
