@@ -2,6 +2,7 @@ using Assets._GameAsset.Script.Session;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UISelectRoom : UIBase
@@ -18,6 +19,14 @@ public class UISelectRoom : UIBase
         }
     }
     private EChessType currentChessType;
+    private void OnEnable()
+    {
+        Observer.Instance.AddObserver(ObserverKey.OnRefreshRoom, Refresh);
+    }
+    private void OnDisable()
+    {
+        Observer.Instance.RemoveObserver(ObserverKey.OnRefreshRoom, Refresh);
+    }
     public override void Show(Action onHideDone)
     {
         base.Show(onHideDone);
@@ -37,6 +46,15 @@ public class UISelectRoom : UIBase
             });
         }
     }
+    private void Refresh(object data)
+    {
+        RefreshUI();
+    }
+    public override void RefreshUI()
+    {
+        base.RefreshUI();
+        GetRoom(currentChessType);
+    }
     public void OnClickBack()
     {
         Hide();
@@ -49,5 +67,9 @@ public class UISelectRoom : UIBase
     {
         GlobalServices.Instance.RequestJoinRoom(dataRoom.idRoom,false);
 
+    }
+    public void OnClickRefreshData()
+    {
+        RoomManager.Instance.PostRequestRoom();
     }
 }

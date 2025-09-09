@@ -1,9 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
+using Assets._GameAsset.Script.Session;
 
 public class RoomManager : Singleton<RoomManager>
 {
+    public void PostRequestRoom()
+    {
+        GlobalServices.Instance.RequestGetRoom(EChessType.Chess);
+        GlobalServices.Instance.RequestGetRoom(EChessType.ChinaChess);
+        GlobalServices.Instance.RequestGetRoom(EChessType.ChessVisible);
+        GlobalServices.Instance.RequestGetRoom(EChessType.ChinaChessVisible);
+    }
     public Dictionary<EChessType, List<DataServerRoom>> listRoomDatas = new Dictionary<EChessType, List<DataServerRoom>>();
     public void UpdateRoom(EChessType eChessType, List<DataServerRoom> listDataServerRooms)
     {
@@ -15,6 +24,7 @@ public class RoomManager : Singleton<RoomManager>
         {
             listRoomDatas.Add(eChessType, listDataServerRooms);
         }
+        Observer.Instance.Notify(ObserverKey.OnRefreshRoom);
     }
     public List<ConfigDataRoom> GetConfigDataRooms(EChessType eChessType)
     {
@@ -80,6 +90,7 @@ public class DataRoom
     public EChessType eChessType;
     public int goldRate;
     public int viewer;
+    public bool isMaster;
     public DataPlayerInRoom dataMe;
     public DataPlayerInRoom dataMember2;
 
@@ -91,4 +102,5 @@ public class DataPlayerInRoom
     public string name;
     public string avatar;
     public long gold;
+    public bool isReady;
 }

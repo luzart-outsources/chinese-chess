@@ -53,4 +53,5 @@ public static class ObserverKey
     public const string OnNewDay = "OnNewDay";
     public const string OnReceiveCreateName = "OnReceiveCreateName";
     public const string RefreshDataMeByServer = "RefreshDataMeByServer";
+    public const string OnRefreshRoom = "OnRefreshRoom";
 }

@@ -1,6 +1,7 @@
 ﻿using NetworkClient.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,17 +59,13 @@ namespace Assets._GameAsset.Script.Session
 
             }
         }
-
-        public void PostListRoom()
-        {
-            var msg = new Message(11);
-            msg.Writer.writeByte(0);
-        }
-        public void RequestGetRoom(int idChess)
+        public void RequestGetRoom(EChessType eChessType)
         {
             var msg = new Message(10);
             msg.Writer.writeByte(0);
-            msg.Writer.writeInt(idChess);
+            msg.Writer.writeByte((byte)eChessType);
+            SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("RequestGetRoom: " + eChessType);
         }
         public void RequestCreateRoom(EChessType eChessType, int gold, bool isFlash)
         {
@@ -86,6 +83,13 @@ namespace Assets._GameAsset.Script.Session
             msg.Writer.writeInt(idRoom);
             msg.Writer.writeBool(isViewer);
             SessionMe.Instance.SendMessage(msg);
+        }
+
+        public void RequestReady()
+        {
+            var msg = new Message(11);
+            msg.Writer.writeByte(0);
+            msg.Writer.writeBool(true);
         }
     }
 }

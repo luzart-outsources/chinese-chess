@@ -44,7 +44,7 @@ namespace Assets._GameAsset.Script.Session
                     readMsg.OnReceiveListRoomData(msg);
                     break;
                 case 11:
-                    readMsg.OnReceiveCreateRoomData(msg);
+                    readMsg.OnReceiveCase11(msg);
                     break;
 
             }
