@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using UnityEngine.Lumin;
 
 namespace Assets._GameAsset.Script.Session
 {
@@ -109,6 +110,18 @@ namespace Assets._GameAsset.Script.Session
                         OnReceiveCreateRoomData(msg);
                         break;
                     }
+                case 1:
+                    {
+                        // Join Room
+                        OnUpdateDataInRoom(msg);
+
+                        break;
+                    }
+                case 2:
+                    {
+                        // Start Game
+                        break;
+                    }
                 case 3:
                     {
                         OnReceiveReadyData(msg);
@@ -123,17 +136,36 @@ namespace Assets._GameAsset.Script.Session
         }
         public void OnReceiveCreateRoomData(Message msg)
         {
+            int idRoom = msg.Reader.readInt();
+            byte typeChess = msg.Reader.readByte();
+            bool isViewer = msg.Reader.readBool();
+            short numberViewer = msg.Reader.readShort();
+            int goldRate = msg.Reader.readInt();
+            DataRoom dataRoom = new DataRoom();
+            dataRoom.idRoom = idRoom;
+            dataRoom.goldRate = goldRate;
+            dataRoom.viewer = numberViewer;
+            dataRoom.eChessType = (EChessType)typeChess;
+            OnUpdateDataInRoom(msg, dataRoom);
+            UnityEngine.Debug.Log("OnReceiveCreateRoomData: " + dataRoom.idRoom + " - " + dataRoom.isMaster + " - " + dataRoom.dataMe.name + " - " + (dataRoom.dataMember2 != null ? dataRoom.dataMember2.name : "null"));
+
+        }
+
+        public void OnUpdateDataInRoom(Message msg, DataRoom dataRoom = null)
+        {
+            if (dataRoom == null)
+            {
+                dataRoom = RoomManager.Instance.currentRoom;
+            }
             string nameMember2 = "";
             string avtMember2 = "";
             long goldMember2 = 0;
             bool isReady2 = false;
-            int idRoom = msg.Reader.readInt();
-            byte typeChess = msg.Reader.readByte();
-            bool isViewer = msg.Reader.readBool();
             int idMember1 = msg.Reader.readInt();
             string nameMember1 = msg.Reader.readString();
             string avtMember1 = msg.Reader.readString();
             long goldMember1 = msg.Reader.readLong();
+            bool isReady1 = msg.Reader.readBool();
             int idMemeber2 = msg.Reader.readInt();
             if (idMemeber2 != -1)
             {
@@ -142,14 +174,6 @@ namespace Assets._GameAsset.Script.Session
                 goldMember2 = msg.Reader.readLong();
                 isReady2 = msg.Reader.readBool();
             }
-            short numberViewer = msg.Reader.readShort();
-            int goldRate = msg.Reader.readInt();
-
-
-            DataRoom dataRoom = new DataRoom();
-            dataRoom.idRoom = idRoom;
-            dataRoom.goldRate = goldRate;
-            dataRoom.viewer = numberViewer;
 
             var dataMember1 = new DataPlayerInRoom()
             {
@@ -157,7 +181,7 @@ namespace Assets._GameAsset.Script.Session
                 name = nameMember1,
                 avatar = avtMember1,
                 gold = goldMember1,
-                isReady = true
+                isReady = isReady1
             };
             DataPlayerInRoom dataMember2 = null;
             if (idMemeber2 != -1)
@@ -183,10 +207,9 @@ namespace Assets._GameAsset.Script.Session
                 dataRoom.dataMe = dataMember2;
                 dataRoom.dataMember2 = dataMember1;
             }
-            UnityEngine.Debug.Log("OnReceiveCreateRoomData: " + dataRoom.idRoom + " - " + dataRoom.isMaster + " - " + dataRoom.dataMe.name + " - " + (dataRoom.dataMember2 != null ? dataRoom.dataMember2.name : "null"));
+            UnityEngine.Debug.Log("OnUpdateDataInRoom: " + dataRoom.idRoom + " - " + dataRoom.isMaster + " - " + dataRoom.dataMe.name + " - " + (dataRoom.dataMember2 != null ? dataRoom.dataMember2.name : "null"));
             RoomManager.Instance.JoinRoom(dataRoom);
             GameManager.Instance.OpenRoom(dataRoom);
-
         }
 
         public void OnReceiveReadyData(Message msg)
@@ -204,6 +227,7 @@ namespace Assets._GameAsset.Script.Session
         public void OnReceiveLeaveRoom(Message msg)
         {
             RoomManager.Instance.LeaveRoom();
+            GameManager.Instance.LeaveRoom();
             UIManager.Instance.HideAllUiActive();
             UIManager.Instance.ShowUI(UIName.MainMenu);
         }
