@@ -75,6 +75,7 @@ namespace Assets._GameAsset.Script.Session
             msg.Writer.writeInt(gold);
             msg.Writer.writeBool(isFlash);
             SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("RequestCreateRoom: " + eChessType + " - " + gold + " - " + isFlash);
         }
         public void RequestJoinRoom(int idRoom, bool isViewer)
         {
@@ -83,13 +84,22 @@ namespace Assets._GameAsset.Script.Session
             msg.Writer.writeInt(idRoom);
             msg.Writer.writeBool(isViewer);
             SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("RequestJoinRoom: " + idRoom + " - " + isViewer);
         }
 
-        public void RequestReady()
+        public void RequestReady(bool isReady)
         {
             var msg = new Message(11);
-            msg.Writer.writeByte(0);
-            msg.Writer.writeBool(true);
+            msg.Writer.writeByte(3);
+            msg.Writer.writeBool(isReady);
+            SessionMe.Instance.SendMessage(msg);
+        }
+
+        public void RequestLeaveRoom()
+        {
+            var msg = new Message(11);
+            msg.Writer.writeByte(4);
+            SessionMe.Instance.SendMessage(msg);
         }
     }
 }

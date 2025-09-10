@@ -1,6 +1,7 @@
 ﻿using NetworkClient.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -113,6 +114,11 @@ namespace Assets._GameAsset.Script.Session
                         OnReceiveReadyData(msg);
                         break;
                     }
+                case 4:
+                    {
+                        OnReceiveLeaveRoom(msg);
+                        break;
+                    }
             }
         }
         public void OnReceiveCreateRoomData(Message msg)
@@ -177,16 +183,36 @@ namespace Assets._GameAsset.Script.Session
                 dataRoom.dataMe = dataMember2;
                 dataRoom.dataMember2 = dataMember1;
             }
-
+            UnityEngine.Debug.Log("OnReceiveCreateRoomData: " + dataRoom.idRoom + " - " + dataRoom.isMaster + " - " + dataRoom.dataMe.name + " - " + (dataRoom.dataMember2 != null ? dataRoom.dataMember2.name : "null"));
+            RoomManager.Instance.JoinRoom(dataRoom);
             GameManager.Instance.OpenRoom(dataRoom);
-            //RoomManager.Instance.JoinRoom(idRoom);
+
         }
 
         public void OnReceiveReadyData(Message msg)
         {
             int id = msg.Reader.readInt();
             bool isReady = msg.Reader.readBool();
+
+            var data = new DataReceiveReady
+            {
+                id = id,
+                isReady = isReady
+            };
+            GameManager.Instance.OnReceiveRoomReady(data);
+        }
+        public void OnReceiveLeaveRoom(Message msg)
+        {
+            RoomManager.Instance.LeaveRoom();
+            UIManager.Instance.HideAllUiActive();
+            UIManager.Instance.ShowUI(UIName.MainMenu);
         }
 
     }
+}
+[System.Serializable]
+public class DataReceiveReady
+{
+    public int id;
+    public bool isReady;
 }

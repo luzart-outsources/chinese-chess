@@ -6,6 +6,7 @@ using Assets._GameAsset.Script.Session;
 
 public class RoomManager : Singleton<RoomManager>
 {
+    public DataRoom currentRoom;
     public void PostRequestRoom()
     {
         GlobalServices.Instance.RequestGetRoom(EChessType.Chess);
@@ -47,6 +48,14 @@ public class RoomManager : Singleton<RoomManager>
             return listConfigDataRooms;
         }
         return null;
+    }
+    public void JoinRoom(DataRoom roomData)
+    {
+        currentRoom = roomData;
+    }
+    public void LeaveRoom()
+    {
+        currentRoom = null;
     }
 }
 public enum EChessType

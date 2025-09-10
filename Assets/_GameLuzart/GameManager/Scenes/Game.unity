@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf239de41414544cb62e79fcd8a6250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsInRoom: 0
 --- !u!224 &862957810
 RectTransform:
   m_ObjectHideFlags: 0
@@ -800,6 +801,10 @@ PrefabInstance:
       propertyPath: parentSpawn
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3821148737664148204, guid: 1c97fd2be94bc6f4d9f81eb67d659b62, type: 3}
+      propertyPath: gameCoordinator
+      value: 
+      objectReference: {fileID: 862957809}
     - target: {fileID: 7062897448495686203, guid: 1c97fd2be94bc6f4d9f81eb67d659b62, type: 3}
       propertyPath: m_Name
       value: Manager

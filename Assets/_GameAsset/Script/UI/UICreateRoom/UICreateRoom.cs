@@ -16,12 +16,6 @@ public class UICreateRoom : UIBase
     private int[] valuesRate;
     private int typeChess = 0;
     private int typeChestFlash = 0;
-
-    protected override void Setup()
-    {
-        base.Setup();
-        GameUtil.ButtonOnClick(btnCreateRoom, OnClickCreateRoom);
-    }
     public override void Show(Action onHideDone)
     {
         base.Show(onHideDone);
@@ -61,6 +55,6 @@ public class UICreateRoom : UIBase
 
     public void OnClickCreateRoom()
     {
-        GlobalServices.Instance.RequestCreateRoom((EChessType)typeChess, 10000 ,typeChestFlash == 0? true : false);
+        GlobalServices.Instance.RequestCreateRoom((EChessType)typeChess, 10000, typeChestFlash == 0 ? true : false);
     }
 }

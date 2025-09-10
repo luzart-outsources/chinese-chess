@@ -53,7 +53,7 @@ public class GameManager : Singleton<GameManager>
     {
         DisableCurrentMode();
         UIManager.Instance.HideAll();
-        PlayGameMode(EGameMode.Classic,0);
+        PlayGameMode(EGameMode.Classic, 0);
     }
     public void PlayGameMode(EGameMode eGameMode, int level)
     {
@@ -113,13 +113,44 @@ public class GameManager : Singleton<GameManager>
 
     public void OpenRoom(DataRoom dataRoom)
     {
-        UIManager.Instance.HideAll();
-        gameCoordinator.OpenRoom(dataRoom);
-        var ui = UIManager.Instance.ShowUI<UIGameplay>(UIName.Gameplay);
+        var ui = UIManager.Instance.GetUiActive<UIGameplay>(UIName.Gameplay);
+        if (ui == null)
+        {
+            UIManager.Instance.HideAll();
+            ui = UIManager.Instance.ShowUI<UIGameplay>(UIName.Gameplay);
+            Debug.Log("Show UI Gameplay");
+        }
         ui.InitData(dataRoom);
+        if (gameCoordinator.IsInRoom)
+        {
+            if (dataRoom.dataMember2.isReady)
+            {
+                ui.StartReady();
+            }
+        }
+        else
+        {
+            if (!dataRoom.isMaster)
+            {
+                ui.StartReady();
+            }
+        }
+        gameCoordinator.OpenRoom(dataRoom);
     }
-
-
+    public void OnReceiveRoomReady(DataReceiveReady dataReceiveReady)
+    {
+        if (dataReceiveReady.id == DataManager.Instance.DataUser.id && dataReceiveReady.isReady)
+        {
+            if (RoomManager.Instance.currentRoom.isMaster)
+            {
+                var ui = UIManager.Instance.GetUiActive<UIGameplay>(UIName.Gameplay);
+                if (ui != null)
+                {
+                    ui.StartReady();
+                }
+            }
+        }
+    }
 
 }
 public enum EGameState

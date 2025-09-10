@@ -36,6 +36,7 @@ public class UIManager : Singleton<UIManager>
         {UIName.CreateName,"1,0,UICreateName" },
         {UIName.SelectRoom,"1,0,UISelectRoom" },
         {UIName.CreateRoom,"1,0,UICreateRoom" },
+        {UIName.LeaveRoom,"1,0,UILeaveRoom" },
 };
 
     private Dictionary<UIName, DataUIBase> dic2;
@@ -203,11 +204,11 @@ public class UIManager : Singleton<UIManager>
                 current = Instantiate(pf, rootOb[idx]);
                 cacheScreen.Add(uIScreen, current);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.LogError(e);
             }
-            
+
 
         }
         return current;
@@ -372,6 +373,7 @@ public enum UIName
     CreateName = 10,
     CreateRoom = 11,
     SelectRoom = 12,
+    LeaveRoom = 13,
 }
 public class DataUIBase
 {
