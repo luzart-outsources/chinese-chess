@@ -139,7 +139,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void OnReceiveRoomReady(DataReceiveReady dataReceiveReady)
     {
-        if (dataReceiveReady.id == DataManager.Instance.DataUser.id && dataReceiveReady.isReady)
+        if (dataReceiveReady.id != DataManager.Instance.DataUser.id && dataReceiveReady.isReady)
         {
             if (RoomManager.Instance.currentRoom.isMaster)
             {
