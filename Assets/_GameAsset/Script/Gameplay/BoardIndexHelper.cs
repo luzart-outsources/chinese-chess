@@ -1,209 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class XiangqiRules
-{
-    public static List<Vector2Int> GetValidMoves(BoardDataModel board, PieceModel p, RulesConfig cfg)
-    {
-        var res = new List<Vector2Int>();
-        int r = p.row, c = p.col;
-        bool red = p.isRed;
-
-        // Loại dùng để tính (Cờ úp: nếu chưa ngửa → xác định theo init pos)
-        PieceType typeForMove = p.type;
-        if (cfg.mode == GameMode.UpsideDown && !p.isShow)
-            typeForMove = InitialTypeResolver.ResolveFromInitial(p.isRed, p.initRow, p.initCol);
-
-        switch (typeForMove)
-        {
-            case PieceType.Rook: AddRookMoves(board, r, c, red, res); break;
-            case PieceType.Cannon: AddCannonMoves(board, r, c, red, res); break;
-            case PieceType.Knight: AddKnightMoves(board, r, c, red, res); break;
-            case PieceType.Elephant: AddElephantMoves(board, r, c, red, res, cfg); break;
-            case PieceType.Advisor: AddAdvisorMoves(board, r, c, red, res, cfg); break;
-            case PieceType.General: AddGeneralMoves(board, r, c, red, res); break;
-            case PieceType.Soldier: AddSoldierMoves(board, r, c, red, res); break;
-        }
-        return res;
-    }
-
-    static bool InBoard(BoardDataModel b, int r, int c)
-        => r >= 0 && r < b.rows && c >= 0 && c < b.cols;
-
-    static void TryAdd(BoardDataModel b, int r, int c, bool myRed, List<Vector2Int> res)
-    {
-        if (!InBoard(b, r, c)) return;
-        var t = b.cells[r, c];
-        if (t == null || t.isRed != myRed) res.Add(new Vector2Int(r, c));
-    }
-
-    static void AddRookMoves(BoardDataModel b, int r, int c, bool red, List<Vector2Int> res)
-    {
-        int[] dr = { -1, 1, 0, 0 };
-        int[] dc = { 0, 0, -1, 1 };
-        for (int k = 0; k < 4; k++)
-        {
-            int nr = r, nc = c;
-            while (true)
-            {
-                nr += dr[k]; nc += dc[k];
-                if (!InBoard(b, nr, nc)) break;
-                var t = b.cells[nr, nc];
-                if (t != null)
-                {
-                    if (t.isRed != red) res.Add(new Vector2Int(nr, nc));
-                    break;
-                }
-                res.Add(new Vector2Int(nr, nc));
-            }
-        }
-    }
-
-    static void AddCannonMoves(BoardDataModel b, int r, int c, bool red, List<Vector2Int> res)
-    {
-        int[] dr = { -1, 1, 0, 0 };
-        int[] dc = { 0, 0, -1, 1 };
-        for (int k = 0; k < 4; k++)
-        {
-            int nr = r, nc = c;
-            while (true)
-            {
-                nr += dr[k]; nc += dc[k];
-                if (!InBoard(b, nr, nc)) break;
-                var t = b.cells[nr, nc];
-                if (t != null)
-                {
-                    int jr = nr + dr[k], jc = nc + dc[k];
-                    while (InBoard(b, jr, jc))
-                    {
-                        var tt = b.cells[jr, jc];
-                        if (tt != null)
-                        {
-                            if (tt.isRed != red) res.Add(new Vector2Int(jr, jc));
-                            break;
-                        }
-                        jr += dr[k]; jc += dc[k];
-                    }
-                    break;
-                }
-                res.Add(new Vector2Int(nr, nc));
-            }
-        }
-    }
-
-    static void AddKnightMoves(BoardDataModel b, int r, int c, bool red, List<Vector2Int> res)
-    {
-        int[,] L = { { -2, -1 }, { -2, 1 }, { 2, -1 }, { 2, 1 }, { -1, -2 }, { 1, -2 }, { -1, 2 }, { 1, 2 } };
-        for (int i = 0; i < L.GetLength(0); i++)
-        {
-            int nr = r + L[i, 0], nc = c + L[i, 1];
-            if (!InBoard(b, nr, nc)) continue;
-            int br = r + (L[i, 0] / 2), bc = c + (L[i, 1] / 2);
-            if (b.cells[br, bc] != null) continue;
-            var t = b.cells[nr, nc];
-            if (t == null || t.isRed != red) res.Add(new Vector2Int(nr, nc));
-        }
-    }
-
-    static void AddElephantMoves(BoardDataModel b, int r, int c, bool red, List<Vector2Int> res, RulesConfig cfg)
-    {
-        int[,] D = { { -2, -2 }, { -2, 2 }, { 2, -2 }, { 2, 2 } };
-        for (int i = 0; i < D.GetLength(0); i++)
-        {
-            int nr = r + D[i, 0], nc = c + D[i, 1];
-            if (!InBoard(b, nr, nc)) continue;
-
-            // Cờ thường: không qua sông; Cờ úp: bỏ giới hạn này
-            if (cfg.elephantBlockedByRiver)
-            {
-                if (red && nr < 5) continue;
-                if (!red && nr > 4) continue;
-            }
-
-            int mr = r + (D[i, 0] / 2), mc = c + (D[i, 1] / 2); // mắt tượng
-            if (b.cells[mr, mc] != null) continue;
-
-            var t = b.cells[nr, nc];
-            if (t == null || t.isRed != red) res.Add(new Vector2Int(nr, nc));
-        }
-    }
-
-    static void AddAdvisorMoves(BoardDataModel b, int r, int c, bool red, List<Vector2Int> res, RulesConfig cfg)
-    {
-        int[,] D = { { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } };
-        if (cfg.advisorRestrictedToPalace)
-        {
-            int minRow = red ? 7 : 0, maxRow = red ? 9 : 2, minCol = 3, maxCol = 5;
-            for (int i = 0; i < D.GetLength(0); i++)
-            {
-                int nr = r + D[i, 0], nc = c + D[i, 1];
-                if (nr < minRow || nr > maxRow || nc < minCol || nc > maxCol) continue;
-                var t = b.cells[nr, nc];
-                if (t == null || t.isRed != red) res.Add(new Vector2Int(nr, nc));
-            }
-        }
-        else
-        {
-            for (int i = 0; i < D.GetLength(0); i++)
-            {
-                int nr = r + D[i, 0], nc = c + D[i, 1];
-                TryAdd(b, nr, nc, red, res); // không giới hạn cung
-            }
-        }
-    }
-
-    static void AddGeneralMoves(BoardDataModel b, int r, int c, bool red, List<Vector2Int> res)
-    {
-        int[] dr = { -1, 1, 0, 0 };
-        int[] dc = { 0, 0, -1, 1 };
-        int minRow = red ? 7 : 0, maxRow = red ? 9 : 2, minCol = 3, maxCol = 5;
-
-        // tìm tướng đối phương
-        PieceModel enemyGen = null;
-        foreach (var kv in b.byId)
-        {
-            var pm = kv.Value;
-            if (pm.type == PieceType.General && pm.isRed != red) { enemyGen = pm; break; }
-        }
-
-        for (int k = 0; k < 4; k++)
-        {
-            int nr = r + dr[k], nc = c + dc[k];
-            if (nr < minRow || nr > maxRow || nc < minCol || nc > maxCol) continue;
-            var t = b.cells[nr, nc];
-            if (t != null && t.isRed == red) continue;
-
-            // cấm “tướng đối mặt”
-            if (enemyGen != null && nc == enemyGen.col)
-            {
-                bool blocked = false;
-                int step = enemyGen.row > nr ? 1 : -1;
-                for (int tr = nr + step; tr != enemyGen.row; tr += step)
-                {
-                    if (b.cells[tr, nc] != null) { blocked = true; break; }
-                }
-                if (!blocked) continue;
-            }
-            res.Add(new Vector2Int(nr, nc));
-        }
-    }
-
-    static void AddSoldierMoves(BoardDataModel b, int r, int c, bool red, List<Vector2Int> res)
-    {
-        // Chuẩn: row=0 phía TRÊN → ĐỎ đi xuống (tăng row), ĐEN đi lên (giảm row)
-        int forward = red ? +1 : -1;
-        TryAdd(b, r + forward, c, red, res);
-
-        bool crossedRiver = red ? (r >= 5) : (r <= 4);
-        if (crossedRiver)
-        {
-            TryAdd(b, r, c - 1, red, res);
-            TryAdd(b, r, c + 1, red, res);
-        }
-    }
-}
-
-
 public enum GameMode { Standard, UpsideDown }
 
 public struct RulesConfig
@@ -285,50 +82,6 @@ public class PieceModel
         this.row = row; this.col = col; this.initRow = row; this.initCol = col;
     }
 }
-
-public class BoardDataModel
-{
-    public readonly int rows = 10;
-    public readonly int cols = 9;
-    public PieceModel[,] cells;
-    public readonly Dictionary<int, PieceModel> byId = new();
-
-    public BoardDataModel() { cells = new PieceModel[rows, cols]; }
-
-    public void Clear()
-    {
-        cells = new PieceModel[rows, cols];
-        byId.Clear();
-    }
-
-    public void Place(PieceModel p, int r, int c)
-    {
-        cells[r, c] = p;
-        p.row = r; p.col = c;
-        byId[p.id] = p;
-    }
-
-    public void RemoveAt(int r, int c)
-    {
-        var p = cells[r, c];
-        if (p != null) byId.Remove(p.id);
-        cells[r, c] = null;
-    }
-
-    public void MoveTo(PieceModel p, int newR, int newC)
-    {
-        cells[p.row, p.col] = null;
-        var target = cells[newR, newC];
-        if (target != null) byId.Remove(target.id); // bắt quân
-        cells[newR, newC] = p;
-        p.row = newR; p.col = newC;
-    }
-
-    public PieceModel GetAt(int r, int c) => cells[r, c];
-    public PieceModel GetById(int id) => byId.TryGetValue(id, out var p) ? p : null;
-}
-
-
 public static class BoardIndexHelper
 {
     /// <summary>
@@ -420,28 +173,39 @@ public static class BoardIndexHelper
 public enum PieceType
 {
     None = -1,
-    Rook,       // Xe
-    Knight,     // Mã
-    Cannon,     // Pháo
-    Elephant,   // Tượng
-    Advisor,    // Sĩ
-    General,    // Tướng/Soái
-    Soldier     // Tốt/Binh
+    Rook = 0,       // Xe
+    Knight = 1,     // Mã
+    Cannon = 2,     // Pháo
+    Elephant = 3,   // Tượng
+    Advisor = 4,    // Sĩ
+    General = 5,    // Tướng/Soái
+    Soldier = 6    // Tốt/Binh
 }
 
 public class PieceDTO
 {
     public int id;
-    public PieceType type;
-    public bool isRed;
+    public PieceType type;  // Với Chess: map tạm (Soldier->Pawn, Knight->Knight, Elephant->Bishop, Rook->Rook, Advisor->Queen, General->King)
+    public bool isRed;      // Dùng như White=true khi chơi Chess
     public bool isShow;
 }
 
-// Khi gọi InitializeFromServer, server kèm:
 public struct InitPayload
 {
-    public PieceDTO[,] grid10x9;
-    public bool iAmRed;    // <- tôi là Đỏ (true) hay Đen (false)
-    public bool myTurn;    // <- có phải tới lượt tôi không
+    public PieceDTO[][] grid;  // <--- răng cưa
+    public bool iAmRed;
+    public bool myTurn;
 }
+
+
+public class ServerMoveResult
+{
+    public bool moveAllowed;
+    public int pieceId;
+    public int newRow, newCol;
+    public bool newIsShow;
+    public PieceType newType;
+    public bool nextMyTurn; // server báo có phải lượt tôi sau khi áp dụng nước đi
+}
+
 

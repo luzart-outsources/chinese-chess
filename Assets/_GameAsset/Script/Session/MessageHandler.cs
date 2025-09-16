@@ -46,7 +46,9 @@ namespace Assets._GameAsset.Script.Session
                 case 11:
                     readMsg.OnReceiveCase11(msg);
                     break;
-
+                case 12:
+                    readMsg.OnReceiveCase12(msg);
+                    break;
             }
         }
     }

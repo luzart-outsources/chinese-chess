@@ -232,7 +232,23 @@ namespace Assets._GameAsset.Script.Session
             UIManager.Instance.HideAllUiActive();
             UIManager.Instance.ShowUI(UIName.MainMenu);
         }
-
+        public void OnReceiveCase12(Message msg)
+        {
+            byte type = msg.Reader.readByte();
+            switch (type)
+            {
+                case 0:
+                    {
+                        OnReceiveStartGame(msg);
+                        break;
+                    }
+            }
+        }
+        public void OnReceiveStartGame(Message msg)
+        {
+            byte typeChess = msg.Reader.readByte();
+            
+        }
     }
 }
 [System.Serializable]
