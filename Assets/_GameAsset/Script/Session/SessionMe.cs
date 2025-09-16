@@ -12,7 +12,7 @@ namespace Assets._GameAsset.Script.Session
 {
     public class SessionMe
     {
-        const string hostTCP = "103.82.21.235";
+        const string hostTCP = "103.82.39.169";
         const int port = 36526;
 
         private static SessionMe _instance;
