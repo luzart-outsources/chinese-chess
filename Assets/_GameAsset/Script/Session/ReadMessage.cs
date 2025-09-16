@@ -223,6 +223,7 @@ namespace Assets._GameAsset.Script.Session
                 isReady = isReady
             };
             GameManager.Instance.OnReceiveRoomReady(data);
+            UnityEngine.Debug.Log("OnReceiveReadyData: " + id + " - " + isReady);
         }
         public void OnReceiveLeaveRoom(Message msg)
         {
