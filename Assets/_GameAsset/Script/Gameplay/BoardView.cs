@@ -9,7 +9,7 @@ public class BoardView : MonoBehaviour
     public List<Transform> cells;
 
     [Header("Prefabs")]
-    public ChessPieceView piecePrefab;
+    public PieceView piecePrefab;
     public MoveIndicatorView indicatorPrefab;
 
     [Header("Perspective")]
@@ -24,7 +24,7 @@ public class BoardView : MonoBehaviour
     private int gridRows = 10;
     private int gridCols = 9;
 
-    private readonly Dictionary<int, ChessPieceView> viewsById = new();
+    private readonly Dictionary<int, PieceView> viewsById = new();
     private readonly List<MoveIndicatorView> activeIndicators = new();
 
     public void ConfigurePerspective(bool iAmRed, bool mySideAtBottom = true)
@@ -51,10 +51,10 @@ public class BoardView : MonoBehaviour
         ClearIndicators();
     }
 
-    public ChessPieceView SpawnPiece(int id, PieceType type, bool isRed, bool isShow, int serverRow, int serverCol)
+    public PieceView SpawnPiece(int id, PieceType type, bool isRed, bool isShow, int serverRow, int serverCol)
     {
         var go = Instantiate(piecePrefab, transform);
-        var view = go.GetComponent<ChessPieceView>();
+        var view = go;
         view.InitData(id, type, isRed, isShow);
 
         var t = TargetCell(serverRow, serverCol);
@@ -64,9 +64,9 @@ public class BoardView : MonoBehaviour
         return view;
     }
 
-    public void SetControllerFor(ChessPieceView v, BoardController c) { if (v != null) v.BindController(c); }
+    public void SetControllerFor(PieceView v, BoardController c) { if (v != null) v.BindController(c); }
     public void SetControllerForAll(BoardController c) { foreach (var kv in viewsById) if (kv.Value) kv.Value.BindController(c); }
-    public ChessPieceView GetViewById(int id) => viewsById.TryGetValue(id, out var v) ? v : null;
+    public PieceView GetViewById(int id) => viewsById.TryGetValue(id, out var v) ? v : null;
 
     public void MovePieceTo(int id, int serverRow, int serverCol)
     {
@@ -102,12 +102,6 @@ public class BoardView : MonoBehaviour
     {
         var v = GetViewById(id); if (v == null) return;
         v.SetColor(isRed);
-    }
-
-    public void SetBaseSpriteFor(int id, Sprite baseSprite)
-    {
-        var v = GetViewById(id); if (v == null) return;
-        v.SetBaseSprite(baseSprite);
     }
 
     private Transform TargetCell(int serverRow, int serverCol)

@@ -246,8 +246,38 @@ namespace Assets._GameAsset.Script.Session
         }
         public void OnReceiveStartGame(Message msg)
         {
-            byte typeChess = msg.Reader.readByte();
-            
+
+            InitPayload data = new InitPayload();
+            data.iAmRed = false;
+            // byte tiếp theo: loại bàn cờ
+            byte boardType = msg.Reader.readByte();
+
+            // row, col
+            byte rowCount = msg.Reader.readByte();
+            byte colCount = msg.Reader.readByte();
+
+            // số quân
+            short totalPieces = msg.Reader.readShort();
+
+            List<PieceDTO> pieces = new List<PieceDTO>();
+
+            for (int i = 0; i < totalPieces; i++)
+            {
+                short id = msg.Reader.readShort();
+                sbyte type = msg.Reader.readSByte();
+                bool isBlack = msg.Reader.readBool();
+                short x = msg.Reader.readShort();
+                short y = msg.Reader.readShort();
+
+                pieces.Add(new PieceDTO
+                {
+                    id = id,
+                    type = (PieceType)type,
+                    isRed = !isBlack,
+
+                });
+            }
+
         }
     }
 }

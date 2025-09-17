@@ -20,7 +20,7 @@ public class BoardController : MonoBehaviour
     private bool inputLocked = false;
 
     private PieceModel lastSelectedModel;
-    private ChessPieceView lastSelectedView;
+    private PieceView lastSelectedView;
 
     private void Awake()
     {
@@ -90,7 +90,7 @@ public class BoardController : MonoBehaviour
 
     public void SetMyTurn(bool isMyTurn) => myTurn = isMyTurn;
 
-    public void OnPieceClickedView(ChessPieceView v)
+    public void OnPieceClickedView(PieceView v)
     {
         if (inputLocked || !myTurn) return;
         var p = data.GetById(v.id);
