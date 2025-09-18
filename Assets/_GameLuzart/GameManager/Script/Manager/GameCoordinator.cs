@@ -6,6 +6,7 @@ public class GameCoordinator : MonoBehaviour
     public Action ActionOnLoadDoneLevel = null;
     public Action<bool> ActionOnEndGame = null;
     public bool IsInRoom = false;
+    public BoardController boardController;
     void Start()
     {
 
@@ -18,5 +19,8 @@ public class GameCoordinator : MonoBehaviour
         }
         IsInRoom = false;
     }
+    public void InitBoardGame()
+    {
 
+    }
 }

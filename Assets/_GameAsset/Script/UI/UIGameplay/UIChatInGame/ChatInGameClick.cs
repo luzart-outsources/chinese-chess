@@ -31,7 +31,8 @@ public class ChatInGameClick : MonoBehaviour
     [Button]
     public void SetText()
     {
-        txtContent.text = content;
+        if(txtContent!= null)
+            txtContent.text = content;
     }
 
 }
