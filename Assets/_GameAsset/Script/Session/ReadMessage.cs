@@ -314,11 +314,11 @@ namespace Assets._GameAsset.Script.Session
             data.grid = grid;
             if (RoomManager.Instance.currentRoom.isMaster)
             {
-                data.iAmRed = isMyRed;
+                data.iAmRed = !isMyRed;
             }
             else 
             {
-                data.iAmRed = !isMyRed;
+                data.iAmRed = isMyRed;
             }
 
             // Giữ logic cũ (nếu server có field lượt đánh thì thay bằng giá trị server)
