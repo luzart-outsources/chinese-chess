@@ -308,23 +308,24 @@ namespace Assets._GameAsset.Script.Session
                 };
 
                 grid[r][c] = dto;
-                UnityEngine.Debug.Log($"[OnReceive] Piece {i}: id={id} type={type} isBlack={isBlack} at ({r},{c})");
+                //UnityEngine.Debug.Log($"[OnReceive] Piece {i}: id={id} type={type} isBlack={isBlack} at ({r},{c})");
             }
 
             data.grid = grid;
             if (RoomManager.Instance.currentRoom.isMaster)
             {
-                data.iAmRed = !isMyRed;
+                data.iAmRed = isMyRed;
             }
             else 
             {
-                data.iAmRed = isMyRed;
+                data.iAmRed = !isMyRed;
             }
 
             // Giữ logic cũ (nếu server có field lượt đánh thì thay bằng giá trị server)
             data.myTurn = data.iAmRed;
 
-            UnityEngine.Debug.Log($"[OnReceive] StartGame: boardType={boardType} rows={rows} cols={cols} pieces={totalPieces}");
+            UnityEngine.Debug.Log($"[OnReceive] StartGame: boardType={boardType} id1 = {idMember1} and isRed = {isMyRed}");
+
 
             // TODO: truyền sang BoardController
             GameManager.Instance.gameCoordinator.boardController.InitializeFromServer(data);
