@@ -253,10 +253,10 @@ namespace Assets._GameAsset.Script.Session
             byte boardType = msg.Reader.readByte();
 
             int idMember1 = msg.Reader.readInt();
-            bool isMyBlack = msg.Reader.readBool();
+            bool isMyRed = !msg.Reader.readBool();
 
             int idMember2 = msg.Reader.readInt();
-            bool isMember2Black = msg.Reader.readBool();
+            bool idMember2Red = !msg.Reader.readBool();
 
             // row, col
             byte rowCount = msg.Reader.readByte();
@@ -302,7 +302,14 @@ namespace Assets._GameAsset.Script.Session
             }
 
             data.grid = grid;
-            data.iAmRed = !isMyBlack;
+            if(idMember1 == DataManager.Instance.DataUser.id && RoomManager.Instance.currentRoom.isMaster)
+            {
+                data.iAmRed = isMyRed;
+            }
+            else if(idMember2 != DataManager.Instance.DataUser.id && !RoomManager.Instance.currentRoom.isMaster)
+            {
+                data.iAmRed = isMyRed;
+            }
 
             // Giữ logic cũ (nếu server có field lượt đánh thì thay bằng giá trị server)
             data.myTurn = data.iAmRed;
