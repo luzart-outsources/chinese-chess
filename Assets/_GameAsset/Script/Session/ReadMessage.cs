@@ -312,13 +312,13 @@ namespace Assets._GameAsset.Script.Session
             }
 
             data.grid = grid;
-            if (idMember1 == DataManager.Instance.DataUser.id && RoomManager.Instance.currentRoom.isMaster)
+            if (RoomManager.Instance.currentRoom.isMaster)
             {
                 data.iAmRed = isMyRed;
             }
-            else if (idMember2 != DataManager.Instance.DataUser.id && !RoomManager.Instance.currentRoom.isMaster)
+            else 
             {
-                data.iAmRed = isMyRed;
+                data.iAmRed = !isMyRed;
             }
 
             // Giữ logic cũ (nếu server có field lượt đánh thì thay bằng giá trị server)
