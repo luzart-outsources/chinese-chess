@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.Lumin;
 
 namespace Assets._GameAsset.Script.Session
@@ -246,40 +247,78 @@ namespace Assets._GameAsset.Script.Session
         }
         public void OnReceiveStartGame(Message msg)
         {
-
             InitPayload data = new InitPayload();
-            data.iAmRed = false;
-            // byte tiếp theo: loại bàn cờ
+
+            // byte đầu: loại bàn cờ
             byte boardType = msg.Reader.readByte();
+
+            int idMember1 = msg.Reader.readInt();
+            bool isMyBlack = msg.Reader.readBool();
+
+            int idMember2 = msg.Reader.readInt();
+            bool isMember2Black = msg.Reader.readBool();
 
             // row, col
             byte rowCount = msg.Reader.readByte();
             byte colCount = msg.Reader.readByte();
+            int rows = rowCount;
+            int cols = colCount;
 
             // số quân
             short totalPieces = msg.Reader.readShort();
 
-            List<PieceDTO> pieces = new List<PieceDTO>();
+            // Khởi tạo mảng răng cưa PieceDTO (null = ô trống)
+            var grid = new PieceDTO[rows][];
+            for (int r = 0; r < rows; r++)
+                grid[r] = new PieceDTO[cols];
+
+            // Suy ra biến thể để set isShow ban đầu
+            bool isUpsideDown = boardType == 1 || boardType == 3;
+            bool isChess = IsChessBoard(boardType, rows, cols);
 
             for (int i = 0; i < totalPieces; i++)
             {
                 short id = msg.Reader.readShort();
                 sbyte type = msg.Reader.readSByte();
                 bool isBlack = msg.Reader.readBool();
-                short x = msg.Reader.readShort();
-                short y = msg.Reader.readShort();
+                short x = msg.Reader.readShort(); // server row
+                short y = msg.Reader.readShort(); // server col
 
-                pieces.Add(new PieceDTO
+                // Clamp an toàn
+                int r = Mathf.Clamp(y, 0, rows - 1);
+                int c = Mathf.Clamp(x, 0, cols - 1);
+
+                // Tạo DTO. Lưu ý: type server đã map về PieceType của bạn.
+                var dto = new PieceDTO
                 {
                     id = id,
                     type = (PieceType)type,
-                    isRed = !isBlack,
+                    isRed = !isBlack,              // Chess: isRed==true ⇔ White
+                    isShow = !isUpsideDown          // “úp” → ẩn, “thường” → ngửa
+                };
 
-                });
+                grid[r][c] = dto;
+                UnityEngine.Debug.Log($"[OnReceive] Piece {i}: id={id} type={type} isBlack={isBlack} at ({r},{c})");
             }
-            UnityEngine.Debug.Log("[OnReceive] OnReceiveStartGame: " + boardType + " - " + rowCount + " - " + colCount + " - " + totalPieces);
 
+            data.grid = grid;
+            data.iAmRed = !isMyBlack;
+
+            // Giữ logic cũ (nếu server có field lượt đánh thì thay bằng giá trị server)
+            data.myTurn = data.iAmRed;
+
+            UnityEngine.Debug.Log($"[OnReceive] StartGame: boardType={boardType} rows={rows} cols={cols} pieces={totalPieces}");
+
+            // TODO: truyền sang BoardController
+            GameManager.Instance.gameCoordinator.boardController.InitializeFromServer(data);
         }
+        private bool IsChessBoard(byte boardType, int rows, int cols)
+        {
+            // Ưu tiên rows/cols nếu server set chuẩn 8x8 cho Chess
+            if (rows == 8 && cols == 8) return true;
+            return boardType == 2 || boardType == 3;
+        }
+
     }
 }
 [System.Serializable]

@@ -21,6 +21,6 @@ public class GameCoordinator : MonoBehaviour
     }
     public void InitBoardGame()
     {
-
+        //boardController.
     }
 }
