@@ -277,6 +277,7 @@ namespace Assets._GameAsset.Script.Session
 
                 });
             }
+            UnityEngine.Debug.Log("[OnReceive] OnReceiveStartGame: " + boardType + " - " + rowCount + " - " + colCount + " - " + totalPieces);
 
         }
     }

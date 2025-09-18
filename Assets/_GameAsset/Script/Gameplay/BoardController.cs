@@ -205,6 +205,17 @@ public class BoardController : MonoBehaviour
         lastSelectedView = null;
         myTurn = r.nextMyTurn;
     }
+
+}
+// Đây là DataServer truyền về, server sẽ truyền về 1 mảng này
+[System.Serializable]
+public class DataPieceServer
+{
+    public short id;
+    public PieceType type;
+    public bool isRed;
+    public int x;
+    public int y;
 }
 
 

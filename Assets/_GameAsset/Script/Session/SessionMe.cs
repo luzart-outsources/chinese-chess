@@ -21,22 +21,22 @@ namespace Assets._GameAsset.Script.Session
         public INetworkConnection network;
 
 
-        public SessionMe() 
+        public SessionMe()
         {
             messageHandler = new MessageHandler(this);
-#if UNITY_ANDROID 
+#if UNITY_ANDROID || UNITY_EDITOR || UNITY_STANDALONE
             network = new TcpClientHandler(messageHandler.onMessage, Disconnect);
 #endif
         }
         public void Connect()
         {
-            if(network == null || !network.IsConnected && !network.IsWaitConnect)
+            if (network == null || !network.IsConnected && !network.IsWaitConnect)
                 network.Connect(hostTCP, port);
         }
 
         public void Disconnect()
         {
-            if(network != null && !network.IsConnected)
+            if (network != null && !network.IsConnected)
             {
                 Action action = () =>
                 {
