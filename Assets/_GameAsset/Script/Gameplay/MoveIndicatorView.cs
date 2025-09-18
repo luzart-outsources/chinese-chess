@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public enum IndicatorMode { Move, Capture }
 
-public class MoveIndicatorView : MonoBehaviour, IPointerClickHandler
+public class MoveIndicatorView : MonoBehaviour
 {
     [Header("Refs")]
     [SerializeField] private GameObject moveGO;     // GameObject con cho nước đi thường
@@ -56,7 +56,7 @@ public class MoveIndicatorView : MonoBehaviour, IPointerClickHandler
     /// Gọi callback function với tọa độ server đã được bind
     /// </summary>
     /// <param name="eventData">Dữ liệu sự kiện pointer từ Unity Event System</param>
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnClick()
     {
         onClick?.Invoke(row, col);
     }

@@ -1,3 +1,4 @@
+using Assets._GameAsset.Script.Session;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -146,35 +147,14 @@ public class BoardController : MonoBehaviour
         view.ClearIndicators();
         if (lastSelectedView != null) view.SetSelected(lastSelectedView.id, false, true);
 
-        // TODO: Gửi TCP thực:
-        // net.SendMove(new MoveRequest { pieceId = lastSelectedModel.id, toRow = targetRow, toCol = targetCol });
 
-        // DEMO fake:
-        StartCoroutine(CoFakeServerOk(targetRow, targetCol));
-    }
+        GlobalServices.Instance.RequestMove(idPiece:(short)lastSelectedModel.id, toRow: (short)targetRow, toCol: (short)targetCol);
 
-    private System.Collections.IEnumerator CoFakeServerOk(int targetRow, int targetCol)
-    {
-        yield return new WaitForSeconds(0.15f);
-        bool revealNow = (mode == GameMode.UpsideDown && lastSelectedModel != null && !lastSelectedModel.isShow);
-        var revealType = InitialTypeResolver.ResolveFromInitial(lastSelectedModel.isRed, lastSelectedModel.initRow, lastSelectedModel.initCol);
-        OnServerMoveResult(new ServerMoveResult
-        {
-            moveAllowed = true,
-            pieceId = lastSelectedModel.id,
-            newRow = targetRow,
-            newCol = targetCol,
-            newIsShow = revealNow ? true : lastSelectedModel.isShow,
-            newType = revealNow ? revealType : lastSelectedModel.type,
-            nextMyTurn = false
-        });
     }
 
     public void OnServerMoveResult(ServerMoveResult r)
     {
         inputLocked = false;
-        if (!r.moveAllowed) return;
-
         var p = data.GetById(r.pieceId);
         if (p == null) return;
 
@@ -187,7 +167,7 @@ public class BoardController : MonoBehaviour
         }
 
         // Lật/ngửa & type (úp)
-        p.isShow = r.newIsShow;
+        p.isShow = r.newType != PieceType.None;
         p.type = r.newType;
 
         // Di chuyển
@@ -203,7 +183,7 @@ public class BoardController : MonoBehaviour
 
         lastSelectedModel = null;
         lastSelectedView = null;
-        myTurn = r.nextMyTurn;
+        myTurn = false;
     }
 
 }

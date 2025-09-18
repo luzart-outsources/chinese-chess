@@ -243,6 +243,16 @@ namespace Assets._GameAsset.Script.Session
                         OnReceiveStartGame(msg);
                         break;
                     }
+                case 1:
+                    {
+                        OnReceiveCanMove(msg);
+                        break;
+                    }
+                case 2:
+                    {
+                        OnReceiveTurnMove(msg);
+                        break;
+                    }
             }
         }
         public void OnReceiveStartGame(Message msg)
@@ -302,11 +312,11 @@ namespace Assets._GameAsset.Script.Session
             }
 
             data.grid = grid;
-            if(idMember1 == DataManager.Instance.DataUser.id && RoomManager.Instance.currentRoom.isMaster)
+            if (idMember1 == DataManager.Instance.DataUser.id && RoomManager.Instance.currentRoom.isMaster)
             {
                 data.iAmRed = isMyRed;
             }
-            else if(idMember2 != DataManager.Instance.DataUser.id && !RoomManager.Instance.currentRoom.isMaster)
+            else if (idMember2 != DataManager.Instance.DataUser.id && !RoomManager.Instance.currentRoom.isMaster)
             {
                 data.iAmRed = isMyRed;
             }
@@ -319,13 +329,38 @@ namespace Assets._GameAsset.Script.Session
             // TODO: truyền sang BoardController
             GameManager.Instance.gameCoordinator.boardController.InitializeFromServer(data);
         }
+
+        private void OnReceiveTurnMove(Message msg)
+        {
+            int id = msg.Reader.readInt();
+            long timeRemain = msg.Reader.readLong();
+
+
+            UnityEngine.Debug.Log("[OnReceive] TurnMove: id=" + id + " timeRemain=" + timeRemain);
+        }
+
+        private void OnReceiveCanMove(Message msg)
+        {
+            short id = msg.Reader.readShort();
+            byte type = msg.Reader.readByte();
+            short toX = msg.Reader.readShort();
+            short toY = msg.Reader.readShort();
+
+            ServerMoveResult r = new ServerMoveResult();
+            r.pieceId = id;
+            r.newType = (PieceType)type;
+            r.newRow = toY;
+            r.newCol = toX;
+
+            GameManager.Instance.gameCoordinator.boardController.OnServerMoveResult(r);
+            UnityEngine.Debug.Log("[OnReceive] MoveResult: id=" + id + " to (" + toY + "," + toX + ") type=" + type);
+        }
         private bool IsChessBoard(byte boardType, int rows, int cols)
         {
             // Ưu tiên rows/cols nếu server set chuẩn 8x8 cho Chess
             if (rows == 8 && cols == 8) return true;
             return boardType == 2 || boardType == 3;
         }
-
     }
 }
 [System.Serializable]

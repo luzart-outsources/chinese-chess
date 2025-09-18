@@ -200,12 +200,9 @@ public struct InitPayload
 
 public class ServerMoveResult
 {
-    public bool moveAllowed;
     public int pieceId;
     public int newRow, newCol;
-    public bool newIsShow;
-    public PieceType newType;
-    public bool nextMyTurn; // server báo có phải lượt tôi sau khi áp dụng nước đi
+    public PieceType newType; // Loại mới nếu có thay đổi (úp-ngửa)
 }
 
 
