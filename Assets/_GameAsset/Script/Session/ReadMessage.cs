@@ -324,7 +324,7 @@ namespace Assets._GameAsset.Script.Session
             // Giữ logic cũ (nếu server có field lượt đánh thì thay bằng giá trị server)
             data.myTurn = data.iAmRed;
 
-            UnityEngine.Debug.Log($"[OnReceive] StartGame: boardType={boardType} id1 = {idMember1} and isRed = {isMyRed}");
+            UnityEngine.Debug.Log($"[OnReceive] StartGame: boardType={boardType} I am master {RoomManager.Instance.currentRoom.isMaster} id1 = {idMember1} and isRed = {isMyRed}");
 
 
             // TODO: truyền sang BoardController
