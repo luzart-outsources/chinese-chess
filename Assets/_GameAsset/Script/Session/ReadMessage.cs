@@ -334,6 +334,14 @@ namespace Assets._GameAsset.Script.Session
         {
             int id = msg.Reader.readInt();
             long timeRemain = msg.Reader.readLong();
+            if(id == DataManager.Instance.DataUser.id)
+            {
+                GameManager.Instance.gameCoordinator.boardController.SetMyTurn(true);
+            }
+            else
+            {
+                GameManager.Instance.gameCoordinator.boardController.SetMyTurn(false);
+            }
 
 
             UnityEngine.Debug.Log("[OnReceive] TurnMove: id=" + id + " timeRemain=" + timeRemain);
