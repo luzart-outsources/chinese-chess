@@ -304,11 +304,11 @@ namespace Assets._GameAsset.Script.Session
                     id = id,
                     type = (PieceType)type,
                     isRed = !isBlack,              // Chess: isRed==true ⇔ White
-                    isShow = !isUpsideDown          // “úp” → ẩn, “thường” → ngửa
+                    isShow = type >= 0,          // “úp” → ẩn, “thường” → ngửa
                 };
 
                 grid[r][c] = dto;
-                //UnityEngine.Debug.Log($"[OnReceive] Piece {i}: id={id} type={type} isBlack={isBlack} at ({r},{c})");
+                UnityEngine.Debug.Log($"[OnReceive] Piece {i}: id={id} type={type} isBlack={isBlack} at ({r},{c})");
             }
 
             data.grid = grid;
@@ -316,7 +316,7 @@ namespace Assets._GameAsset.Script.Session
             {
                 data.iAmRed = isMyRed;
             }
-            else 
+            else
             {
                 data.iAmRed = !isMyRed;
             }
@@ -335,7 +335,7 @@ namespace Assets._GameAsset.Script.Session
         {
             int id = msg.Reader.readInt();
             long timeRemain = msg.Reader.readLong();
-            if(id == DataManager.Instance.DataUser.id)
+            if (id == DataManager.Instance.DataUser.id)
             {
                 GameManager.Instance.gameCoordinator.boardController.SetMyTurn(true);
             }

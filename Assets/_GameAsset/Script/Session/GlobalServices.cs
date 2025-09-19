@@ -107,10 +107,10 @@ namespace Assets._GameAsset.Script.Session
             var msg = new Message(12);
             msg.Writer.writeByte(1);
             msg.Writer.writeShort(idPiece);
-            msg.Writer.writeShort(toRow);
             msg.Writer.writeShort(toCol);
+            msg.Writer.writeShort(toRow);
             SessionMe.Instance.SendMessage(msg);
-            UnityEngine.Debug.Log("[Post] RequestMove: " + idPiece + " - " + toRow + " - " + toCol);
+            UnityEngine.Debug.Log("[Post] RequestMove: " + idPiece + " - " + toCol + " - " + toRow);
 
 
         }

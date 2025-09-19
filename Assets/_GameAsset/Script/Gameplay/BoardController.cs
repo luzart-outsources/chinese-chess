@@ -89,7 +89,11 @@ public class BoardController : MonoBehaviour
         }
     }
 
-    public void SetMyTurn(bool isMyTurn) => myTurn = isMyTurn;
+    public void SetMyTurn(bool isMyTurn)
+    {
+        this.myTurn = isMyTurn;
+        this.inputLocked = false;
+    }
 
     public void OnPieceClickedView(PieceView v)
     {
@@ -148,7 +152,7 @@ public class BoardController : MonoBehaviour
         if (lastSelectedView != null) view.SetSelected(lastSelectedView.id, false, true);
 
 
-        GlobalServices.Instance.RequestMove(idPiece:(short)lastSelectedModel.id, toRow: (short)targetRow, toCol: (short)targetCol);
+        GlobalServices.Instance.RequestMove(idPiece: (short)lastSelectedModel.id, toRow: (short)targetRow, toCol: (short)targetCol);
 
     }
 
