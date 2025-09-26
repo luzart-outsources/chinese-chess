@@ -34,7 +34,7 @@ public class ChessPieceSpriteConfig
 /// - Có animation chọn/bỏ chọn bằng DOTween.
 /// - Click: gọi BoardController.OnPieceClickedView(this).
 /// </summary>
-public class ChessPieceView : PieceView, IPointerClickHandler
+public class ChessPieceView : PieceView
 {
     [Header("UI Refs")]
     [SerializeField] private Image backImage;   // HIỆN khi úp
@@ -167,8 +167,6 @@ public class ChessPieceView : PieceView, IPointerClickHandler
 
     // ===== Input =====
     public void OnClick() => controller?.OnPieceClickedView(this);
-    public void OnPointerClick(PointerEventData _) => controller?.OnPieceClickedView(this);
-
     // ===== Helpers =====
 
     /// <summary>

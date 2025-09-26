@@ -179,4 +179,37 @@ public class BoardView : MonoBehaviour
     {
         foreach (var kv in viewsById) if (kv.Value != null) kv.Value.SetSelected(false, animate);
     }
+
+    public void KillAllTweens()
+    {
+        foreach (var kv in viewsById)
+            if (kv.Value) kv.Value.transform.DOKill();
+        // Indicator cũng là child
+        for (int i = 0; i < activeIndicators.Count; i++)
+            if (activeIndicators[i]) activeIndicators[i].transform.DOKill();
+    }
+
+    /// <summary>Xoá toàn bộ quân (PieceView) + indicator và dừng tween.</summary>
+    public void TeardownVisuals()
+    {
+        KillAllTweens();
+
+        // Gỡ controller trên từng PieceView (nếu có bind)
+        foreach (var kv in viewsById)
+        {
+            var v = kv.Value;
+            if (!v) continue;
+            v.BindController(null); // tránh callback rơi vào object đã bị xoá
+            Destroy(v.gameObject);
+        }
+        viewsById.Clear();
+
+        ClearIndicators();
+    }
+
+    /// <summary>Ẩn/hiện toàn bộ bàn (giữ nguyên state trong bộ nhớ).</summary>
+    public void SetBoardActive(bool active)
+    {
+        gameObject.SetActive(active);
+    }
 }

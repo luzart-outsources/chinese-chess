@@ -248,7 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backImage: {fileID: 6909185066098223521}
   pieceImage: {fileID: 1748080348067126480}
-  button: {fileID: 0}
+  button: {fileID: 7256408643168057681}
   backWhite: {fileID: 21300000, guid: b633d461ea30a4d37a19ae75620b803e, type: 3}
   backBlack: {fileID: 21300000, guid: 294f1a219f844435dbb4cb9c9fc2d267, type: 3}
   chessSprites:

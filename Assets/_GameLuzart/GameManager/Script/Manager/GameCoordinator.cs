@@ -18,9 +18,34 @@ public class GameCoordinator : MonoBehaviour
             return;
         }
         IsInRoom = false;
+        InitBoardGame();
+    }
+    public void OnResetBoard()
+    {
+        boardController.CloseBoard();
+        InitBoardGame();
     }
     public void InitBoardGame()
     {
-        //boardController.
+        boardController.InitializeRuleCode(RoomManager.Instance.currentRoom.eChessType);
     }
+    public void OnTurn(bool isMe, int count, int totalTime, int totalTimeOponent)
+    {
+        var ui = UIManager.Instance.GetUI<UIGameplay>(UIName.Gameplay);
+        ui.CountdownPlayer(isMe, count, totalTime, totalTimeOponent);
+    }
+    public void OnMoveDenied()
+    {
+
+    }
+    public void OnCheckKing()
+    {
+        UIManager.Instance.ShowUI(UIName.ChieuTuong);
+    }
+    public void OnEndGame(bool isWin)
+    {
+
+    }
+
+
 }

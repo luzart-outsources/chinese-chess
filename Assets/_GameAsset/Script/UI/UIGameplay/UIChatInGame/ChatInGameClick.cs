@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class ChatInGameClick : MonoBehaviour
 {
     public TMP_Text txtContent;
+    public Image imIcon;
     public string content;
 
     public Action<string> actionClick;
@@ -16,6 +17,7 @@ public class ChatInGameClick : MonoBehaviour
     void Start()
     {
         SetText();
+        SetIcon();
     }
 
     public void Init(Action<string> actionClick)
@@ -33,6 +35,15 @@ public class ChatInGameClick : MonoBehaviour
     {
         if(txtContent!= null)
             txtContent.text = content;
+    }
+
+    [Button]
+    public void SetIcon()
+    {
+        if(imIcon != null)
+        {
+            imIcon.sprite = ResourcesManager.Instance.GetIconByString(content);
+        }
     }
 
 }

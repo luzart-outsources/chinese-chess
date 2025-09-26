@@ -112,7 +112,24 @@ namespace Assets._GameAsset.Script.Session
             SessionMe.Instance.SendMessage(msg);
             UnityEngine.Debug.Log("[Post] RequestMove: " + idPiece + " - " + toCol + " - " + toRow);
 
+        }
 
+        public void RequestChatInGame(byte user = 0 , string content = ":)")
+        {
+            var msg = new Message(5);
+            msg.Writer.writeByte(user);
+            msg.Writer.writeString(content);
+            SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("[Post] RequestChatInGame: " + content);
+        }
+
+        public void RequestChatWorld(string content = "Hello everyone!")
+        {
+            var msg = new Message(5);
+            msg.Writer.writeByte(2);
+            msg.Writer.writeString(content);
+            SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("[Post] RequestChatWorld: " + content);
         }
     }
 }

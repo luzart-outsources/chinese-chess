@@ -18,25 +18,30 @@ public sealed class XiangqiRuleSet : IRuleSet
 
     public bool IsMoveLegal(BoardDataModel board, PieceModel p, Vector2Int to)
     {
-        // (giữ đơn giản) đã sinh pseudo-legal đủ dùng trong client
+        // Client chỉ dùng pseudo-legal được sinh từ GetValidMoves
         return true;
     }
 
     public void ApplyPostServer(BoardDataModel board, ServerMoveResult ack)
     {
-        // Xiangqi không cần hậu xử lý thêm ở client (bạn đã làm trong BoardController)
+        // Không cần hậu xử lý thêm ở client
     }
 }
 
 public static class XiangqiRules
 {
+    private const int ROWS = 10;
+    private const int COLS = 9;
+    private const int TOP_RIVER_MAX = 4;   // 0..4 là nửa trên (trước khi qua sông của ĐỎ / sau khi qua sông của ĐEN)
+    private const int BOT_RIVER_MIN = 5;   // 5..9 là nửa dưới (trước khi qua sông của ĐEN / sau khi qua sông của ĐỎ)
+
     public static List<Vector2Int> GetValidMoves(BoardDataModel board, PieceModel p, RulesConfig cfg)
     {
         var res = new List<Vector2Int>();
         int r = p.row, c = p.col;
         bool red = p.isRed;
 
-        // Loại dùng để tính (Cờ úp: nếu chưa ngửa → xác định theo init pos)
+        // Cờ úp: nếu chưa ngửa → quyết định loại theo vị trí ban đầu
         PieceType typeForMove = p.type;
         if (cfg.mode == GameMode.UpsideDown && !p.isShow)
             typeForMove = InitialTypeResolver.ResolveFromInitial(p.isRed, p.initRow, p.initCol);
@@ -125,7 +130,7 @@ public static class XiangqiRules
         {
             int nr = r + L[i, 0], nc = c + L[i, 1];
             if (!InBoard(b, nr, nc)) continue;
-            int br = r + (L[i, 0] / 2), bc = c + (L[i, 1] / 2);
+            int br = r + (L[i, 0] / 2), bc = c + (L[i, 1] / 2); // chân mã
             if (b.cells[br, bc] != null) continue;
             var t = b.cells[nr, nc];
             if (t == null || t.isRed != red) res.Add(new Vector2Int(nr, nc));
@@ -140,11 +145,11 @@ public static class XiangqiRules
             int nr = r + D[i, 0], nc = c + D[i, 1];
             if (!InBoard(b, nr, nc)) continue;
 
-            // Cờ thường: không qua sông; Cờ úp: bỏ giới hạn này
+            // Cờ tiêu chuẩn: không qua sông
             if (cfg.elephantBlockedByRiver)
             {
-                if (red && nr < 5) continue;
-                if (!red && nr > 4) continue;
+                if (red && nr <= TOP_RIVER_MAX) continue;   // Đỏ không được lên 0..4
+                if (!red && nr >= BOT_RIVER_MIN) continue; // Đen không được xuống 5..9
             }
 
             int mr = r + (D[i, 0] / 2), mc = c + (D[i, 1] / 2); // mắt tượng
@@ -155,29 +160,31 @@ public static class XiangqiRules
         }
     }
 
+    static bool InPalace(bool red, int r, int c)
+    {
+        int minRow = red ? 7 : 0, maxRow = red ? 9 : 2;
+        const int minCol = 3, maxCol = 5;
+        return r >= minRow && r <= maxRow && c >= minCol && c <= maxCol;
+    }
+
     static void AddAdvisorMoves(BoardDataModel b, int r, int c, bool red, List<Vector2Int> res, RulesConfig cfg)
     {
+        // 4 hướng chéo 1 ô
         int[,] D = { { -1, -1 }, { -1, 1 }, { 1, -1 }, { 1, 1 } };
-        if (cfg.advisorRestrictedToPalace)
+
+        for (int i = 0; i < D.GetLength(0); i++)
         {
-            int minRow = red ? 7 : 0, maxRow = red ? 9 : 2, minCol = 3, maxCol = 5;
-            for (int i = 0; i < D.GetLength(0); i++)
-            {
-                int nr = r + D[i, 0], nc = c + D[i, 1];
-                if (nr < minRow || nr > maxRow || nc < minCol || nc > maxCol) continue;
-                var t = b.cells[nr, nc];
-                if (t == null || t.isRed != red) res.Add(new Vector2Int(nr, nc));
-            }
-        }
-        else
-        {
-            for (int i = 0; i < D.GetLength(0); i++)
-            {
-                int nr = r + D[i, 0], nc = c + D[i, 1];
-                TryAdd(b, nr, nc, red, res); // không giới hạn cung
-            }
+            int nr = r + D[i, 0], nc = c + D[i, 1];
+            if (!InBoard(b, nr, nc)) continue;
+
+            // CỜ QUYẾT ĐỊNH: cờ úp => không cần trong cung; cờ thường => phải trong cung
+            if (cfg.advisorRestrictedToPalace && !InPalace(red, nr, nc)) continue;
+
+            var t = b.cells[nr, nc];
+            if (t == null || t.isRed != red) res.Add(new Vector2Int(nr, nc));
         }
     }
+
 
     static void AddGeneralMoves(BoardDataModel b, int r, int c, bool red, List<Vector2Int> res)
     {
@@ -217,15 +224,21 @@ public static class XiangqiRules
 
     static void AddSoldierMoves(BoardDataModel b, int r, int c, bool red, List<Vector2Int> res)
     {
-        // Chuẩn: row=0 phía TRÊN → ĐỎ đi xuống (tăng row), ĐEN đi lên (giảm row)
-        int forward = red ? +1 : -1;
+        // Hướng tiến đúng với hệ quy chiếu: row=0 ở TRÊN
+        // Đỏ ở DƯỚI → đi LÊN (row - 1). Đen ở TRÊN → đi XUỐNG (row + 1).
+        int forward = red ? -1 : +1;
+
+        // Tiến 1 ô
         TryAdd(b, r + forward, c, red, res);
 
-        bool crossedRiver = red ? (r >= 5) : (r <= 4);
+        // Chỉ được đi ngang SAU khi qua sông (không bao giờ đi lùi)
+        // Ranh giới sông: giữa hàng 4 và 5
+        bool crossedRiver = red ? (r <= 4) : (r >= 5);
         if (crossedRiver)
         {
             TryAdd(b, r, c - 1, red, res);
             TryAdd(b, r, c + 1, red, res);
         }
     }
+
 }

@@ -19,6 +19,8 @@ public class RegisterPopup : MonoBehaviour
 
     public void OnClickeRegister()
     {
+        UIManager.Instance.ShowUI(UIName.NotiFake);
+        return;
         string username = usernameInputField.text;
         string phone = phoneInputField.text;
         string password = passwordInputField.text;

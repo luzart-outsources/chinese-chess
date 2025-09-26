@@ -38,7 +38,10 @@ namespace Assets._GameAsset.Script.Session
                     readMsg.ShowDialog(msg);
                     break;
                 case 4:
-                    readMsg.RefreshData(msg);
+                    readMsg.OnReceiveCase4(msg);
+                    break;
+                case 5:
+                    readMsg.OnReceiveCase5(msg);
                     break;
                 case 10:
                     readMsg.OnReceiveListRoomData(msg);

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BoardController : MonoBehaviour
 {
-    [Header("Refs")]
-    public BoardView view;
+    public BoardView chineseChessView;
+    public BoardView chessView;
+    private BoardView view;
 
     [Header("Game Mode (Xiangqi legacy)")]
     public GameMode mode = GameMode.Standard; // vẫn giữ để tương thích Xiangqi up/standard
@@ -30,6 +31,34 @@ public class BoardController : MonoBehaviour
         // Khởi tạo tạm với kích thước theo RuleSet (sẽ được tạo lại khi nhận payload)
         data = new BoardDataModel(rules.Rows, rules.Cols);
     }
+    public void InitializeRuleCode(EChessType eChessType)
+    {
+        rulesCode = (GameRules)(int)eChessType;
+        rules = RulesFactory.Create(rulesCode);
+        ctx = new RulesContext { code = rulesCode, showOnlyLegal = false };
+        // Khởi tạo tạm với kích thước theo RuleSet (sẽ được tạo lại khi nhận payload)
+        data = new BoardDataModel(rules.Rows, rules.Cols);
+        if (eChessType == EChessType.ChinaChess || eChessType == EChessType.ChinaChessVisible)
+        {
+            chineseChessView.gameObject.SetActive(true);
+            chessView.gameObject.SetActive(false);
+            view = chineseChessView;
+        }
+        else
+        {
+            chineseChessView.gameObject.SetActive(false);
+            chessView.gameObject.SetActive(true);
+            view = chessView;
+        }
+        if (eChessType == EChessType.ChinaChessVisible || eChessType == EChessType.ChessVisible)
+        {
+            mode = GameMode.UpsideDown;
+        }
+        else
+        {
+            mode = GameMode.Standard;
+        }
+    }
 
     /// <summary>
     /// Khởi tạo từ payload mảng răng cưa.
@@ -37,7 +66,7 @@ public class BoardController : MonoBehaviour
     public void InitializeFromServer(InitPayload init)
     {
         iAmRed = init.iAmRed;
-        myTurn = init.myTurn;
+        myTurn = false;
         inputLocked = false;
 
         // Suy ra rows/cols từ mảng răng cưa
@@ -80,13 +109,6 @@ public class BoardController : MonoBehaviour
         lastSelectedView = null;
         view.ClearIndicators();
         view.DeselectAll(false);
-
-        // Nếu đang ở Xiangqi nhưng muốn “úp”, đồng bộ lại RuleSet
-        if (rulesCode == GameRules.Xiangqi || rulesCode == GameRules.XiangqiUpsideDown)
-        {
-            rules = RulesFactory.Create(mode == GameMode.UpsideDown ? GameRules.XiangqiUpsideDown : GameRules.Xiangqi);
-            ctx.code = rules.Code;
-        }
     }
 
     public void SetMyTurn(bool isMyTurn)
@@ -147,7 +169,7 @@ public class BoardController : MonoBehaviour
         if (!rules.IsMoveLegal(data, lastSelectedModel, new Vector2Int(targetRow, targetCol)))
             return;
 
-        inputLocked = true;
+        //inputLocked = true;
         view.ClearIndicators();
         if (lastSelectedView != null) view.SetSelected(lastSelectedView.id, false, true);
 
@@ -188,6 +210,59 @@ public class BoardController : MonoBehaviour
         lastSelectedModel = null;
         lastSelectedView = null;
         myTurn = false;
+    }
+
+    /// <summary>Soft reset: xoá quân + indicator trên view, reset data/model & input.</summary>
+    public void ResetBoardKeepGrid()
+    {
+        // 1) Khoá input và clear chọn
+        inputLocked = true;
+        myTurn = false;
+        lastSelectedModel = null;
+        lastSelectedView = null;
+
+        // 2) Xoá visual (quân + indicator) và dừng tween
+        if (view) view.TeardownVisuals();
+
+        // 3) Reset data (giữ size hiện tại để sẵn sàng init ván mới)
+        int rows = data?.rows ?? rules.Rows;
+        int cols = data?.cols ?? rules.Cols;
+        data = new BoardDataModel(rows, cols);
+        data.Clear();
+
+        // 4) Mở khoá nếu cần (tuỳ luồng khởi tạo lại)
+        inputLocked = false;
+    }
+
+    /// <summary>Hard close: soft reset + ẩn bàn (hoặc huỷ nếu bạn muốn).</summary>
+    public void CloseBoard()
+    {
+        ResetBoardKeepGrid();
+
+        //// Ẩn UI bàn cờ (tuỳ nhu cầu: có thể Destroy(view.gameObject))
+        //if (view) view.SetBoardActive(false);
+
+        // Nếu có đăng ký event vào GlobalServices, nhớ huỷ ở đây
+        // GlobalServices.Instance.OnMoveResult -= OnServerMoveResult;  // ví dụ (nếu có)
+    }
+
+    /// <summary>Mở lại bàn (UI), sau đó gọi InitializeFromServer để dựng ván mới.</summary>
+    public void OpenBoard()
+    {
+        //if (view) view.SetBoardActive(true);
+    }
+
+    // Gợi ý: bảo hiểm khi object bị disable/destroy
+    private void OnDisable() { SafeTeardownIfNeeded(); }
+    private void OnDestroy() { SafeTeardownIfNeeded(); }
+
+    private void SafeTeardownIfNeeded()
+    {
+        try
+        {
+            if (view) view.TeardownVisuals();
+        }
+        catch { /* ignore */ }
     }
 
 }

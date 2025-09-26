@@ -154,6 +154,7 @@ public class GameManager : Singleton<GameManager>
     public void LeaveRoom()
     {
         gameCoordinator.IsInRoom = false;
+        gameCoordinator.boardController.CloseBoard();
     }
 
 }

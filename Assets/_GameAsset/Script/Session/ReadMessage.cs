@@ -1,13 +1,9 @@
-﻿using NetworkClient.Models;
+﻿using JetBrains.Annotations;
+using NetworkClient.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Lumin;
 
 namespace Assets._GameAsset.Script.Session
 {
@@ -41,6 +37,28 @@ namespace Assets._GameAsset.Script.Session
             }
             Observer.Instance.Notify(ObserverKey.RefreshDataMeByServer);
         }
+        public void RefreshMoney(Message msg)
+        {
+            long gold = msg.Reader.readLong();
+            DataManager.Instance.DataUser.gold = gold;
+        }
+        public void OnReceiveCase4(Message msg)
+        {
+            byte type = msg.Reader.readByte();
+            switch (type)
+            {
+                case 0:
+                    {
+                        RefreshData(msg);
+                        break;
+                    }
+                case 1:
+                    {
+                        RefreshMoney(msg);
+                        break;
+                    }
+            }
+        }
 
         public void ShowDialog(Message msg)
         {
@@ -56,6 +74,12 @@ namespace Assets._GameAsset.Script.Session
                         {
                             uiNoti.InitPopup(null, title, noti);
                         }
+                        break;
+                    }
+                case 2:
+                    {
+                        string noti = msg.Reader.readString();
+                        UIManager.Instance.ShowToast(noti);
                         break;
                     }
             }
@@ -115,12 +139,11 @@ namespace Assets._GameAsset.Script.Session
                     {
                         // Join Room
                         OnUpdateDataInRoom(msg);
-
                         break;
                     }
                 case 2:
                     {
-                        // Start Game
+                        OnReceiveViewer(msg);
                         break;
                     }
                 case 3:
@@ -131,6 +154,11 @@ namespace Assets._GameAsset.Script.Session
                 case 4:
                     {
                         OnReceiveLeaveRoom(msg);
+                        break;
+                    }
+                case 5:
+                    {
+                        OnReceiveResetBoard();
                         break;
                     }
             }
@@ -211,6 +239,7 @@ namespace Assets._GameAsset.Script.Session
             UnityEngine.Debug.Log("OnUpdateDataInRoom: " + dataRoom.idRoom + " - " + dataRoom.isMaster + " - " + dataRoom.dataMe.name + " - " + (dataRoom.dataMember2 != null ? dataRoom.dataMember2.name : "null"));
             RoomManager.Instance.JoinRoom(dataRoom);
             GameManager.Instance.OpenRoom(dataRoom);
+
         }
 
         public void OnReceiveReadyData(Message msg)
@@ -251,6 +280,11 @@ namespace Assets._GameAsset.Script.Session
                 case 2:
                     {
                         OnReceiveTurnMove(msg);
+                        break;
+                    }
+                case 4:
+                    {
+                        OnReceiveAnimation(msg);
                         break;
                     }
             }
@@ -330,22 +364,22 @@ namespace Assets._GameAsset.Script.Session
             // TODO: truyền sang BoardController
             GameManager.Instance.gameCoordinator.boardController.InitializeFromServer(data);
         }
-
+        private void OnReceiveViewer(Message msg)
+        {
+            int viewer = msg.Reader.readInt();
+        }
         private void OnReceiveTurnMove(Message msg)
         {
             int id = msg.Reader.readInt();
-            long timeRemain = msg.Reader.readLong();
-            if (id == DataManager.Instance.DataUser.id)
-            {
-                GameManager.Instance.gameCoordinator.boardController.SetMyTurn(true);
-            }
-            else
-            {
-                GameManager.Instance.gameCoordinator.boardController.SetMyTurn(false);
-            }
+            long timeRemain = msg.Reader.readLong() / 1000;
+            long timeTotalRemain = msg.Reader.readLong() / 1000;
+            long timeTotalRemainOpponent = msg.Reader.readLong() / 1000;
 
+            bool isMyTurn = id == DataManager.Instance.DataUser.id;
+            GameManager.Instance.gameCoordinator.boardController.SetMyTurn(isMyTurn);
+            GameManager.Instance.gameCoordinator.OnTurn(isMyTurn, (int)timeRemain, (int)timeTotalRemain, (int)timeTotalRemainOpponent);
 
-            UnityEngine.Debug.Log("[OnReceive] TurnMove: id=" + id + " timeRemain=" + timeRemain);
+            UnityEngine.Debug.Log("OnReceiveTurnMove: " + id + " - " + isMyTurn + " - " + timeRemain + " - " + timeTotalRemain + " - " + timeTotalRemainOpponent);
         }
 
         private void OnReceiveCanMove(Message msg)
@@ -370,11 +404,101 @@ namespace Assets._GameAsset.Script.Session
             if (rows == 8 && cols == 8) return true;
             return boardType == 2 || boardType == 3;
         }
+        public void OnReceiveCase5(Message msg)
+        {
+            byte type = msg.Reader.readByte();
+            switch (type)
+            {
+                case 0:
+                    {
+                        OnReceiveChatInGame(msg);
+                        break;
+                    }
+                case 2:
+                    {
+                        OnReceiveChatServer(msg);
+                        break;
+                    }
+            }
+        }
+        private void OnReceiveChatInGame(Message msg)
+        {
+            int id = msg.Reader.readInt();
+            byte type = msg.Reader.readByte();
+            if (type != 0)
+            {
+                return;
+            }
+            int idSession = msg.Reader.readInt();
+            string chat = msg.Reader.readString();
+            Observer.Instance.Notify(ObserverKey.OnReceiveChatInGame, chat);
+            UnityEngine.Debug.Log("OnReceiveChatInGame: " + id + " - " + chat);
+        }
+        private void OnReceiveChatServer(Message msg)
+        {
+            int id = msg.Reader.readInt();
+            string name = msg.Reader.readString();
+            string chat = msg.Reader.readString();
+            DataMessageWorld data = new DataMessageWorld
+            {
+                id = id,
+                name = name,
+                chat = chat
+            };
+            Observer.Instance.Notify(ObserverKey.OnReceiveChatServer, data);
+            UnityEngine.Debug.Log("OnReceiveChatServer: " + id + " - " + chat);
+        }
+        private void OnReceiveAnimation(Message msg)
+        {
+            int type = msg.Reader.readInt();
+            AnimationType animationType = (AnimationType)type;
+            switch(animationType)
+            {
+                case AnimationType.MOVE_DENIED:
+                    {
+                        GameManager.Instance.gameCoordinator.OnMoveDenied();
+                        break;
+                    }
+                case AnimationType.TAGET_KING:
+                    {
+                        GameManager.Instance.gameCoordinator.OnCheckKing();
+                        break;
+                    }
+                case AnimationType.WIN:
+                    {
+                        GameManager.Instance.gameCoordinator.OnEndGame(true);
+                        break;
+                    }
+                case AnimationType.LOSE:
+                    {
+                        GameManager.Instance.gameCoordinator.OnEndGame(false);
+                        break;
+                    }
+            }
+        }
+        private void OnReceiveResetBoard()
+        {
+            GameManager.Instance.gameCoordinator.OnResetBoard();
+        }
     }
+}
+[System.Serializable]
+public class DataMessageWorld
+{
+    public int id;
+    public string name;
+    public string chat;
 }
 [System.Serializable]
 public class DataReceiveReady
 {
     public int id;
     public bool isReady;
+}
+public enum AnimationType
+{
+    MOVE_DENIED = 0, // KHÔNG ĐƯỢC DI CHUYỂN
+    TAGET_KING = 1,  // CHIẾU TƯỚNG
+    WIN = 2,         // THẮNG
+    LOSE = 3,        // THUA
 }

@@ -1,7 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public enum ChessPieceType { Pawn = 0, Knight = 1, Bishop = 2, Rook = 3, Queen = 4, King = 5 }
+public enum ChessPieceType { 
+    Pawn = 0, // Tốt
+    Knight = 1, // Mã
+    Bishop = 2, // Tượng
+    Rook = 3, // Xe
+    Queen = 4, // Hậu
+    King = 5 // Vua
+}
 
 public sealed class ChessRuleSet : IRuleSet
 {
