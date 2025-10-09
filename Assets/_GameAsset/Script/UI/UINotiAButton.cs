@@ -15,9 +15,9 @@ public class UINotiAButton : UIBase
         txtDescription.text = strDescription;
         txtButton.text = strButton;
     }
-    //public override void OnClickClose()
-    //{
-    //    base.OnClickClose();
-    //    actionClick?.Invoke();
-    //}
+    override public void OnClickClose()
+    {
+        base.OnClickClose();
+        actionClick?.Invoke();
+    }
 }

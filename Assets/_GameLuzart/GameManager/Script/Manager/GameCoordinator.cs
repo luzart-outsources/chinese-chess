@@ -7,9 +7,13 @@ public class GameCoordinator : MonoBehaviour
     public Action<bool> ActionOnEndGame = null;
     public bool IsInRoom = false;
     public BoardController boardController;
-    void Start()
+    public void StartGame()
     {
-
+        var ui = UIManager.Instance.GetUI<UIGameplay>(UIName.Gameplay);
+        if(ui!= null)
+        {
+            ui.StartGame();
+        }
     }
     public void OpenRoom(DataRoom dataRoom)
     {
@@ -44,7 +48,8 @@ public class GameCoordinator : MonoBehaviour
     }
     public void OnEndGame(bool isWin)
     {
-
+        UIName uiName = isWin ? UIName.Win : UIName.Lose;
+        UIManager.Instance.ShowUI(uiName);
     }
 
 

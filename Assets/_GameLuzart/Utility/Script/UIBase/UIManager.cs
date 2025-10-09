@@ -38,11 +38,16 @@ public class UIManager : Singleton<UIManager>
         {UIName.CreateRoom,"1,0,UICreateRoom" },
         {UIName.LeaveRoom,"1,0,UILeaveRoom" },
         {UIName.NotiFake,"3,0,UINotiFake" },
-        {UIName.ChieuTuong,"1.0,UIChieuTuong" },
+        {UIName.ChieuTuong,"1,0,UIChieuTuong" },
         {UIName.Win,"1,0,UIWin" },
         {UIName.Lose,"1,0,UILose" },
         {UIName.Chat,"1,0,UIChat" },
         {UIName.ChatGlobal,"1,0,UIChatGlobal" },
+        {UIName.SeeChess,"1,0,UISeeChess" },
+        {UIName.UIPrivateChallenge,"2,0,UIPrivateChallenge" },
+        {UIName.StartGame,"2,0,UIStartGame" },
+        {UIName.Profile,"2,0,UIProfile" },
+
 };
 
     private Dictionary<UIName, DataUIBase> dic2;
@@ -386,6 +391,10 @@ public enum UIName
     Lose = 17,
     Chat = 18,
     ChatGlobal =19,
+    SeeChess = 20,
+    UIPrivateChallenge = 21,
+    StartGame = 22,
+    Profile = 23,
 }
 public class DataUIBase
 {

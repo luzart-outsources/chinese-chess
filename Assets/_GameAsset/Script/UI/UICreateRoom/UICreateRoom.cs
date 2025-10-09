@@ -14,8 +14,9 @@ public class UICreateRoom : UIBase
     public TMP_Dropdown dropDown;
     public Button btnCreateRoom;
     private int[] valuesRate;
-    private int typeChess = 0;
+    public int typeChess = 0;
     private int typeChestFlash = 0;
+    private int valueRate = 0;
     public override void Show(Action onHideDone)
     {
         base.Show(onHideDone);
@@ -30,7 +31,7 @@ public class UICreateRoom : UIBase
         UpdateInteractableButtonCreateRoom();
         SetDefaultChess();
     }
-    private void SetDefaultChess()
+    public void SetDefaultChess()
     {
         bsTypeChess.Select(typeChess);
         OnClickChangeTypeChess(typeChess);
@@ -52,9 +53,13 @@ public class UICreateRoom : UIBase
         bool isCreateRoom = typeChess != -1 && typeChestFlash != -1;
         btnCreateRoom.interactable = isCreateRoom;
     }
-
+    public void OnDropDownChanged(int index)
+    {
+        string value = dropDown.options[index].text;
+        valueRate = int.Parse(value);
+    }
     public void OnClickCreateRoom()
     {
-        GlobalServices.Instance.RequestCreateRoom((EChessType)typeChess, 10000, typeChestFlash == 0 ? true : false);
+        GlobalServices.Instance.RequestCreateRoom((EChessType)typeChess, valueRate, typeChestFlash == 0 ? true : false);
     }
 }

@@ -23,6 +23,7 @@ namespace Assets._GameAsset.Script.Session
                 msg.Writer.writeString(password);
 
                 SessionMe.Instance.SendMessage(msg);
+                UnityEngine.Debug.Log("[Post] Login: " + username);
             }
             catch (Exception e)
             {
@@ -40,6 +41,7 @@ namespace Assets._GameAsset.Script.Session
                 msg.Writer.writeString(password);
 
                 SessionMe.Instance.SendMessage(msg);
+                UnityEngine.Debug.Log("[Post] Register: " + username + " - " + phoneNumber);
             }
             catch (Exception e)
             {
@@ -53,6 +55,7 @@ namespace Assets._GameAsset.Script.Session
                 var msg = new Message(2);
                 msg.Writer.writeString(namePlayer);
                 SessionMe.Instance.SendMessage(msg);
+                UnityEngine.Debug.Log("[Post] PostNameUser: " + namePlayer);
             }
             catch (Exception e)
             {
@@ -65,7 +68,7 @@ namespace Assets._GameAsset.Script.Session
             msg.Writer.writeByte(0);
             msg.Writer.writeByte((byte)eChessType);
             SessionMe.Instance.SendMessage(msg);
-            UnityEngine.Debug.Log("RequestGetRoom: " + eChessType);
+            UnityEngine.Debug.Log("[Post]RequestGetRoom: " + eChessType);
         }
         public void RequestCreateRoom(EChessType eChessType, int gold, bool isFlash)
         {
@@ -75,7 +78,7 @@ namespace Assets._GameAsset.Script.Session
             msg.Writer.writeInt(gold);
             msg.Writer.writeBool(isFlash);
             SessionMe.Instance.SendMessage(msg);
-            UnityEngine.Debug.Log("RequestCreateRoom: " + eChessType + " - " + gold + " - " + isFlash);
+            UnityEngine.Debug.Log("[Post]RequestCreateRoom: " + eChessType + " - " + gold + " - " + isFlash);
         }
         public void RequestJoinRoom(int idRoom, bool isViewer)
         {
@@ -84,7 +87,7 @@ namespace Assets._GameAsset.Script.Session
             msg.Writer.writeInt(idRoom);
             msg.Writer.writeBool(isViewer);
             SessionMe.Instance.SendMessage(msg);
-            UnityEngine.Debug.Log("RequestJoinRoom: " + idRoom + " - " + isViewer);
+            UnityEngine.Debug.Log("[Post]RequestJoinRoom: " + idRoom + " - " + isViewer);
         }
 
         public void RequestReady(bool isReady)
@@ -93,6 +96,7 @@ namespace Assets._GameAsset.Script.Session
             msg.Writer.writeByte(3);
             msg.Writer.writeBool(isReady);
             SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("[Post] RequestReady: " + isReady);
         }
 
         public void RequestLeaveRoom()
@@ -100,15 +104,17 @@ namespace Assets._GameAsset.Script.Session
             var msg = new Message(11);
             msg.Writer.writeByte(4);
             SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("[Post] RequestLeaveRoom");
         }
 
-        public void RequestMove(short idPiece, short toRow, short toCol)
+        public void RequestMove(short idPiece, short toRow, short toCol, sbyte type = -1 )
         {
             var msg = new Message(12);
             msg.Writer.writeByte(1);
             msg.Writer.writeShort(idPiece);
             msg.Writer.writeShort(toCol);
             msg.Writer.writeShort(toRow);
+            msg.Writer.writeSByte(type);
             SessionMe.Instance.SendMessage(msg);
             UnityEngine.Debug.Log("[Post] RequestMove: " + idPiece + " - " + toCol + " - " + toRow);
 
@@ -130,6 +136,36 @@ namespace Assets._GameAsset.Script.Session
             msg.Writer.writeString(content);
             SessionMe.Instance.SendMessage(msg);
             UnityEngine.Debug.Log("[Post] RequestChatWorld: " + content);
+        }
+
+        public void RequestChatP2P(string username, string content = "Hello!")
+        {
+            var msg = new Message(13);
+            msg.Writer.writeByte(2);
+            msg.Writer.writeString(username);
+            msg.Writer.writeString(content);
+            SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("[Post] RequestChatP2P: " + username + " - " + content);
+        }
+        public void RequestSeeChess(EChessType eChessType)
+        {
+            var msg = new Message(10);
+            msg.Writer.writeByte(3);
+            msg.Writer.writeByte(4);
+            msg.Writer.writeByte(0);
+            msg.Writer.writeByte(1);
+            msg.Writer.writeByte(2);
+            msg.Writer.writeByte(3);
+            SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("[Post]RequestSeeChess: " + eChessType);
+        }
+        public void RequestGetInfoUser(string username)
+        {
+            var msg = new Message(13);
+            msg.Writer.writeByte(1);
+            msg.Writer.writeString(username);
+            SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("[Post]RequestGetInfoUser");
         }
     }
 }

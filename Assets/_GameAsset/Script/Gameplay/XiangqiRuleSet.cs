@@ -48,13 +48,13 @@ public static class XiangqiRules
 
         switch (typeForMove)
         {
-            case PieceType.Rook: AddRookMoves(board, r, c, red, res); break;
-            case PieceType.Cannon: AddCannonMoves(board, r, c, red, res); break;
-            case PieceType.Knight: AddKnightMoves(board, r, c, red, res); break;
-            case PieceType.Elephant: AddElephantMoves(board, r, c, red, res, cfg); break;
-            case PieceType.Advisor: AddAdvisorMoves(board, r, c, red, res, cfg); break;
-            case PieceType.General: AddGeneralMoves(board, r, c, red, res); break;
-            case PieceType.Soldier: AddSoldierMoves(board, r, c, red, res); break;
+            case PieceType.Xe: AddRookMoves(board, r, c, red, res); break;
+            case PieceType.Phao: AddCannonMoves(board, r, c, red, res); break;
+            case PieceType.Ma: AddKnightMoves(board, r, c, red, res); break;
+            case PieceType.Tuong: AddElephantMoves(board, r, c, red, res, cfg); break;
+            case PieceType.Si: AddAdvisorMoves(board, r, c, red, res, cfg); break;
+            case PieceType.Vua: AddGeneralMoves(board, r, c, red, res); break;
+            case PieceType.Tot: AddSoldierMoves(board, r, c, red, res); break;
         }
         return res;
     }
@@ -197,7 +197,7 @@ public static class XiangqiRules
         foreach (var kv in b.byId)
         {
             var pm = kv.Value;
-            if (pm.type == PieceType.General && pm.isRed != red) { enemyGen = pm; break; }
+            if (pm.type == PieceType.Vua && pm.isRed != red) { enemyGen = pm; break; }
         }
 
         for (int k = 0; k < 4; k++)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,11 +15,13 @@ public class PieceView : MonoBehaviour
 
     public virtual void InitData(int id, PieceType type, bool isRed, bool isShow)
     {
-
+        this.id = id; this.type = type; this.isRed = isRed; this.isShow = isShow;
+        RefreshVisual();
+        SetSelected(false, instant: true); // Đảm bảo scale về chuẩn khi spawn
     }
     public virtual bool IsKing()
     {
-        return type == PieceType.General;
+        return type == PieceType.Vua;
     }
 
     /// <summary>
@@ -62,5 +65,20 @@ public class PieceView : MonoBehaviour
 
     public virtual void SetBaseSprite(Sprite s)
     { }
+
+#if UNITY_EDITOR
+    private static GUIStyle labelStyle;
+
+    private void OnDrawGizmos()
+    {
+        if (labelStyle == null)
+        {
+            labelStyle = new GUIStyle();
+            labelStyle.normal.textColor = Color.green;
+            labelStyle.fontSize = 40;
+        }
+        Handles.Label(transform.position + Vector3.up*0.5f , $"{id}",labelStyle);
+    }
+#endif
 
 }

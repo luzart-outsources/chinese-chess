@@ -392,6 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteResourcesSO: {fileID: 11400000, guid: 7cd0fb9f64018114fb4ff267fe0fd95e, type: 2}
   avatarResourcesSO: {fileID: 11400000, guid: a937e538218949c4b8b53a448a88fe8c, type: 2}
+  iconResourcesSO: {fileID: 11400000, guid: b5c26358f9b5d984e9a3d30692e6db9c, type: 2}
 --- !u!1 &4822578124946984593
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +447,13 @@ MonoBehaviour:
     avt: 
     name: 
     gold: 0
-  dbValueRate: []
+    statusFriend: 0
+    isOnline: 0
+    dataHistoryGame: []
+  dbValueRate:
+  - value: 000000008813000010270000204e000050c30000a0860100
+  - value: 400d030020a1070040420f0080841e00
+  - value: 80969800002d310180f0fa02804a5d05
 --- !u!1 &6545976241998736178
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +498,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8399a6504a784851b30a91d6b5b44ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRoom:
+    idRoom: 0
+    eChessType: 0
+    goldRate: 0
+    viewer: 0
+    isMaster: 0
+    dataMe:
+      idSession: 0
+      name: 
+      avatar: 
+      gold: 0
+      isReady: 0
+    dataMember2:
+      idSession: 0
+      name: 
+      avatar: 
+      gold: 0
+      isReady: 0
 --- !u!1 &7062897448495686203
 GameObject:
   m_ObjectHideFlags: 0

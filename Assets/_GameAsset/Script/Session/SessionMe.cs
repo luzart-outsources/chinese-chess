@@ -13,6 +13,7 @@ namespace Assets._GameAsset.Script.Session
     public class SessionMe
     {
         const string hostTCP = "103.82.39.169";
+          
         const int port = 36526;
 
         private static SessionMe _instance;
@@ -41,7 +42,11 @@ namespace Assets._GameAsset.Script.Session
                 Action action = () =>
                 {
                     var ui = UIManager.Instance.ShowUI<UINotiAButton>(UIName.NotiAButton);
-                    ui.InitPopup(null, "Lỗi kết nối mạng", "Không thể kết nối với máy chủ", "Thử lại");
+                    ui.InitPopup(() =>
+                    {
+                        UIManager.Instance.HideAll();
+                        UIManager.Instance.ShowUI<UILogin>(UIName.Login);
+                    }, "Lỗi kết nối mạng", "Không thể kết nối với máy chủ", "Thử lại");
                 };
                 MainThreadDispatcher.Enqueue(action);
             }

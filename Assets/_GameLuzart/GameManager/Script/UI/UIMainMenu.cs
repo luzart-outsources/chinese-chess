@@ -9,7 +9,9 @@ public class UIMainMenu : UIBase
     {
         base.Show(onHideDone);
         RoomManager.Instance.PostRequestRoom();
+        RoomManager.Instance.RequestSeeRoom();
     }
+
     public void OnClickChinaChess()
     {
         var ui = UIManager.Instance.ShowUI<UISelectRoom>(UIName.SelectRoom);

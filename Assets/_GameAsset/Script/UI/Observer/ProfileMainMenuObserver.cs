@@ -1,3 +1,4 @@
+using Assets._GameAsset.Script.Session;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -28,5 +29,9 @@ public class ProfileMainMenuObserver : MonoBehaviour
         int intAvt = 0;
         bool canTryPase = int.TryParse(avt, out intAvt);
         imAvt.sprite = ResourcesManager.Instance.avatarResourcesSO.GetSpriteAvatar(intAvt);
+    }
+    public void OnClickProfile()
+    {
+        GlobalServices.Instance.RequestGetInfoUser(DataManager.Instance.DataUser.name);
     }
 }

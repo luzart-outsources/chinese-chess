@@ -91,9 +91,20 @@ public class DataUserLogin
 public class DataUser
 {
     public int id;
+    public int idPlayer;
     public string avt;
     public string name;
     public long gold;
+    public byte statusFriend;
+    public bool isOnline;
+    public List<DataHistoryGame> dataHistoryGame = new List<DataHistoryGame>();
+}
+[System.Serializable]
+public class DataHistoryGame
+{
+    public EChessType eChessType;
+    public int win;
+    public int lose;
 }
 public class GameRes
 {
@@ -204,5 +215,5 @@ public class PlayerResources
 [System.Serializable]
 public class DBValueRate
 {
-    public int[] value;
+    public List<int> value;
 }

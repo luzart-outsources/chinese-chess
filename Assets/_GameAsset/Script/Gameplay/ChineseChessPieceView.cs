@@ -84,9 +84,7 @@ public class ChineseChessPieceView : PieceView
     /// <param name="isShow">True nếu quân đã được lật (hiện), false nếu còn úp</param>
     public override void InitData(int id, PieceType type, bool isRed, bool isShow)
     {
-        this.id = id; this.type = type; this.isRed = isRed; this.isShow = isShow;
-        RefreshVisual();
-        SetSelected(false, instant: true); // Đảm bảo scale về chuẩn khi spawn
+        base.InitData(id, type, isRed, isShow);
     }
 
     /// <summary>
@@ -145,13 +143,13 @@ public class ChineseChessPieceView : PieceView
         var set = redSide ? spriteConfig.red : spriteConfig.black;
         return t switch
         {
-            PieceType.Rook => set.rook,
-            PieceType.Knight => set.knight,
-            PieceType.Cannon => set.cannon,
-            PieceType.Elephant => set.elephant,
-            PieceType.Advisor => set.advisor,
-            PieceType.General => set.general,
-            PieceType.Soldier => set.soldier,
+            PieceType.Xe => set.rook,
+            PieceType.Ma => set.knight,
+            PieceType.Phao => set.cannon,
+            PieceType.Tuong => set.elephant,
+            PieceType.Si => set.advisor,
+            PieceType.Vua => set.general,
+            PieceType.Tot => set.soldier,
             _ => null
         };
     }

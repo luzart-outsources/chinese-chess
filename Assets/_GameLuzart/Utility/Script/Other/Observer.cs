@@ -54,6 +54,7 @@ public static class ObserverKey
     public const string OnReceiveCreateName = "OnReceiveCreateName";
     public const string RefreshDataMeByServer = "RefreshDataMeByServer";
     public const string OnRefreshRoom = "OnRefreshRoom";
+    public const string OnRefreshRoomSee = "OnRefreshRoomSee";
     public const string OnReceiveChatServer = "OnReceiveChatServer";
     public const string OnReceiveChatInGame = "OnReceiveChatInGame";
 }

@@ -1,7 +1,9 @@
 using Assets._GameAsset.Script.Session;
+using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,6 +21,20 @@ public class UISelectRoom : UIBase
         }
     }
     private EChessType currentChessType;
+    private int currentRank = 0;
+    public void OnClickRank(int index)
+    {
+        this.currentRank = index;
+        GetRoom(currentChessType);
+    }
+    public List<ConfigDataRoom> GetCurrentRank(List<ConfigDataRoom> list, int currentRank)
+    {
+        List<int> listInt = DataManager.Instance.dbValueRate[currentRank].value;
+        int min = listInt[0];
+        int max = listInt[^1];
+        List<ConfigDataRoom> listResult = list.Where(x => x.gold >= min && x.gold <= max).ToList();
+        return listResult;
+    }
     private void OnEnable()
     {
         Observer.Instance.AddObserver(ObserverKey.OnRefreshRoom, Refresh);
@@ -30,11 +46,13 @@ public class UISelectRoom : UIBase
     public override void Show(Action onHideDone)
     {
         base.Show(onHideDone);
+        OnClickRefreshData();
     }
     public void GetRoom(EChessType eChessType)
     {
         this.currentChessType = eChessType;
         var listRoom = roomManager.GetConfigDataRooms(eChessType);
+        listRoom = GetCurrentRank(listRoom, currentRank);
         if (listRoom != null)
         {
             int length = listRoom.Count;
@@ -61,7 +79,9 @@ public class UISelectRoom : UIBase
     }
     public void OnClickCreateRoom()
     {
-        UIManager.Instance.ShowUI<UICreateRoom>(UIName.CreateRoom);
+        var  ui = UIManager.Instance.ShowUI<UICreateRoom>(UIName.CreateRoom);
+        ui.typeChess = (int) currentChessType;
+        ui.SetDefaultChess();
     }
     public void OnClickJoinRoom(ConfigDataRoom dataRoom)
     {
@@ -70,6 +90,10 @@ public class UISelectRoom : UIBase
     }
     public void OnClickRefreshData()
     {
-        RoomManager.Instance.PostRequestRoom();
+        RoomManager.Instance.PostRequestRoom(currentChessType);
+    }
+    public void OnClickShowPrivateChallenge()
+    {
+        UIManager.Instance.ShowUI<UIPrivateChallenge>(UIName.UIPrivateChallenge);
     }
 }

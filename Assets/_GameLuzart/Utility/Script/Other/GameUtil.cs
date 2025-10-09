@@ -269,6 +269,18 @@ public class GameUtil : MonoBehaviour
     #endregion
 
     #region Time And Ordinal To String
+
+    public static string FormatNumber(int number)
+    {
+        if (number >= 1_000_000_000)
+            return (number / 1_000_000_000f).ToString("0.#") + " B";
+        else if (number >= 1_000_000)
+            return (number / 1_000_000f).ToString("0.#") + " M";
+        else if (number >= 1_000)
+            return (number / 1_000f).ToString("0.#") + " K";
+        else
+            return number.ToString();
+    }
     public static string LongTimeSecondToUnixTime(long unixTimeSeconds, bool isDoubleParam = false, string day = "d", string hour = "h", string minutes = "m", string second = "s")
     {
         TimeSpan dateTime = TimeSpan.FromSeconds(unixTimeSeconds);

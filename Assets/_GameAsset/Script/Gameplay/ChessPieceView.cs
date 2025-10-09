@@ -180,15 +180,16 @@ public class ChessPieceView : PieceView
     {
         if (chessSprites == null) return null;
         var set = white ? chessSprites.white : chessSprites.black;
-
-        switch (t)
+        int value = (int)t;
+        ChessPieceType type = ChessRuleSet.MapFromPieceType(t);
+        switch (type)
         {
-            case PieceType.Soldier: return set.pawn;
-            case PieceType.Knight: return set.knight;
-            case PieceType.Elephant: return set.bishop;
-            case PieceType.Rook: return set.rook;
-            case PieceType.Advisor: return set.queen;
-            case PieceType.General: return set.king;
+            case ChessPieceType.Tot: return set.pawn;
+            case ChessPieceType.Ma: return set.knight;
+            case ChessPieceType.Tuong: return set.bishop;
+            case ChessPieceType.Xe: return set.rook;
+            case ChessPieceType.Hau: return set.queen;
+            case ChessPieceType.Vua: return set.king;
             // Cannon, None… không áp dụng trong chess
             default: return null;
         }

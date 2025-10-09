@@ -9,44 +9,67 @@ public class RoomManager : Singleton<RoomManager>
     public DataRoom currentRoom;
     public void PostRequestRoom()
     {
-        GlobalServices.Instance.RequestGetRoom(EChessType.Chess);
-        GlobalServices.Instance.RequestGetRoom(EChessType.ChinaChess);
-        GlobalServices.Instance.RequestGetRoom(EChessType.ChessVisible);
-        GlobalServices.Instance.RequestGetRoom(EChessType.ChinaChessVisible);
+        PostRequestRoom(EChessType.Chess);
+        PostRequestRoom(EChessType.ChinaChess);
+        PostRequestRoom(EChessType.ChessVisible);
+        PostRequestRoom(EChessType.ChinaChessVisible);
+
     }
-    public Dictionary<EChessType, List<DataServerRoom>> listRoomDatas = new Dictionary<EChessType, List<DataServerRoom>>();
+    public void PostRequestRoom(EChessType eChessType)
+    {
+        GlobalServices.Instance.RequestGetRoom(eChessType);
+    }
+    public Dictionary<EChessType, List<DataServerRoom>> dictRoomDatas = new Dictionary<EChessType, List<DataServerRoom>>();
+    public Dictionary<EChessType, List<DataRoom>> dictRoomSeeDatas = new Dictionary<EChessType, List<DataRoom>>();
     public void UpdateRoom(EChessType eChessType, List<DataServerRoom> listDataServerRooms)
     {
-        if (listRoomDatas.ContainsKey(eChessType))
+        if (dictRoomDatas.ContainsKey(eChessType))
         {
-            listRoomDatas[eChessType] = listDataServerRooms;
+            dictRoomDatas[eChessType] = listDataServerRooms;
         }
         else
         {
-            listRoomDatas.Add(eChessType, listDataServerRooms);
+            dictRoomDatas.Add(eChessType, listDataServerRooms);
         }
         Observer.Instance.Notify(ObserverKey.OnRefreshRoom);
     }
+    public void RequestSeeRoom()
+    {
+        GlobalServices.Instance.RequestSeeChess(EChessType.Chess);
+        GlobalServices.Instance.RequestSeeChess(EChessType.ChessVisible);
+        GlobalServices.Instance.RequestSeeChess(EChessType.ChinaChess);
+        GlobalServices.Instance.RequestSeeChess(EChessType.ChinaChessVisible);
+    }
+    public void UpdateRoomSee(Dictionary<EChessType, List<DataRoom>> dataRoom)
+    {
+        dictRoomSeeDatas = dataRoom;
+        Observer.Instance.Notify(ObserverKey.OnRefreshRoomSee);
+    }
     public List<ConfigDataRoom> GetConfigDataRooms(EChessType eChessType)
     {
-        if (listRoomDatas.ContainsKey(eChessType))
+        if (dictRoomDatas.ContainsKey(eChessType))
         {
             var listConfigDataRooms = new List<ConfigDataRoom>();
-            for (int i = 0; i < listRoomDatas[eChessType].Count; i++)
+            for (int i = 0; i < dictRoomDatas[eChessType].Count; i++)
             {
-                var dataServerRoom = listRoomDatas[eChessType][i];
+                var dataServerRoom = dictRoomDatas[eChessType][i];
                 var configDataRoom = new ConfigDataRoom
                 {
                     idRoom = dataServerRoom.id,
                     name = dataServerRoom.nameBoss,
                     gold = dataServerRoom.gold,
                     index = i,
-                    isFilled = dataServerRoom.numPeoplePlay >= 1,
+                    isFilled = dataServerRoom.numPeoplePlay < 1,
                 };
                 listConfigDataRooms.Add(configDataRoom);
             }
             return listConfigDataRooms;
         }
+        return null;
+    }
+    public List<DataRoom> GetDataSeeChess(EChessType eChessType)
+    {
+        //return listRoomSeeDatas[eChessType];
         return null;
     }
     public void JoinRoom(DataRoom roomData)

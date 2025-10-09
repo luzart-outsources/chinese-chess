@@ -1,5 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -118,38 +119,30 @@ public class GameManager : Singleton<GameManager>
         {
             UIManager.Instance.HideAll();
             ui = UIManager.Instance.ShowUI<UIGameplay>(UIName.Gameplay);
-            Debug.Log("Show UI Gameplay");
         }
         ui.InitData(dataRoom);
-        if (gameCoordinator.IsInRoom)
-        {
-            if (dataRoom.dataMember2.isReady)
-            {
-                ui.StartReady();
-            }
-        }
-        else
-        {
-            if (!dataRoom.isMaster)
-            {
-                ui.StartReady();
-            }
-        }
         gameCoordinator.OpenRoom(dataRoom);
     }
-    public void OnReceiveRoomReady(DataReceiveReady dataReceiveReady)
+    public void OnShowDataTime(float time)
     {
-        if (dataReceiveReady.id != DataManager.Instance.DataUser.id && dataReceiveReady.isReady)
+        var dataRoom = RoomManager.Instance.currentRoom;
+        var ui = UIManager.Instance.GetUiActive<UIGameplay>(UIName.Gameplay);
+        ui.StartReady(time);
+    }
+    public void OnReceivePlayerReady(DataReceiveReady dataReceiveReady)
+    {
+        var ui = UIManager.Instance.GetUiActive<UIGameplay>(UIName.Gameplay);
+        if (!dataReceiveReady.isReady)
         {
-            if (RoomManager.Instance.currentRoom.isMaster)
-            {
-                var ui = UIManager.Instance.GetUiActive<UIGameplay>(UIName.Gameplay);
-                if (ui != null)
-                {
-                    ui.StartReady();
-                }
-            }
+            return;
         }
+        bool isBot = dataReceiveReady.id == DataManager.Instance.DataUser.id;
+        ui.AvatarReady(isBot, true);
+    }
+    public void OnReceiveString(string message = "Đang chờ đối thủ vào phòng")
+    {
+        var ui = UIManager.Instance.GetUiActive<UIGameplay>(UIName.Gameplay);
+        ui.OnShowString(message);
     }
     public void LeaveRoom()
     {

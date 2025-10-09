@@ -1,4 +1,5 @@
 using Assets._GameAsset.Script.Session;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -184,7 +185,41 @@ public class BoardController : MonoBehaviour
         var p = data.GetById(r.pieceId);
         if (p == null) return;
 
-        // Capture
+        // Lưu from trước khi di chuyển để suy luận đặc quyền
+        int fromRow = p.row, fromCol = p.col;
+
+        // --- En Passant (chỉ áp dụng cho Chess) ---
+        bool isChess = rulesCode == GameRules.Chess || rulesCode == GameRules.ChessUpsideDown;
+        bool maybeEnPassant = false;
+        if (isChess)
+        {
+            // Ô đích trống + tốt đi chéo 1 cột => nghi ngờ en passant
+            var targetCell = data.GetAt(r.newRow, r.newCol);
+            bool targetEmpty = (targetCell == null);
+
+            // Tự kiểm tra xem quân đang đi có phải là Tốt chess không
+            bool isPawn = false;
+            // Nếu enum PieceType của bạn chắc chắn “tốt chess” thì check trực tiếp:
+            // isPawn = (p.type == PieceType.YourChessPawnEnum);
+            // Nếu dùng chung enum cờ tướng/cờ vua, có thể nhờ map của ChessRuleSet (public static):
+            isPawn = (ChessRuleSet.MapFromPieceType(p.type) == ChessPieceType.Tot);
+
+            if (isPawn && targetEmpty && Math.Abs(r.newCol - fromCol) == 1 && Math.Abs(r.newRow - fromRow) == 1)
+            {
+                // Vị trí nạn nhân nằm ngay cùng hàng with fromRow, cột = newCol
+                var victim = data.GetAt(fromRow, r.newCol);
+                if (victim != null && victim.isRed != p.isRed &&
+                    ChessRuleSet.MapFromPieceType(victim.type) == ChessPieceType.Tot)
+                {
+                    // Xóa nạn nhân en passant
+                    data.RemoveAt(fromRow, r.newCol);
+                    view.RemoveById(victim.id);
+                    maybeEnPassant = true;
+                }
+            }
+        }
+
+        // Capture thường (ô đích có quân khác màu)
         var tgt = data.GetAt(r.newRow, r.newCol);
         if (tgt != null && tgt.isRed != p.isRed)
         {
@@ -192,11 +227,11 @@ public class BoardController : MonoBehaviour
             view.RemoveById(tgt.id);
         }
 
-        // Lật/ngửa & type (úp)
+        // Lật/ngửa & type (úp) – với Chess thì thường luôn show
         p.isShow = r.newType != PieceType.None;
         p.type = r.newType;
 
-        // Di chuyển
+        // Di chuyển quân chính
         data.MoveTo(p, r.newRow, r.newCol);
         view.MovePieceTo(p.id, r.newRow, r.newCol);
 
@@ -204,13 +239,34 @@ public class BoardController : MonoBehaviour
         view.SetShowState(p.id, p.isShow);
         view.SetType(p.id, p.type);
 
-        // Cho RuleSet hậu xử lý nếu cần (promotion, …)
+        // --- Castling (nếu là Chess): di chuyển xe luôn ---
+        if (isChess)
+        {
+            bool isKing = (ChessRuleSet.MapFromPieceType(p.type) == ChessPieceType.Vua);
+            int dx = r.newCol - fromCol;
+            if (isKing && Math.Abs(dx) == 2 && fromRow == r.newRow)
+            {
+                // King-side: dx>0 ; Queen-side: dx<0
+                int rookFromCol = (dx > 0) ? (data.cols - 1) : 0;
+                int rookToCol = (dx > 0) ? (r.newCol - 1) : (r.newCol + 1);
+                var rook = data.GetAt(fromRow, rookFromCol);
+                if (rook != null && rook.isRed == p.isRed &&
+                    ChessRuleSet.MapFromPieceType(rook.type) == ChessPieceType.Xe)
+                {
+                    data.MoveTo(rook, fromRow, rookToCol);
+                    view.MovePieceTo(rook.id, fromRow, rookToCol);
+                }
+            }
+        }
+
+        // Hậu xử lý RuleSet (promotion…)
         rules.ApplyPostServer(data, r);
 
         lastSelectedModel = null;
         lastSelectedView = null;
         myTurn = false;
     }
+
 
     /// <summary>Soft reset: xoá quân + indicator trên view, reset data/model & input.</summary>
     public void ResetBoardKeepGrid()

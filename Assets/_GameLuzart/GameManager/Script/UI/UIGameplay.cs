@@ -8,17 +8,18 @@ using UnityEngine.UI;
 
 public class UIGameplay : UIBase
 {
-    public Gameplay_AvatarFrame frameMe;
-    public Gameplay_AvatarFrame frameEnemy;
+    public Gameplay_AvatarFrame frameTop;
+    public Gameplay_AvatarFrame frameBot;
 
-    public BubbleChatInGame bubbleMe;
-    public BubbleChatInGame bubbleEnemy;
+    public BubbleChatInGame bubbleTop;
+    public BubbleChatInGame bubbleBot;
 
     public TMP_Text txtGold;
     public TMP_Text txtIDRoom;
     public BaseSelect selectStartMaster;
 
     public CountDownObject obReady;
+    public WaitingText watingTxt;
     private DataRoom dataRoom;
 
     private void OnEnable()
@@ -29,7 +30,23 @@ public class UIGameplay : UIBase
     {
         Observer.Instance.RemoveObserver(ObserverKey.OnReceiveChatInGame, OnReceiveChat);
     }
-
+    public void StartGame()
+    {
+        HideWait();
+        UIManager.Instance.ShowUI(UIName.StartGame);
+        frameBot.SetActiveReady(false);
+        frameTop.SetActiveReady(false);
+    }
+    public void OnShowString(string str)
+    {
+        HideWait();
+        watingTxt.InitText(str);
+    }
+    public void HideWait()
+    {
+        obReady.gameObject.SetActive(false);
+        watingTxt?.gameObject?.SetActive(false);
+    }
     public override void Show(System.Action onHideDone)
     {
         base.Show(onHideDone);
@@ -38,21 +55,29 @@ public class UIGameplay : UIBase
     public void InitData(DataRoom dataRoom)
     {
         this.dataRoom = dataRoom;
-        txtIDRoom.text = "ID: " + dataRoom.idRoom;
+        txtIDRoom.text = "ID Phòng: " + dataRoom.idRoom;
         txtGold.text = dataRoom.goldRate.ToString();
-        frameMe.SetData(dataRoom.dataMe);
-        frameEnemy.SetData(dataRoom.dataMember2);
+        frameBot.SetData(dataRoom.dataMe);
+        frameTop.SetData(dataRoom.dataMember2);
+        HideWait();
+
     }
-    public void StartReady()
+    public void StartReady(float time)
     {
+        HideWait();
         obReady.gameObject.SetActive(true);
         selectStartMaster.Select(dataRoom.isMaster);
-        StartCountDown();
+        StartCountDown(time);
     }
     public void OnClickReady()
     {
         GlobalServices.Instance.RequestReady(true);
         obReady.gameObject.SetActive(false);
+    }
+    public void AvatarReady(bool isBot, bool isReady)
+    {
+        var frame_avt = isBot ? frameBot : frameTop;
+        frame_avt.SetActiveReady(isReady);
     }
     public void OnFailedReady()
     {
@@ -71,9 +96,9 @@ public class UIGameplay : UIBase
     {
         UIManager.Instance.ShowUI(UIName.ChatGlobal);
     }
-    public void StartCountDown()
+    public void StartCountDown(float time)
     {
-        obReady.StartCountDown(10, 0, 10f, null, () =>
+        obReady.StartCountDown(time, 0, time, null, () =>
         {
             obReady.gameObject.SetActive(false);
             // Countdown complete
@@ -81,8 +106,8 @@ public class UIGameplay : UIBase
     }
     public void CountdownPlayer(bool isMe ,int count, int totalTime, int totalTimeOponent)
     {
-        var itemRoll = isMe ? frameMe : frameEnemy;
-        var itemReset = isMe ? frameEnemy : frameMe;
+        var itemRoll = isMe ? frameTop : frameBot;
+        var itemReset = isMe ? frameBot : frameTop;
         itemRoll.StartCountCountDown(count, totalTime);
         itemReset.ResetCountDown(totalTimeOponent);
     }
@@ -93,7 +118,7 @@ public class UIGameplay : UIBase
             return;
         }
         var chatData = data as string;
-        bubbleEnemy.ShowBubble(chatData);
+        bubbleTop.ShowBubble(chatData);
     }
 
 }

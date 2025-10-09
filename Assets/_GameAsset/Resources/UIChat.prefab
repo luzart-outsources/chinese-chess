@@ -122,7 +122,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3093239841992519922}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8998248493410522906}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8998248493410522906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,7 +347,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8145526859719882520}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6150123639318213657}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6150123639318213657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,7 +497,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8606110789898319568}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4696201178224873940}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4696201178224873940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,7 +887,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2187270999559564694}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4323555264169328336}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4323555264169328336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1636,7 +1684,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5291146647095454216}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7316169733373978831}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7316169733373978831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2350,9 +2410,9 @@ MonoBehaviour:
   _canvasGroup: {fileID: 0}
   _image: {fileID: 0}
   _baseOptions:
-    ShowEase: 27
+    ShowEase: 6
     HideEase: 26
-    Duration: 0.1925
+    Duration: 0.3
     StartDelay: 0
     IgnoreTimeScale: 0
     LoopTime: 0
@@ -3015,7 +3075,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4212509184407036814}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5368351838551131453}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5368351838551131453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3491,7 +3563,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2243072781537794477}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7313241936866231032}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7313241936866231032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4608,7 +4692,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7199409445354561686}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6484649022723470740}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6484649022723470740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4746,7 +4842,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6575426201812452015}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2170045718366581443}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2170045718366581443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4922,7 +5030,7 @@ MonoBehaviour:
       - m_Target: {fileID: 5921429274325511542}
         m_TargetAssemblyTypeName: UIChatInGame, Assembly-CSharp
         m_MethodName: OnChangeValueTMPInputField
-        m_Mode: 5
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5490,7 +5598,7 @@ GameObject:
   - component: {fileID: 4303796530222486726}
   - component: {fileID: 8033389547207138024}
   m_Layer: 5
-  m_Name: Image
+  m_Name: btnX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7160,7 +7268,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6801010711731800814}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4050662847711085684}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4050662847711085684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7298,7 +7418,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4426171708702604097}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2555712417593704955}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2555712417593704955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7647,7 +7779,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5716460893460979624}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1677448790431803798}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1677448790431803798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7785,7 +7929,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6826259229368675654}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3440829006142125347}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3440829006142125347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8209,7 +8365,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1447318835430724874}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2321820568919621193}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2321820568919621193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8235,6 +8403,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7643805514947741445}
   - component: {fileID: 8692941963236924875}
+  - component: {fileID: 5580678784201140711}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -8274,7 +8443,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.000030517578, y: -8.5}
-  m_SizeDelta: {x: 982.57, y: 362.5388}
+  m_SizeDelta: {x: 0, y: 362.5388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8692941963236924875
 MonoBehaviour:
@@ -8300,6 +8469,20 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 2
+--- !u!114 &5580678784201140711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8479003787904753851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &8828968623442513156
 GameObject:
   m_ObjectHideFlags: 0
@@ -8497,7 +8680,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 628880255611272352}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1636593416708957440}
+        m_TargetAssemblyTypeName: ChatInGameClick, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1636593416708957440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8564,7 +8759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiName: 0
-  closeBtn: {fileID: 0}
+  closeBtn: {fileID: 8033389547207138024}
   isAnimBtnClose: 0
   isCache: 0
   txtInputField: {fileID: 7902894452742914771}

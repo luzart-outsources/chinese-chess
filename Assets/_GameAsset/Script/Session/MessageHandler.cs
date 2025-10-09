@@ -44,13 +44,16 @@ namespace Assets._GameAsset.Script.Session
                     readMsg.OnReceiveCase5(msg);
                     break;
                 case 10:
-                    readMsg.OnReceiveListRoomData(msg);
+                    readMsg.OnReceiveCase10(msg);
                     break;
                 case 11:
                     readMsg.OnReceiveCase11(msg);
                     break;
                 case 12:
                     readMsg.OnReceiveCase12(msg);
+                    break;
+                case 13:
+                    readMsg.OnReceiveCase13(msg);
                     break;
             }
         }

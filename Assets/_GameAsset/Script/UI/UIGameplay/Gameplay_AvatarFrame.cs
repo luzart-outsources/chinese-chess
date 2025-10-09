@@ -1,3 +1,4 @@
+using Assets._GameAsset.Script.Session;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,9 +11,20 @@ public class Gameplay_AvatarFrame : MonoBehaviour
     public TMP_Text txtName;
     public TMP_Text txtCountDown;
     public ProgressBarUI progressBar;
+    public GameObject obReady;
+    private DataPlayerInRoom dataPlayerInRoom;
 
+    private void OnEnable()
+    {
+        SetActiveReady(false);
+    }
+    public void SetActiveReady(bool isReady)
+    {
+        obReady?.SetActive(isReady);
+    }
     public void SetData(DataPlayerInRoom data)
     {
+        this.dataPlayerInRoom = data;
         bool isHasData = data != null;
         this.gameObject.SetActive(isHasData);
         if (!isHasData)
@@ -20,8 +32,7 @@ public class Gameplay_AvatarFrame : MonoBehaviour
             return;
         }
         txtName.text = data.name;
-        int idAvt = int.Parse(data.avatar);
-        imAvatar.sprite = ResourcesManager.Instance.avatarResourcesSO.GetSpriteAvatar(idAvt);   
+        imAvatar.sprite = ResourcesManager.Instance.GetAvatar(data.avatar);
     }
     public void ResetCountDown(long timeRemain)
     {
@@ -46,6 +57,10 @@ public class Gameplay_AvatarFrame : MonoBehaviour
         {
             txtCountDown.text = str;
         }
+    }
+    public void OnClickCheckProfile()
+    {
+        GlobalServices.Instance.RequestGetInfoUser(dataPlayerInRoom.name);
     }
 
 

@@ -27,7 +27,7 @@ public class ChatInGameClick : MonoBehaviour
 
     public void OnClick()
     {
-        txtContent.text = content;
+        actionClick?.Invoke(content);
     }
 
     [Button]

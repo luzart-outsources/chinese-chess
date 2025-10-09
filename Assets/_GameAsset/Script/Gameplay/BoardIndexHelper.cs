@@ -43,26 +43,26 @@ public static class InitialTypeResolver
 
         // BLACK (top)
         // row 0: R N E A G A E N R
-        var topRow = new[] { PieceType.Rook, PieceType.Knight, PieceType.Elephant, PieceType.Advisor, PieceType.General, PieceType.Advisor, PieceType.Elephant, PieceType.Knight, PieceType.Rook };
+        var topRow = new[] { PieceType.Xe, PieceType.Ma, PieceType.Tuong, PieceType.Si, PieceType.Vua, PieceType.Si, PieceType.Tuong, PieceType.Ma, PieceType.Xe };
         for (int c = 0; c < 9; c++) blackInit[0, c] = topRow[c];
         // row 2: cannons at 1,7
-        blackInit[2, 1] = PieceType.Cannon; blackInit[2, 7] = PieceType.Cannon;
+        blackInit[2, 1] = PieceType.Phao; blackInit[2, 7] = PieceType.Phao;
         // row 3: soldiers at 0,2,4,6,8
-        for (int c = 0; c < 9; c += 2) blackInit[3, c] = PieceType.Soldier;
+        for (int c = 0; c < 9; c += 2) blackInit[3, c] = PieceType.Tot;
 
         // RED (bottom)
         // row 9: R N E A G A E N R
         for (int c = 0; c < 9; c++) redInit[9, c] = topRow[c];
         // row 7: cannons at 1,7
-        redInit[7, 1] = PieceType.Cannon; redInit[7, 7] = PieceType.Cannon;
+        redInit[7, 1] = PieceType.Phao; redInit[7, 7] = PieceType.Phao;
         // row 6: soldiers at 0,2,4,6,8
-        for (int c = 0; c < 9; c += 2) redInit[6, c] = PieceType.Soldier;
+        for (int c = 0; c < 9; c += 2) redInit[6, c] = PieceType.Tot;
     }
 
     public static PieceType ResolveFromInitial(bool isRed, int initRow, int initCol)
     {
         var t = isRed ? redInit[initRow, initCol] : blackInit[initRow, initCol];
-        return t == PieceType.None ? PieceType.Soldier : t; // fallback an toàn
+        return t == PieceType.None ? PieceType.Tot : t; // fallback an toàn
     }
 }
 
@@ -173,13 +173,23 @@ public static class BoardIndexHelper
 public enum PieceType
 {
     None = -1,
-    Rook = 0,       // Xe
-    Knight = 1,     // Mã
-    Cannon = 2,     // Pháo
-    Elephant = 3,   // Tượng
-    Advisor = 4,    // Sĩ
-    General = 5,    // Tướng/Soái
-    Soldier = 6    // Tốt/Binh
+    Xe = 0,       // Xe
+    Ma = 1,     // Mã
+    Phao = 2,     // Pháo
+    Tuong = 3,   // Tượng
+    Si = 4,    // Sĩ
+    Vua = 5,    // Tướng/Soái
+    Tot = 6    // Tốt/Binh
+}
+public enum ChessPieceType
+{
+    None = -1,
+    Tot = 0, // Tốt
+    Ma = 1, // Mã
+    Tuong = 2, // Tượng
+    Xe = 3, // Xe
+    Hau = 4, // Hậu
+    Vua = 5 // Vua
 }
 
 public class PieceDTO

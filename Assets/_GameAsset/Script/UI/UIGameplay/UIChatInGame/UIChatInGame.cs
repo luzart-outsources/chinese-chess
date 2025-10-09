@@ -17,6 +17,7 @@ public class UIChatInGame : UIBase
         {
             item.Init(OnClickChat);
         }
+        strMe = null;
     }
     public void OnClickChat(string content)
     {
@@ -37,6 +38,7 @@ public class UIChatInGame : UIBase
     private void CallChatInGame(string str)
     {
         var ui = UIManager.Instance.GetUiActive<UIGameplay>(UIName.Gameplay);
-        ui.bubbleMe.ShowBubble(str);
+        ui.bubbleBot.ShowBubble(str);
+        Hide();
     }
 }
