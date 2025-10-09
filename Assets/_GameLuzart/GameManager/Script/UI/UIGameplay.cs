@@ -25,22 +25,47 @@ public class UIGameplay : UIBase
     private void OnEnable()
     {
         Observer.Instance.AddObserver(ObserverKey.OnReceiveChatInGame, OnReceiveChat);
+        Observer.Instance.AddObserver(ObserverKey.OnStartGameInGame, StartGame);
+        Observer.Instance.AddObserver(ObserverKey.OnShowStringNotiInGame, OnShowStringNotiInGame);
+        Observer.Instance.AddObserver(ObserverKey.OnReceivePlayerReady, OnReceivePlayerReady);
+        Observer.Instance.AddObserver(ObserverKey.OnShowDataTimeReady, OnShowDataTimeReady);
+        Observer.Instance.AddObserver(ObserverKey.OnReceiveDataTurn, CountdownPlayer);
     }
     private void OnDisable()
     {
         Observer.Instance.RemoveObserver(ObserverKey.OnReceiveChatInGame, OnReceiveChat);
+        Observer.Instance.RemoveObserver(ObserverKey.OnStartGameInGame, StartGame);
+        Observer.Instance.RemoveObserver(ObserverKey.OnShowStringNotiInGame, OnShowStringNotiInGame);
+        Observer.Instance.RemoveObserver(ObserverKey.OnReceivePlayerReady, OnReceivePlayerReady);
+        Observer.Instance.RemoveObserver(ObserverKey.OnShowDataTimeReady, OnShowDataTimeReady);
+        Observer.Instance.RemoveObserver(ObserverKey.OnReceiveDataTurn, CountdownPlayer);
     }
-    public void StartGame()
+    public void StartGame(object data)
     {
         HideWait();
         UIManager.Instance.ShowUI(UIName.StartGame);
         frameBot.SetActiveReady(false);
         frameTop.SetActiveReady(false);
     }
+    private void OnShowStringNotiInGame(object data)
+    {
+        string str = data as string;
+        OnShowString(str);
+    }
     public void OnShowString(string str)
     {
         HideWait();
         watingTxt.InitText(str);
+    }
+    public void OnReceivePlayerReady(object data)
+    {
+        if(data == null)
+        {
+            return;
+        }
+        var dataReady = data as DataReceiveReady;
+        bool isBot = (dataReady.id == frameBot.dataPlayerInRoom.idSession);
+        AvatarReady(isBot, dataReady.isReady);
     }
     public void HideWait()
     {
@@ -61,6 +86,15 @@ public class UIGameplay : UIBase
         frameTop.SetData(dataRoom.dataMember2);
         HideWait();
 
+    }
+    public void OnShowDataTimeReady(object data)
+    {
+        if(data == null)
+        {
+            return;
+        }
+        float time = (float)data;
+        StartReady(time);
     }
     public void StartReady(float time)
     {
@@ -104,12 +138,18 @@ public class UIGameplay : UIBase
             // Countdown complete
         });
     }
-    public void CountdownPlayer(bool isMe ,int count, int totalTime, int totalTimeOponent)
+    public void CountdownPlayer(object data)
     {
-        var itemRoll = isMe ? frameTop : frameBot;
-        var itemReset = isMe ? frameBot : frameTop;
-        itemRoll.StartCountCountDown(count, totalTime);
-        itemReset.ResetCountDown(totalTimeOponent);
+        if(data == null)
+        {
+            return;
+        }
+        var turnData = data as DataTurn;
+        bool isBot = (turnData.idSession == frameBot.dataPlayerInRoom.idSession);
+        var itemRoll = isBot ? frameBot : frameTop ;
+        var itemReset = !isBot ? frameBot : frameTop;
+        itemRoll.StartCountCountDown(turnData.timeRemain, turnData.timeTotalRemain);
+        itemReset.ResetCountDown(turnData.timeTotalRemainOpponent);
     }
     private void OnReceiveChat(object data)
     {

@@ -1,10 +1,11 @@
 using System.Collections.Generic;
-
+[System.Serializable]
 public class BoardDataModel
 {
     public readonly int rows;
     public readonly int cols;
     public PieceModel[,] cells;
+    [Sirenix.OdinInspector.ShowInInspector]
     public readonly Dictionary<int, PieceModel> byId = new();
 
     public BoardDataModel(int rows = 10, int cols = 9)

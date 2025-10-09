@@ -123,11 +123,12 @@ public class GameManager : Singleton<GameManager>
         ui.InitData(dataRoom);
         gameCoordinator.OpenRoom(dataRoom);
     }
-    public void OnShowDataTime(float time)
+    public void OpenRoomSee(DataRoom dataRoom)
     {
-        var dataRoom = RoomManager.Instance.currentRoom;
-        var ui = UIManager.Instance.GetUiActive<UIGameplay>(UIName.Gameplay);
-        ui.StartReady(time);
+        UIManager.Instance.HideAll();
+        var ui = UIManager.Instance.GetOrShowUIActive<UIGameplay>(UIName.Gameplay);
+        ui.InitData(dataRoom);
+        gameCoordinator.OpenRoom(dataRoom);
     }
     public void OnReceivePlayerReady(DataReceiveReady dataReceiveReady)
     {
@@ -138,11 +139,6 @@ public class GameManager : Singleton<GameManager>
         }
         bool isBot = dataReceiveReady.id == DataManager.Instance.DataUser.id;
         ui.AvatarReady(isBot, true);
-    }
-    public void OnReceiveString(string message = "Đang chờ đối thủ vào phòng")
-    {
-        var ui = UIManager.Instance.GetUiActive<UIGameplay>(UIName.Gameplay);
-        ui.OnShowString(message);
     }
     public void LeaveRoom()
     {

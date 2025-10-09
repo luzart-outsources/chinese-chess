@@ -57,4 +57,9 @@ public static class ObserverKey
     public const string OnRefreshRoomSee = "OnRefreshRoomSee";
     public const string OnReceiveChatServer = "OnReceiveChatServer";
     public const string OnReceiveChatInGame = "OnReceiveChatInGame";
+    public const string OnStartGameInGame = "OnStartGame";
+    public const string OnShowStringNotiInGame = "OnShowStringNotiInGame";
+    public const string OnReceivePlayerReady = "OnReceivePlayerReady";
+    public const string OnShowDataTimeReady = "OnShowDataTimeReady";
+    public const string OnReceiveDataTurn = "OnReceiveDataTurn";
 }

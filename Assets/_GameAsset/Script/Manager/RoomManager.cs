@@ -123,6 +123,7 @@ public class DataRoom
     public int goldRate;
     public int viewer;
     public bool isMaster;
+    public bool isViewer;
     public DataPlayerInRoom dataMe;
     public DataPlayerInRoom dataMember2;
 

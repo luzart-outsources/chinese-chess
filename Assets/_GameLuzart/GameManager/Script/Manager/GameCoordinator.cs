@@ -7,21 +7,13 @@ public class GameCoordinator : MonoBehaviour
     public Action<bool> ActionOnEndGame = null;
     public bool IsInRoom = false;
     public BoardController boardController;
-    public void StartGame()
-    {
-        var ui = UIManager.Instance.GetUI<UIGameplay>(UIName.Gameplay);
-        if(ui!= null)
-        {
-            ui.StartGame();
-        }
-    }
     public void OpenRoom(DataRoom dataRoom)
     {
         if (IsInRoom)
         {
             return;
         }
-        IsInRoom = false;
+        IsInRoom = true;
         InitBoardGame();
     }
     public void OnResetBoard()
@@ -32,11 +24,6 @@ public class GameCoordinator : MonoBehaviour
     public void InitBoardGame()
     {
         boardController.InitializeRuleCode(RoomManager.Instance.currentRoom.eChessType);
-    }
-    public void OnTurn(bool isMe, int count, int totalTime, int totalTimeOponent)
-    {
-        var ui = UIManager.Instance.GetUI<UIGameplay>(UIName.Gameplay);
-        ui.CountdownPlayer(isMe, count, totalTime, totalTimeOponent);
     }
     public void OnMoveDenied()
     {

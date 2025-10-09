@@ -17,7 +17,7 @@ public class BoardController : MonoBehaviour
     private IRuleSet rules;
     private RulesContext ctx;
 
-    private BoardDataModel data;
+    public BoardDataModel data;
     private bool iAmRed = true;
     private bool myTurn = false;
     private bool inputLocked = false;

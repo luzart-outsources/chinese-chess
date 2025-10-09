@@ -17,9 +17,9 @@ public class SoundSettingsButtonOnOffSelectChange : SoundSettings
     public override void Show()
     {
         base.Show();
-        //bsMusic.Select(DataGame.Music == 1);
-        //bsSFX.Select(DataGame.Sound == 1);
-        //bsHapstic.Select(DataGame.Haptics == 1);
+        bsMusic.Select(AudioManager.Instance.isMusic);
+        bsSFX.Select(AudioManager.Instance.isSFX);
+        bsHapstic.Select(AudioManager.Instance.isVibra);
     }
     private void SetUpButton()
     {
@@ -29,27 +29,27 @@ public class SoundSettingsButtonOnOffSelectChange : SoundSettings
     }
     private void ClickMusic()
     {
-        //bool isOn = DataGame.Music == 1;
-        //isOn = !isOn;
-        //DataGame.Music = isOn ? 1: 0;
-        //bsMusic.Select(isOn);
-        //if (isOn)
-        //{
-        //    GameEventManager.RaisedEvent(GameEventManager.EventId.GameAcMusic);
-        //}
+        bool isOn = AudioManager.Instance.isMusic;
+        isOn = !isOn;
+        AudioManager.Instance.isMusic = isOn;
+        bsMusic.Select(isOn);
+        if (isOn)
+        {
+            //Observer.Instance.Notify();
+        }
     }
     private void ClickSFX()
     {
-        //bool isOn = DataGame.Sound == 1;
-        //isOn = !isOn;
-        //DataGame.Sound = isOn ? 1 : 0;
-        //bsSFX.Select(isOn);
+        bool isOn = AudioManager.Instance.isSFX;
+        isOn = !isOn;
+        AudioManager.Instance.isSFX = isOn;
+        bsSFX.Select(isOn);
     }
     private void ClickVibrate()
     {
-        //bool isOn = DataGame.Haptics == 1;
-        //isOn = !isOn;
-        //DataGame.Haptics = isOn ? 1 : 0;
-        //bsHapstic.Select(isOn);
+        bool isOn = AudioManager.Instance.isVibra;
+        isOn = !isOn;
+        AudioManager.Instance.isVibra = isOn;
+        bsHapstic.Select(isOn);
     }
 }

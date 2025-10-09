@@ -12,4 +12,9 @@ public class UISettings : UIBase
         base.Show(onHideDone);
         soundSettings.Show();
     }
+    public void OnClickButtonLogOut()
+    {
+        UIManager.Instance.HideAll();
+        UIManager.Instance.ShowUI<UILogin>(UIName.Login);
+    }
 }

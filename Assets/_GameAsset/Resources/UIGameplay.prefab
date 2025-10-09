@@ -850,9 +850,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4190130085522374637}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -272.5, y: -807.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 267.5, y: 152.20001}
   m_SizeDelta: {x: 124, y: 123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5782348915763821920
@@ -982,9 +982,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4190130085522374637}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -142.8, y: -807.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 397.2, y: 152.20001}
   m_SizeDelta: {x: 124, y: 123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4410720992969360739
@@ -2302,10 +2302,10 @@ RectTransform:
   - {fileID: 642168822573496032}
   m_Father: {fileID: 4190130085522374637}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -244.24, y: 833.69}
-  m_SizeDelta: {x: 488.48, y: 194.3}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 295.76, y: -126.31}
+  m_SizeDelta: {x: 488.48, y: 194.30005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &624289626001162182
 MonoBehaviour:
@@ -2637,9 +2637,9 @@ RectTransform:
   - {fileID: 6187484805867204502}
   m_Father: {fileID: 4190130085522374637}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 244.4, y: 872.3}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -295.59998, y: -87.70001}
   m_SizeDelta: {x: 260, y: 98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9060085056366827949
@@ -3166,9 +3166,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4190130085522374637}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -402.2, y: -807.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 137.79999, y: 152.20001}
   m_SizeDelta: {x: 124, y: 123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7289742168668563363
@@ -3798,10 +3798,10 @@ RectTransform:
   - {fileID: 2266736133304336607}
   m_Father: {fileID: 4190130085522374637}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 229, y: -830}
-  m_SizeDelta: {x: 488.48, y: 194.3}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -311, y: 130}
+  m_SizeDelta: {x: 488.47998, y: 194.29999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6753006502312989915
 MonoBehaviour:
@@ -4890,6 +4890,7 @@ GameObject:
   - component: {fileID: 935177276429520317}
   - component: {fileID: 1341087110276491725}
   - component: {fileID: 5409198930738810302}
+  - component: {fileID: 6403490498675379128}
   m_Layer: 5
   m_Name: BtnSettings
   m_TagString: Untagged
@@ -4997,7 +4998,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1341087110276491725}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6403490498675379128}
+        m_TargetAssemblyTypeName: ButtonSettings, Assembly-CSharp
+        m_MethodName: OnClickButtonSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6403490498675379128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261528206382502415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbcf8739797a79f499740e88676a1fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonSettings
 --- !u!1 &8650203741312807736
 GameObject:
   m_ObjectHideFlags: 0

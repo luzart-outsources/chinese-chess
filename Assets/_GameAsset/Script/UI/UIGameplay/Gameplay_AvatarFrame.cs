@@ -12,7 +12,7 @@ public class Gameplay_AvatarFrame : MonoBehaviour
     public TMP_Text txtCountDown;
     public ProgressBarUI progressBar;
     public GameObject obReady;
-    private DataPlayerInRoom dataPlayerInRoom;
+    public DataPlayerInRoom dataPlayerInRoom { get; protected set; }
 
     private void OnEnable()
     {

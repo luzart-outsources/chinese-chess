@@ -38,36 +38,36 @@ public class SoundSettingsButtonOnOff : SoundSettings
     }
     private void ClickMusic()
     {
-        bool isMuteMusic = AudioManager.Instance.isMuteMusic;
+        bool isMuteMusic = AudioManager.Instance.isMusic;
         isMuteMusic = !isMuteMusic;
-        AudioManager.Instance.isMuteMusic = isMuteMusic;
+        AudioManager.Instance.isMusic = isMuteMusic;
         SetSpriteMusic();
     }
     private void ClickSFX()
     {
-        bool isMuteSFX = AudioManager.Instance.isMuteSFX;
+        bool isMuteSFX = AudioManager.Instance.isSFX;
         isMuteSFX = !isMuteSFX;
-        AudioManager.Instance.isMuteSFX = isMuteSFX;
+        AudioManager.Instance.isSFX = isMuteSFX;
         SetSpriteSFX();
     }
     private void ClickVibrate()
     {
-        bool isMuteVibra = AudioManager.Instance.isMuteVibra;
+        bool isMuteVibra = AudioManager.Instance.isVibra;
         isMuteVibra = !isMuteVibra;
-        AudioManager.Instance.isMuteVibra = isMuteVibra;
+        AudioManager.Instance.isVibra = isMuteVibra;
         SetSpriteVibra();
     }
     private void SetSpriteMusic()
     {
-        imMusic.sprite = AudioManager.Instance.isMuteMusic ? spMusics[0] : spMusics[1];
+        imMusic.sprite = AudioManager.Instance.isMusic ? spMusics[0] : spMusics[1];
     }
     private void SetSpriteSFX()
     {
-        imSFX.sprite = AudioManager.Instance.isMuteSFX ? spSFXs[0] : spSFXs[1];
+        imSFX.sprite = AudioManager.Instance.isSFX ? spSFXs[0] : spSFXs[1];
     }
 
     private void SetSpriteVibra()
     {
-        imVibrate.sprite = AudioManager.Instance.isMuteVibra ? spVibrates[0] : spVibrates[1];
+        imVibrate.sprite = AudioManager.Instance.isVibra ? spVibrates[0] : spVibrates[1];
     }
 }

@@ -23,10 +23,10 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    public bool isMuteSFX
+    public bool isSFX
     {
-        get => volumnSFX == 0;
-        set => volumnSFX = value ? 0 : DEFAULT_VOLUME;
+        get => volumnSFX != 0;
+        set => volumnSFX = value ? DEFAULT_VOLUME : 0 ;
     }
 
     public float volumnMusic
@@ -39,14 +39,14 @@ public class AudioManager : Singleton<AudioManager>
             PlayerPrefs.Save();
         }
     }
-
-    public bool isMuteMusic
+    
+    public bool isMusic
     {
-        get => volumnMusic == 0;
-        set => volumnMusic = value ? 0 : DEFAULT_VOLUME;
+        get => volumnMusic != 0;
+        set => volumnMusic = value ? DEFAULT_VOLUME : 0 ;
     }
 
-    public bool isMuteVibra
+    public bool isVibra
     {
         get => PlayerPrefs.GetInt(MUTE_VIBRA, 0) == 0;
         set
@@ -63,8 +63,8 @@ public class AudioManager : Singleton<AudioManager>
     {
         audioSFX = gameObject.AddComponent<AudioSource>();
         audioMusic = gameObject.AddComponent<AudioSource>();
-        audioSFX.mute = isMuteSFX;
-        audioMusic.mute = isMuteMusic;
+        audioSFX.mute = !isSFX;
+        audioMusic.mute = !isMusic;
     }
     public void PlaySFXBtn()
     {
@@ -76,7 +76,7 @@ public class AudioManager : Singleton<AudioManager>
     }
     public void Vibrate()
     {
-        if (isMuteVibra)
+        if (isVibra)
         {
             return;
         }

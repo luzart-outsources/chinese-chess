@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using Coffee.UIEffects;
+using JetBrains.Annotations;
 using NetworkClient.Models;
 using System;
 using System.Collections.Generic;
@@ -318,7 +319,7 @@ namespace Assets._GameAsset.Script.Session
         private void OnReceiveTextWait(Message msg)
         {
             string str = msg.Reader.readString();
-            GameManager.Instance.OnReceiveString(str);
+            Observer.Instance.Notify(ObserverKey.OnShowStringNotiInGame, str);
             UnityEngine.Debug.Log("[Receive]OnReceiveTextWait: " + str);
         }
         public void OnReceiveCreateRoomData(Message msg)
@@ -332,6 +333,7 @@ namespace Assets._GameAsset.Script.Session
             dataRoom.idRoom = idRoom;
             dataRoom.goldRate = goldRate;
             dataRoom.viewer = numberViewer;
+            dataRoom.isViewer = isViewer;
             dataRoom.eChessType = (EChessType)typeChess;
             OnUpdateDataInRoom(msg, dataRoom);
             UnityEngine.Debug.Log("[Receive]OnReceiveCreateRoomData: " + dataRoom.idRoom + " - " + dataRoom.isMaster + " - " + dataRoom.dataMe.name + " - " + (dataRoom.dataMember2 != null ? dataRoom.dataMember2.name : "null"));
@@ -341,8 +343,9 @@ namespace Assets._GameAsset.Script.Session
         {
             int idSession = msg.Reader.readInt();
             int timeMS = msg.Reader.readInt();
-            int timeS = timeMS / 1000;
-            GameManager.Instance.OnShowDataTime(timeS);
+            float timeS = timeMS / 1000;
+            //GameManager.Instance.OnShowDataTime(timeS);
+            Observer.Instance.Notify(ObserverKey.OnShowDataTimeReady, timeS);
 
             UnityEngine.Debug.Log($"[Receive] OnReceiveTimeReady + {timeS}");
         }
@@ -369,14 +372,14 @@ namespace Assets._GameAsset.Script.Session
                 goldMember2 = msg.Reader.readLong();
                 isReady2 = msg.Reader.readBool();
             }
-                var dataMember1 = new DataPlayerInRoom()
-                {
-                    idSession = idMember1,
-                    name = nameMember1,
-                    avatar = avtMember1,
-                    gold = goldMember1,
-                    isReady = isReady1
-                };
+            var dataMember1 = new DataPlayerInRoom()
+            {
+                idSession = idMember1,
+                name = nameMember1,
+                avatar = avtMember1,
+                gold = goldMember1,
+                isReady = isReady1
+            };
             DataPlayerInRoom dataMember2 = null;
             if (idMemeber2 != -1)
             {
@@ -389,6 +392,7 @@ namespace Assets._GameAsset.Script.Session
                     isReady = isReady2
                 };
             }
+            bool isAPlayer = DataManager.Instance.DataUser.id == idMember1 || DataManager.Instance.DataUser.id == idMemeber2;
             bool isMeIsMaster = idMember1 == DataManager.Instance.DataUser.id;
             dataRoom.isMaster = isMeIsMaster;
             if (isMeIsMaster)
@@ -403,10 +407,20 @@ namespace Assets._GameAsset.Script.Session
             }
             UnityEngine.Debug.Log("[Receive]OnUpdateDataInRoom: " + dataRoom.idRoom + " - " + dataRoom.isMaster + " - " + dataRoom.dataMe.name + " - " + (dataRoom.dataMember2 != null ? dataRoom.dataMember2.name : "null"));
             RoomManager.Instance.JoinRoom(dataRoom);
-            GameManager.Instance.OpenRoom(dataRoom);
-            if(idMemeber2 == -1)
+            if (dataRoom.isViewer)
             {
-                GameManager.Instance.OnReceiveString();
+                GameManager.Instance.OpenRoomSee(dataRoom);
+                return;
+            }
+            else
+            {
+                GameManager.Instance.OpenRoom(dataRoom);
+            }
+
+
+            if (idMemeber2 == -1)
+            {
+                Observer.Instance.Notify(ObserverKey.OnShowStringNotiInGame, "Đang chờ đối thủ vào phòng");
             }
 
         }
@@ -421,7 +435,7 @@ namespace Assets._GameAsset.Script.Session
                 id = id,
                 isReady = isReady
             };
-            GameManager.Instance.OnReceivePlayerReady(data);
+            Observer.Instance.Notify(ObserverKey.OnReceivePlayerReady, data);
             UnityEngine.Debug.Log("[Receive]OnReceiveReadyData: " + id + " - " + isReady);
         }
         public void OnReceiveLeaveRoom(Message msg)
@@ -533,7 +547,7 @@ namespace Assets._GameAsset.Script.Session
 
             // TODO: truyền sang BoardController
             GameManager.Instance.gameCoordinator.boardController.InitializeFromServer(data);
-            GameManager.Instance.gameCoordinator.StartGame();
+            Observer.Instance.Notify(ObserverKey.OnStartGameInGame);
         }
         private void OnReceiveViewer(Message msg)
         {
@@ -548,7 +562,16 @@ namespace Assets._GameAsset.Script.Session
 
             bool isMyTurn = id == DataManager.Instance.DataUser.id;
             GameManager.Instance.gameCoordinator.boardController.SetMyTurn(isMyTurn);
-            GameManager.Instance.gameCoordinator.OnTurn(isMyTurn, (int)timeRemain, (int)timeTotalRemain, (int)timeTotalRemainOpponent);
+
+            DataTurn dataTurn = new DataTurn
+            {
+                idSession = id,
+                timeRemain = (int)timeRemain,
+                timeTotalRemain = (int)timeTotalRemain,
+                timeTotalRemainOpponent = (int)timeTotalRemainOpponent
+            };
+            Observer.Instance.Notify(ObserverKey.OnReceiveDataTurn, dataTurn);
+            //GameManager.Instance.gameCoordinator.OnTurn(isMyTurn, (int)timeRemain, (int)timeTotalRemain, (int)timeTotalRemainOpponent);
 
             UnityEngine.Debug.Log("[Receive]OnReceiveTurnMove: " + id + " - " + isMyTurn + " - " + timeRemain + " - " + timeTotalRemain + " - " + timeTotalRemainOpponent);
         }
@@ -739,4 +762,12 @@ public enum AnimationType
     TAGET_KING = 1,  // CHIẾU TƯỚNG
     WIN = 2,         // THẮNG
     LOSE = 3,        // THUA
+}
+[Serializable]
+public class DataTurn 
+{
+   public int idSession;
+   public int timeRemain;
+   public int timeTotalRemain;
+   public int timeTotalRemainOpponent;
 }

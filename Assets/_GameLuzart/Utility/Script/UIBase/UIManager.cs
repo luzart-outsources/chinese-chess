@@ -190,6 +190,15 @@ public class UIManager : Singleton<UIManager>
             return default;
         }
     }
+    public T GetOrShowUIActive<T>(UIName uiScreen) where T : UIBase
+    {
+        var ui = GetUiActive<T>(uiScreen);
+        if(ui == null)
+        {
+            ui = ShowUI<T>(uiScreen);
+        }
+        return ui;
+    }
 
     private UIBase LoadUI(UIName uIScreen)
     {
