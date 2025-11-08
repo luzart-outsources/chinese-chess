@@ -42,7 +42,9 @@ public class UIChatGlobal : UIBase
     }
     public void OnReceiveString(string str)
     {
-        Instantiate(txtContent, parentSpawn).text = str;
+        var txt = Instantiate(txtContent, parentSpawn);
+        txt.text = str;
+        txt.gameObject.SetActive(true);
     }
     public void OnPostMesseage()
     {

@@ -116,6 +116,7 @@ public class BoardController : MonoBehaviour
     {
         this.myTurn = isMyTurn;
         this.inputLocked = false;
+        view?.ClearIndicators();
     }
 
     public void OnPieceClickedView(PieceView v)

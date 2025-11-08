@@ -63,7 +63,7 @@ namespace Assets._GameAsset.Script.Session
             }
         }
 
-        public void ShowDialog(Message msg)
+        public void OnReceiveCase3(Message msg)
         {
             byte type = msg.Reader.readByte();
             switch (type)

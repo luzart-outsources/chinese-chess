@@ -119,7 +119,14 @@ namespace Assets._GameAsset.Script.Session
             UnityEngine.Debug.Log("[Post] RequestMove: " + idPiece + " - " + toCol + " - " + toRow);
 
         }
-
+        public void RequestHoa(bool isXinThua)
+        {
+            var msg = new Message(12);
+            msg.Writer.writeByte(2);
+            msg.Writer.writeByte(isXinThua ? (byte)1 : (byte)0);
+            SessionMe.Instance.SendMessage(msg);
+            UnityEngine.Debug.Log("[Post] RequestHoa");
+        }
         public void RequestChatInGame(byte user = 0 , string content = ":)")
         {
             var msg = new Message(5);

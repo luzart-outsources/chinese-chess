@@ -11,10 +11,10 @@ public class UILeaveRoom : UIBase
     }
     public void OnClickHoa()
     {
-
+        GlobalServices.Instance.RequestHoa(false);
     }
     public void OnClick()
     {
-
+        GlobalServices.Instance.RequestHoa(true);
     }
 }

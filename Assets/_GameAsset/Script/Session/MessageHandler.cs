@@ -35,7 +35,7 @@ namespace Assets._GameAsset.Script.Session
                     readMsg.OnReceiveCreateData(msg);
                     break;
                 case 3:
-                    readMsg.ShowDialog(msg);
+                    readMsg.OnReceiveCase3(msg);
                     break;
                 case 4:
                     readMsg.OnReceiveCase4(msg);
